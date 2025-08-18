@@ -7,7 +7,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft, Calendar, Eye, User, Share2 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import LazyImage from '@/components/LazyImage';
-import Breadcrumb from '@/components/Breadcrumb';
+import EnhancedHeader from '@/components/EnhancedHeader';
+import Footer from '@/components/Footer';
+import BackToTop from '@/components/BackToTop';
+import AdminIndicator from '@/components/AdminIndicator';
 import SocialShareButtons from '@/components/SocialShareButtons';
 import RelatedArticles from '@/components/RelatedArticles';
 import { useAnalytics } from '@/hooks/useAnalytics';
@@ -201,15 +204,8 @@ const BlogArticle = () => {
         publishedTime={article.published_at}
         structuredData={structuredData}
       />
-      {/* Breadcrumb */}
-      <div className="container mx-auto px-6 pt-6">
-        <Breadcrumb
-          items={[
-            { label: 'Blog', href: '/blog' },
-            { label: article.title, current: true }
-          ]}
-        />
-      </div>
+      
+      <EnhancedHeader />
 
       {/* Header */}
       <header className="bg-card border-b border-border">
@@ -329,6 +325,10 @@ const BlogArticle = () => {
           </div>
         </div>
       </main>
+      
+      <Footer />
+      <BackToTop />
+      <AdminIndicator />
     </div>
   );
 };

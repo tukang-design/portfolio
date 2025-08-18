@@ -4,6 +4,7 @@ import ProblemsSection from "@/components/ProblemsSection";
 import EnhancedServicesSection from "@/components/EnhancedServicesSection";
 import EnhancedPortfolioSection from "@/components/EnhancedPortfolioSection";
 import ProcessSection from "@/components/ProcessSection";
+import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import BackToTop from "@/components/BackToTop";
@@ -54,6 +55,7 @@ const Index = () => {
         <EnhancedServicesSection />
         <EnhancedPortfolioSection />
         <ProcessSection />
+        <BlogSection />
         <Footer />
         <BackToTop />
         <SitemapGenerator />

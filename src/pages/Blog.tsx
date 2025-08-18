@@ -138,14 +138,6 @@ const Blog = () => {
       
       <EnhancedHeader />
       
-      {/* Breadcrumb */}
-      <div className="container mx-auto px-6 pt-6">
-        <Breadcrumb
-          items={[
-            { label: 'Blog', current: true }
-          ]}
-        />
-      </div>
 
       {/* Header */}
       <header className="bg-gradient-subtle border-b border-border">
