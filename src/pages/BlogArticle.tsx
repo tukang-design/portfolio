@@ -14,6 +14,7 @@ import AdminIndicator from '@/components/AdminIndicator';
 import SocialShareButtons from '@/components/SocialShareButtons';
 import RelatedArticles from '@/components/RelatedArticles';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import DOMPurify from 'dompurify';
 
 interface BlogArticle {
   id: string;
@@ -279,7 +280,12 @@ const BlogArticle = () => {
           <article className="prose prose-lg max-w-none">
             <div 
               className="content"
-              dangerouslySetInnerHTML={{ __html: article.content }}
+              dangerouslySetInnerHTML={{ 
+                __html: DOMPurify.sanitize(article.content, {
+                  ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'img', 'blockquote', 'code', 'pre'],
+                  ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'width', 'height', 'class']
+                })
+              }}
             />
           </article>
 
