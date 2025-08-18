@@ -262,6 +262,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      increment_view_count: {
+        Args: { article_slug: string }
+        Returns: undefined
+      }
       is_admin: {
         Args: { user_id?: string }
         Returns: boolean
