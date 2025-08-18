@@ -120,7 +120,7 @@ const EnhancedPortfolioSection = () => {
             {portfolioItems.map((item, index) => (
               <div 
                 key={item.id} 
-                className={`group bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-bold transition-all duration-300 border border-border/50 cursor-pointer animate-fade-in-up animate-stagger-${Math.min(index + 1, 4)}`}
+                className={`group bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-bold transition-all duration-500 border border-border/50 cursor-pointer animate-fade-in-up animate-stagger-${Math.min(index + 1, 4)}`}
                 onClick={() => openLightbox(item)}
               >
                 {/* Image */}
@@ -128,11 +128,11 @@ const EnhancedPortfolioSection = () => {
                   <img 
                     src={item.image} 
                     alt={item.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="bg-white/90 px-4 py-2 rounded-full text-primary font-semibold">
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="bg-background/90 px-4 py-2 rounded-full text-[hsl(var(--neon-green))] font-semibold transition-colors duration-500">
                       View Project Details
                     </div>
                   </div>

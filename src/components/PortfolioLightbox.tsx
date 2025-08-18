@@ -42,15 +42,6 @@ const PortfolioLightbox = ({ isOpen, onClose, item }: PortfolioLightboxProps) =>
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-hidden p-0">
         <div className="relative">
-          {/* Close Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-4 right-4 z-10 bg-black/50 text-white hover:bg-black/70"
-            onClick={onClose}
-          >
-            <X className="w-4 h-4" />
-          </Button>
 
           {/* Image Carousel */}
           <div className="relative h-96 bg-black overflow-hidden">

@@ -4,17 +4,17 @@ const ProcessSection = () => {
   const steps = [
     {
       icon: <MessageCircle className="w-12 h-12 text-[hsl(var(--neon-green))]" />,
-      title: "Free Discovery Consultation",
+      title: "1. Free Discovery Consultation",
       description: "We start with a call to understand your business goals. No fluff, just strategy."
     },
     {
       icon: <Palette className="w-12 h-12 text-[hsl(var(--neon-green))]" />,
-      title: "Design & Build",
+      title: "2. Design & Build",
       description: "We get to work, crafting your brand or website with skill and precision."
     },
     {
       icon: <Rocket className="w-12 h-12 text-[hsl(var(--neon-green))]" />,
-      title: "Handover & Launch",
+      title: "3. Handover & Launch",
       description: "We deliver the final files and launch your site. You're ready to go!"
     }
   ];
@@ -46,10 +46,6 @@ const ProcessSection = () => {
               
               {/* Step Content */}
               <div className="relative z-10 bg-card rounded-2xl p-8 shadow-soft border border-border/50 hover:shadow-bold transition-all duration-300">
-                {/* Step Number */}
-                <div className="inline-flex items-center justify-center w-8 h-8 bg-primary text-primary-foreground rounded-full text-sm font-bold mb-6">
-                  {index + 1}
-                </div>
                 
                 {/* Icon */}
                 <div className="flex justify-center mb-6">
