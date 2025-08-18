@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { useContactForm } from "@/hooks/useContactForm";
@@ -8,6 +9,8 @@ import SearchModal from "./SearchModal";
 
 const EnhancedHeader = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
   const {
     isContactFormOpen,
     isSuccessModalOpen,
@@ -38,9 +41,14 @@ const EnhancedHeader = () => {
   }, [isSearchOpen]);
 
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+    if (isHomePage) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page with hash
+      window.location.href = `/#${sectionId}`;
     }
   };
 
@@ -51,7 +59,9 @@ const EnhancedHeader = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-2">
-              <div className="font-heading font-bold text-xl text-white">Tukang Design</div>
+              <Link to="/" className="font-heading font-bold text-xl text-white hover:text-primary transition-colors">
+                Tukang Design
+              </Link>
             </div>
 
             {/* Navigation */}
@@ -74,12 +84,12 @@ const EnhancedHeader = () => {
               >
                 Our Work
               </button>
-              <a 
-                href="/blog"
+              <Link 
+                to="/blog"
                 className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
               >
                 Blog
-              </a>
+              </Link>
               <button 
                 onClick={() => scrollToSection('process')}
                 className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"

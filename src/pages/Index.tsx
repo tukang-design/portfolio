@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import BackToTop from "@/components/BackToTop";
 import SitemapGenerator from "@/components/SitemapGenerator";
+import AdminIndicator from "@/components/AdminIndicator";
 
 const Index = () => {
   const structuredData = {
@@ -56,6 +57,7 @@ const Index = () => {
         <Footer />
         <BackToTop />
         <SitemapGenerator />
+        <AdminIndicator />
       </div>
     </>
   );

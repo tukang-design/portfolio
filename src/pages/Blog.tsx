@@ -10,6 +10,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import SEOHead from '@/components/SEOHead';
 import LazyImage from '@/components/LazyImage';
 import Breadcrumb from '@/components/Breadcrumb';
+import EnhancedHeader from '@/components/EnhancedHeader';
+import Footer from '@/components/Footer';
+import BackToTop from '@/components/BackToTop';
+import AdminIndicator from '@/components/AdminIndicator';
 
 interface BlogArticle {
   id: string;
@@ -131,6 +135,8 @@ const Blog = () => {
         keywords="design blog, case studies, design insights, branding, web design, graphic design"
         structuredData={structuredData}
       />
+      
+      <EnhancedHeader />
       
       {/* Breadcrumb */}
       <div className="container mx-auto px-6 pt-6">
@@ -289,6 +295,10 @@ const Blog = () => {
           </div>
         </div>
       </main>
+      
+      <Footer />
+      <BackToTop />
+      <AdminIndicator />
     </div>
   );
 };
