@@ -53,6 +53,12 @@ const EnhancedHeader = () => {
               >
                 Our Work
               </button>
+              <a 
+                href="/blog"
+                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
+              >
+                Blog
+              </a>
               <button 
                 onClick={() => scrollToSection('process')}
                 className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
