@@ -3,17 +3,17 @@ import { MessageCircle, Palette, Rocket } from "lucide-react";
 const ProcessSection = () => {
   const steps = [
     {
-      icon: <MessageCircle className="w-12 h-12 text-primary" />,
+      icon: <MessageCircle className="w-12 h-12 text-[hsl(var(--neon-green))]" />,
       title: "Free Discovery Consultation",
       description: "We start with a call to understand your business goals. No fluff, just strategy."
     },
     {
-      icon: <Palette className="w-12 h-12 text-primary" />,
+      icon: <Palette className="w-12 h-12 text-[hsl(var(--neon-green))]" />,
       title: "Design & Build",
       description: "We get to work, crafting your brand or website with skill and precision."
     },
     {
-      icon: <Rocket className="w-12 h-12 text-primary" />,
+      icon: <Rocket className="w-12 h-12 text-[hsl(var(--neon-green))]" />,
       title: "Handover & Launch",
       description: "We deliver the final files and launch your site. You're ready to go!"
     }
@@ -24,10 +24,10 @@ const ProcessSection = () => {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
             The Process
           </h2>
-          <h3 className="text-2xl font-semibold text-foreground mb-4">
+          <h3 className="text-2xl font-semibold text-white mb-4">
             Our 3-Step Process
           </h3>
           <p className="text-lg text-muted-foreground">
@@ -59,7 +59,7 @@ const ProcessSection = () => {
                 </div>
                 
                 {/* Content */}
-                <h4 className="text-xl font-bold text-foreground mb-4">{step.title}</h4>
+                <h4 className="text-xl font-bold text-white mb-4">{step.title}</h4>
                 <p className="text-muted-foreground leading-relaxed">{step.description}</p>
               </div>
             </div>

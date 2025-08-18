@@ -30,32 +30,32 @@ const EnhancedHeader = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-2">
-              <div className="font-heading font-bold text-xl text-primary">Tukang Design</div>
+              <div className="font-heading font-bold text-xl text-white">Tukang Design</div>
             </div>
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               <button 
                 onClick={() => scrollToSection('home')}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
               >
                 Home
               </button>
               <button 
                 onClick={() => scrollToSection('services')}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
               >
                 Services
               </button>
               <button 
                 onClick={() => scrollToSection('work')}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
               >
                 Our Work
               </button>
               <button 
                 onClick={() => scrollToSection('process')}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
               >
                 Process
               </button>

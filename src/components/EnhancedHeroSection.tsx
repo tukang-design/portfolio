@@ -34,15 +34,15 @@ const EnhancedHeroSection = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Main Headlines */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-primary mb-6 leading-tight animate-fade-in-up">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight animate-fade-in-up">
               Brand Nampak Lesu?<br />
-              <span className="text-primary-muted">Website Tak Bawa Sales?</span>
+              <span className="text-white/80">Website Tak Bawa Sales?</span>
             </h1>
             
             {/* Sub-text */}
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animate-stagger-2">
-              At <strong className="text-primary">Tukang Design</strong>, we don't just create pretty designs. We build powerful brand assets that work. 
-              With <strong>13 years of big-league experience</strong>, we deliver high-quality design, cepat dan berbaloi.
+            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animate-stagger-2">
+              At <strong className="text-white">Tukang Design</strong>, we don't just create pretty designs. We build powerful brand assets that work. 
+              With <strong className="text-white">13 years of big-league experience</strong>, we deliver high-quality design, cepat dan berbaloi.
             </p>
             
             {/* CTA Buttons */}

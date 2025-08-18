@@ -110,7 +110,7 @@ const EnhancedPortfolioSection = () => {
         <div className="container mx-auto px-6">
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-primary mb-6">
+            <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">
               From brand new logos to full-scale websites, here's a look at our craftsmanship.
             </h2>
           </div>
@@ -141,17 +141,17 @@ const EnhancedPortfolioSection = () => {
                 {/* Content */}
                 <div className="p-8">
                   <div className="flex items-center justify-end mb-4">
-                    <span className="text-xs text-muted-foreground bg-accent px-3 py-1 rounded-full">
+                    <span className="text-xs text-white bg-[hsl(var(--neon-green-muted))] px-3 py-1 rounded-full">
                       {item.category}
                     </span>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-foreground mb-2">{item.title}</h3>
-                  <p className="text-lg font-semibold text-primary mb-3">{item.description}</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-lg font-semibold text-white mb-3">{item.description}</p>
                   <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3">{item.details}</p>
                   
                   <div 
-                    className="inline-flex items-center space-x-2 text-primary hover:text-primary-muted font-semibold transition-colors group"
+                    className="inline-flex items-center space-x-2 text-[hsl(var(--neon-green))] hover:text-[hsl(var(--neon-green))]/80 font-semibold transition-colors group"
                     onClick={(e) => {
                       e.stopPropagation();
                       openLightbox(item);

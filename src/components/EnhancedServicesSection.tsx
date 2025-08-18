@@ -24,7 +24,7 @@ const EnhancedServicesSection = () => {
         <div className="container mx-auto px-6">
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-primary mb-6 animate-fade-in-up">
+            <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 animate-fade-in-up">
               Meet Your Tukang
             </h2>
             <p className="text-xl text-muted-foreground animate-fade-in-up animate-stagger-2">
@@ -42,29 +42,29 @@ const EnhancedServicesSection = () => {
             <div className="bg-card rounded-2xl p-8 shadow-bold border border-border hover:shadow-xl transition-all duration-300 animate-fade-in-up animate-stagger-1">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="p-3 bg-primary/10 rounded-lg">
-                  <Palette className="w-8 h-8 text-primary" />
+                  <Palette className="w-8 h-8 text-[hsl(var(--neon-green))]" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-primary">Brand Foundation Package</h3>
+                  <h3 className="text-2xl font-bold text-white">Brand Foundation Package</h3>
                   <p className="text-muted-foreground">Perfect for new businesses or those needing a serious refresh. We build a brand that you can be proud of.</p>
                 </div>
               </div>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--neon-green))] mt-1 flex-shrink-0" />
                   <span className="text-foreground">Custom Logo Design Suite (multiple variations for all your needs)</span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--neon-green))] mt-1 flex-shrink-0" />
                   <span className="text-foreground">Professional Colour Palette</span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--neon-green))] mt-1 flex-shrink-0" />
                   <span className="text-foreground">Strategic Typography Styles</span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--neon-green))] mt-1 flex-shrink-0" />
                   <span className="text-foreground">Starter Brand Guideline</span>
                 </div>
               </div>
@@ -83,29 +83,29 @@ const EnhancedServicesSection = () => {
             <div className="bg-card rounded-2xl p-8 shadow-bold border border-border hover:shadow-xl transition-all duration-300 animate-fade-in-up animate-stagger-2">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="p-3 bg-primary/10 rounded-lg">
-                  <Globe className="w-8 h-8 text-primary" />
+                  <Globe className="w-8 h-8 text-[hsl(var(--neon-green))]" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-primary">Go-Live Website Package</h3>
+                  <h3 className="text-2xl font-bold text-white">Go-Live Website Package</h3>
                   <p className="text-muted-foreground">Your 24/7 digital storefront. We create a professional, effective website designed to turn visitors into customers.</p>
                 </div>
               </div>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--neon-green))] mt-1 flex-shrink-0" />
                   <span className="text-foreground">1-Year Domain & Hosting Included</span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--neon-green))] mt-1 flex-shrink-0" />
                   <span className="text-foreground">Up to 3 Custom-Designed Pages (e.g., Home, About, Services/Contact)</span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--neon-green))] mt-1 flex-shrink-0" />
                   <span className="text-foreground">Mobile-Responsive Layout (looks perfect on any device)</span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--neon-green))] mt-1 flex-shrink-0" />
                   <span className="text-foreground">Contact Form & WhatsApp Integration (get inquiries instantly)</span>
                 </div>
               </div>

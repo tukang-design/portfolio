@@ -16,11 +16,15 @@
     --popover: 150 25% 12%;
     --popover-foreground: 210 40% 98%;
 
-    /* Primary - Original Brand Color #22342B */
-    --primary: 150 25% 17%; /* Original brand color */
-    --primary-foreground: 0 0% 100%;
+    /* Primary - White for main text */
+    --primary: 0 0% 100%; /* White for logos and headings */
+    --primary-foreground: 150 25% 17%; /* Original brand for contrast */
     --primary-muted: 150 20% 25%;
     --primary-light: 150 15% 25%;
+
+    /* Bright Neon Green - From brand color */
+    --neon-green: 150 80% 60%; /* Bright neon green */
+    --neon-green-muted: 150 80% 60% / 0.6; /* With opacity for badges */
 
     /* Accent CTA - Original Deep Red-Brown #8B4513 */
     --accent-cta: 22 69% 31%; /* Original accent color */
@@ -89,11 +93,15 @@
     --popover: 0 0% 100%;
     --popover-foreground: 150 25% 15%;
 
-    /* Primary - Brand Color #22342B */
-    --primary: 150 25% 17%; /* #22342B converted to HSL */
-    --primary-foreground: 0 0% 100%;
+    /* Primary - White for main text */
+    --primary: 0 0% 100%; /* White for logos and headings */
+    --primary-foreground: 150 25% 17%; /* Original brand for contrast */
     --primary-muted: 150 20% 25%;
     --primary-light: 150 15% 85%;
+
+    /* Bright Neon Green - From brand color */
+    --neon-green: 150 80% 60%; /* Bright neon green */
+    --neon-green-muted: 150 80% 60% / 0.6; /* With opacity for badges */
 
     /* Secondary - Complementary warm tone */
     --secondary: 30 25% 95%;
