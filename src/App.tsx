@@ -8,6 +8,10 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import Blog from "./pages/Blog";
+import BlogManagement from "./pages/BlogManagement";
+import BlogNew from "./pages/BlogNew";
+import BlogEdit from "./pages/BlogEdit";
+import BlogArticle from "./pages/BlogArticle";
 import PortfolioManagement from "./pages/PortfolioManagement";
 import NotFound from "./pages/NotFound";
 
@@ -25,7 +29,11 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/portfolio-management" element={<PortfolioManagement />} />
+            <Route path="/admin/blog" element={<BlogManagement />} />
+            <Route path="/admin/blog/new" element={<BlogNew />} />
+            <Route path="/admin/blog/:id/edit" element={<BlogEdit />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogArticle />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
