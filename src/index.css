@@ -6,45 +6,45 @@
 
 @layer base {
   :root {
-    /* Brand Colors - Modern minimal palette with beige backgrounds */
-    --background: 60 56% 91%; /* Light beige #F5F5DC */
-    --foreground: 150 25% 15%; /* Dark forest green derived from brand */
+    /* Dark Theme - Modern minimal palette */
+    --background: 222.2 84% 4.9%; /* Dark background */
+    --foreground: 210 40% 98%; /* Light text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 150 25% 15%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 150 25% 15%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    /* Primary - Brand Color #22342B */
-    --primary: 150 25% 17%; /* #22342B converted to HSL */
-    --primary-foreground: 0 0% 100%;
-    --primary-muted: 150 20% 25%;
-    --primary-light: 150 15% 85%;
+    /* Primary - Lighter brand color for dark theme */
+    --primary: 150 35% 65%; /* Lighter green for better contrast */
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-muted: 150 25% 45%;
+    --primary-light: 150 15% 25%;
 
     /* Accent CTA - Deep Red-Brown #8B4513 */
-    --accent-cta: 22 69% 31%; /* #8B4513 for primary CTAs */
+    --accent-cta: 22 69% 55%; /* Slightly lighter for dark theme */
     --accent-cta-foreground: 0 0% 100%;
-    --accent-cta-hover: 22 69% 25%;
+    --accent-cta-hover: 22 69% 45%;
 
-    /* Secondary - Complementary warm tone */
-    --secondary: 30 25% 95%;
-    --secondary-foreground: 150 25% 17%;
+    /* Secondary - Dark theme secondary */
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-    /* Neutral tones for modern minimal look with beige tints */
-    --muted: 60 25% 93%;
-    --muted-foreground: 0 0% 45%;
+    /* Dark theme neutral tones */
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 150 15% 92%;
-    --accent-foreground: 150 25% 17%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    /* Borders and inputs - subtle and clean */
-    --border: 0 0% 90%;
-    --input: 0 0% 95%;
-    --ring: 150 25% 17%;
+    /* Dark theme borders and inputs */
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
 
     --radius: 0.75rem;
 
@@ -78,41 +78,49 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  .light {
+    /* Light Theme - Beige backgrounds */
+    --background: 60 56% 91%; /* Light beige #F5F5DC */
+    --foreground: 150 25% 15%; /* Dark forest green derived from brand */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 150 25% 15%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 25% 15%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Primary - Brand Color #22342B */
+    --primary: 150 25% 17%; /* #22342B converted to HSL */
+    --primary-foreground: 0 0% 100%;
+    --primary-muted: 150 20% 25%;
+    --primary-light: 150 15% 85%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary - Complementary warm tone */
+    --secondary: 30 25% 95%;
+    --secondary-foreground: 150 25% 17%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Neutral tones for modern minimal look with beige tints */
+    --muted: 60 25% 93%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 150 15% 92%;
+    --accent-foreground: 150 25% 17%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
+    /* Borders and inputs - subtle and clean */
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: 150 25% 17%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
