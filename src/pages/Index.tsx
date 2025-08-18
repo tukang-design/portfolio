@@ -6,6 +6,8 @@ import EnhancedPortfolioSection from "@/components/EnhancedPortfolioSection";
 import ProcessSection from "@/components/ProcessSection";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import BackToTop from "@/components/BackToTop";
+import SitemapGenerator from "@/components/SitemapGenerator";
 
 const Index = () => {
   const structuredData = {
@@ -52,6 +54,8 @@ const Index = () => {
         <EnhancedPortfolioSection />
         <ProcessSection />
         <Footer />
+        <BackToTop />
+        <SitemapGenerator />
       </div>
     </>
   );

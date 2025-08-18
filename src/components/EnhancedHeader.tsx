@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { useContactForm } from "@/hooks/useContactForm";
@@ -19,6 +19,23 @@ const EnhancedHeader = () => {
     closeSuccessModal,
     openNewInquiry
   } = useContactForm();
+
+  // Add keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+      // ESC to close search
+      if (e.key === 'Escape' && isSearchOpen) {
+        setIsSearchOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchOpen]);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -71,10 +88,12 @@ const EnhancedHeader = () => {
               </button>
               <button 
                 onClick={() => setIsSearchOpen(true)}
-                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
-                aria-label="Search"
+                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium flex items-center space-x-1"
+                aria-label="Search (Ctrl+K)"
+                title="Search (Ctrl+K)"
               >
                 <Search className="h-4 w-4" />
+                <span className="hidden lg:inline text-xs text-muted-foreground">⌘K</span>
               </button>
             </nav>
 

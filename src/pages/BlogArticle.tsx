@@ -5,6 +5,12 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft, Calendar, Eye, User, Share2 } from 'lucide-react';
+import SEOHead from '@/components/SEOHead';
+import LazyImage from '@/components/LazyImage';
+import Breadcrumb from '@/components/Breadcrumb';
+import SocialShareButtons from '@/components/SocialShareButtons';
+import RelatedArticles from '@/components/RelatedArticles';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 interface BlogArticle {
   id: string;
@@ -30,13 +36,15 @@ const BlogArticle = () => {
   const [article, setArticle] = useState<BlogArticle | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const { trackView } = useAnalytics();
 
   useEffect(() => {
     if (slug) {
       fetchArticle();
       incrementViewCount();
+      trackView('blog', slug);
     }
-  }, [slug]);
+  }, [slug, trackView]);
 
   const fetchArticle = async () => {
     try {
@@ -158,8 +166,51 @@ const BlogArticle = () => {
     return <Navigate to="/blog" replace />;
   }
 
+  const currentUrl = `${window.location.origin}/blog/${article.slug}`;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": article.title,
+    "description": article.excerpt,
+    "image": article.featured_image,
+    "author": {
+      "@type": "Organization",
+      "name": "Tukang Design"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tukang Design",
+      "url": window.location.origin
+    },
+    "datePublished": article.published_at,
+    "dateModified": article.published_at,
+    "url": currentUrl,
+    "keywords": article.article_tags.map(tag => tag.tag).join(", ")
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={article.meta_title || article.title}
+        description={article.meta_description || article.excerpt}
+        keywords={article.meta_keywords}
+        image={article.featured_image}
+        url={currentUrl}
+        type="article"
+        author="Tukang Design"
+        publishedTime={article.published_at}
+        structuredData={structuredData}
+      />
+      {/* Breadcrumb */}
+      <div className="container mx-auto px-6 pt-6">
+        <Breadcrumb
+          items={[
+            { label: 'Blog', href: '/blog' },
+            { label: article.title, current: true }
+          ]}
+        />
+      </div>
+
       {/* Header */}
       <header className="bg-card border-b border-border">
         <div className="container mx-auto px-6 py-6">
@@ -214,10 +265,13 @@ const BlogArticle = () => {
       {article.featured_image && (
         <div className="container mx-auto px-6 py-8">
           <div className="max-w-4xl mx-auto">
-            <img
+            <LazyImage
               src={article.featured_image}
               alt={article.title}
+              width={800}
+              height={400}
               className="w-full h-[400px] object-cover rounded-lg shadow-lg"
+              priority
             />
           </div>
         </div>
@@ -233,9 +287,18 @@ const BlogArticle = () => {
             />
           </article>
 
+          {/* Social Share */}
+          <div className="mt-12 pt-8 border-t border-border">
+            <SocialShareButtons
+              url={currentUrl}
+              title={article.title}
+              description={article.excerpt}
+            />
+          </div>
+
           {/* Tags */}
           {article.article_tags.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-border">
+            <div className="mt-8 pt-8 border-t border-border">
               <h3 className="text-lg font-semibold mb-4">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {article.article_tags.map((tag, index) => (
@@ -246,6 +309,13 @@ const BlogArticle = () => {
               </div>
             </div>
           )}
+
+          {/* Related Articles */}
+          <RelatedArticles
+            currentArticleId={article.id}
+            categorySlug={article.blog_categories?.slug}
+            tags={article.article_tags.map(tag => tag.tag)}
+          />
 
           {/* Navigation */}
           <div className="mt-12 pt-8 border-t border-border">

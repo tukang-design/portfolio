@@ -1,3 +1,5 @@
+import NewsletterSignup from './NewsletterSignup';
+
 const Footer = () => {
   return (
     <footer className="bg-background text-foreground py-16">
@@ -24,14 +26,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-white">Navigation</h4>
-            <ul className="space-y-3 text-muted-foreground">
-              <li><a href="#services" className="hover:text-[hsl(var(--neon-green))] transition-colors">Services</a></li>
-              <li><a href="#work" className="hover:text-[hsl(var(--neon-green))] transition-colors">Our Work</a></li>
-              <li><a href="#about" className="hover:text-[hsl(var(--neon-green))] transition-colors">About</a></li>
-            </ul>
+          {/* Newsletter */}
+          <div className="lg:col-span-2">
+            <NewsletterSignup variant="footer" />
           </div>
         </div>
 

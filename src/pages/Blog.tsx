@@ -7,6 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, Calendar, Eye } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import SEOHead from '@/components/SEOHead';
+import LazyImage from '@/components/LazyImage';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface BlogArticle {
   id: string;
@@ -96,8 +99,48 @@ const Blog = () => {
     });
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Tukang Design Blog",
+    "description": "Design insights, case studies, and industry trends from Tukang Design",
+    "url": `${window.location.origin}/blog`,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tukang Design",
+      "url": window.location.origin
+    },
+    "blogPost": filteredArticles.map(article => ({
+      "@type": "BlogPosting",
+      "headline": article.title,
+      "description": article.excerpt,
+      "url": `${window.location.origin}/blog/${article.slug}`,
+      "datePublished": article.published_at,
+      "author": {
+        "@type": "Organization",
+        "name": "Tukang Design"
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Design Insights & Stories | Tukang Design Blog"
+        description="Explore our latest thoughts on design, case studies, and industry trends. Get insights from 13 years of design experience."
+        keywords="design blog, case studies, design insights, branding, web design, graphic design"
+        structuredData={structuredData}
+      />
+      
+      {/* Breadcrumb */}
+      <div className="container mx-auto px-6 pt-6">
+        <Breadcrumb
+          items={[
+            { label: 'Blog', current: true }
+          ]}
+        />
+      </div>
+
       {/* Header */}
       <header className="bg-gradient-subtle border-b border-border">
         <div className="container mx-auto px-6 py-16">
@@ -174,9 +217,11 @@ const Blog = () => {
                   <Card key={article.id} className="group hover:shadow-lg transition-shadow overflow-hidden">
                     {article.featured_image && (
                       <div className="relative overflow-hidden">
-                        <img
+                        <LazyImage
                           src={article.featured_image}
                           alt={article.title}
+                          width={400}
+                          height={200}
                           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>

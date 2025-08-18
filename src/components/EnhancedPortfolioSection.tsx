@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import PortfolioLightbox from "./PortfolioLightbox";
+import LazyImage from "./LazyImage";
 
 interface PortfolioItem {
   id: string;
@@ -113,9 +114,11 @@ const EnhancedPortfolioSection = () => {
                 {/* Image */}
                 <div className="relative overflow-hidden">
                   {mainImage ? (
-                    <img 
+                    <LazyImage
                       src={mainImage.image_url} 
                       alt={item.title}
+                      width={600}
+                      height={256}
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
