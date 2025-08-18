@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +6,7 @@ import { FileImage, FileText, Users, BarChart } from 'lucide-react';
 
 const Admin = () => {
   const { user, isAdmin, loading, signOut } = useAuth();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -111,14 +112,26 @@ const Admin = () => {
               <CardDescription>Manage your portfolio projects and case studies</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => navigate('/portfolio-management')}
+              >
                 <FileImage className="mr-2 h-4 w-4" />
                 View All Portfolios
               </Button>
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => navigate('/portfolio-management')}
+              >
                 Add New Project
               </Button>
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => navigate('/portfolio-management')}
+              >
                 Manage Images
               </Button>
             </CardContent>

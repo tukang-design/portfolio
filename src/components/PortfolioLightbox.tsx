@@ -4,15 +4,15 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, X, ExternalLink } from "lucide-react";
 
 interface PortfolioItem {
-  id: number;
+  id: string;
   title: string;
   category: string;
   description: string;
   details: string;
   images: string[];
   services: string[];
-  timeline: string;
-  client: string;
+  timeline: string | null;
+  client: string | null;
 }
 
 interface PortfolioLightboxProps {

@@ -1,100 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink } from "lucide-react";
-import portfolioKapitani from "@/assets/portfolio-kapitani-new.png";
-import portfolioSag from "@/assets/portfolio-sag-new.png";
-import portfolioYouthopia from "@/assets/portfolio-youthopia-new.png";
-import portfolioRaisuri from "@/assets/portfolio-raisuri-new.png";
+import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 import PortfolioLightbox from "./PortfolioLightbox";
 
+interface PortfolioItem {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  details: string;
+  services: string[];
+  timeline: string | null;
+  client: string | null;
+  images: string[];
+  portfolio_images: Array<{
+    image_url: string;
+    is_main: boolean;
+  }>;
+}
+
 const EnhancedPortfolioSection = () => {
-  const [selectedPortfolio, setSelectedPortfolio] = useState<any>(null);
+  const [selectedPortfolio, setSelectedPortfolio] = useState<PortfolioItem | null>(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Extended portfolio data with multiple images and detailed information
-  const portfolioItems = [
-    {
-      id: 1,
-      title: "Kapitani",
-      category: "Logo Design & Brand Guide",
-      description: "App Redesign & Design System",
-      details: "Their app interface was getting cluttered. We gave it a total user experience overhaul, making it clean, simple, and intuitive for customers to use. The new design system ensures consistency across all touchpoints while improving user engagement by 40%.",
-      image: portfolioKapitani,
-      images: [portfolioKapitani, portfolioKapitani, portfolioKapitani, portfolioKapitani],
-      services: [
-        "User Interface Design",
-        "Design System Creation", 
-        "User Experience Research",
-        "App Prototyping",
-        "Brand Guidelines",
-        "Icon Design"
-      ],
-      timeline: "3 months - Research, Design, Testing & Implementation",
-      client: "Tech Startup",
-      link: "#"
-    },
-    {
-      id: 2,
-      title: "SAG Logistics Sdn Bhd",
-      category: "Rebranding & Web Development",
-      description: "Corporate Brand Transformation",
-      details: "Their outdated image didn't match their global-level service. We delivered a sharp corporate rebrand and a new website to build instant trust with B2B clients. The result was a 60% increase in qualified leads within 6 months.",
-      image: portfolioSag,
-      images: [portfolioSag, portfolioSag, portfolioSag, portfolioSag],
-      services: [
-        "Logo Redesign",
-        "Corporate Identity",
-        "Website Development",
-        "Business Card Design",
-        "Letterhead Design",
-        "Vehicle Branding"
-      ],
-      timeline: "4 months - Strategy, Design, Development & Launch",
-      client: "Logistics Company",
-      link: "#"
-    },
-    {
-      id: 3,
-      title: "Youthopia",
-      category: "Brand Identity Design",
-      description: "Vibrant Youth-Focused Brand",
-      details: "To connect with a younger crowd, they needed a vibrant look. We crafted a fresh logo and a solid brand identity that truly clicks with their target audience. Social media engagement increased by 150% post-rebrand.",
-      image: portfolioYouthopia,
-      images: [portfolioYouthopia, portfolioYouthopia, portfolioYouthopia, portfolioYouthopia],
-      services: [
-        "Logo Design",
-        "Brand Identity",
-        "Social Media Kit",
-        "Merchandise Design",
-        "Color Palette",
-        "Typography System"
-      ],
-      timeline: "2 months - Concept, Design & Brand Guidelines",
-      client: "Youth Organization",
-      link: "#"
-    },
-    {
-      id: 4,
-      title: "Raisuri Football Academy",
-      category: "Brand Revamp & Jersey Design",
-      description: "Sports Brand & Jersey Design",
-      details: "We delivered a powerful brand revamp and a custom jersey design to give the academy a professional look to wear with pride. The new brand helped attract 40% more student athletes.",
-      image: portfolioRaisuri,
-      images: [portfolioRaisuri, portfolioRaisuri, portfolioRaisuri, portfolioRaisuri],
-      services: [
-        "Sports Logo Design",
-        "Jersey Design",
-        "Team Uniform Kit",
-        "Badge Design",
-        "Social Media Assets",
-        "Promotional Materials"
-      ],
-      timeline: "6 weeks - Design, Production & Team Launch",
-      client: "Football Academy",
-      link: "#"
-    }
-  ];
+  useEffect(() => {
+    const fetchPortfolios = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('portfolios')
+          .select(`
+            *,
+            portfolio_images (
+              image_url,
+              is_main,
+              sort_order
+            )
+          `)
+          .eq('status', 'published')
+          .order('created_at', { ascending: false });
 
-  const openLightbox = (item: any) => {
+        if (error) throw error;
+
+        // Transform data to match expected format
+        const transformedData = data?.map(item => ({
+          ...item,
+          services: Array.isArray(item.services) ? item.services.map(s => String(s)) : [],
+          images: item.portfolio_images?.map((img: any) => img.image_url) || [],
+          portfolio_images: item.portfolio_images?.sort((a: any, b: any) => a.sort_order - b.sort_order) || []
+        })) || [];
+
+        setPortfolioItems(transformedData);
+      } catch (error) {
+        console.error('Error fetching portfolios:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPortfolios();
+  }, []);
+
+  const openLightbox = (item: PortfolioItem) => {
     setSelectedPortfolio(item);
     setIsLightboxOpen(true);
   };
@@ -117,7 +86,25 @@ const EnhancedPortfolioSection = () => {
 
           {/* Portfolio Grid */}
           <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {portfolioItems.map((item, index) => (
+            {loading ? (
+              // Loading skeletons
+              [...Array(4)].map((_, index) => (
+                <div key={index} className="group bg-card rounded-2xl overflow-hidden shadow-soft border border-border/50">
+                  <Skeleton className="w-full h-64" />
+                  <div className="p-8">
+                    <div className="flex items-center justify-end mb-4">
+                      <Skeleton className="h-6 w-24" />
+                    </div>
+                    <Skeleton className="h-8 w-3/4 mb-2" />
+                    <Skeleton className="h-6 w-1/2 mb-3" />
+                    <Skeleton className="h-16 w-full mb-6" />
+                    <Skeleton className="h-6 w-32" />
+                  </div>
+                </div>
+              ))
+            ) : portfolioItems.map((item, index) => {
+              const mainImage = item.portfolio_images?.find(img => img.is_main) || item.portfolio_images?.[0];
+              return (
               <div 
                 key={item.id} 
                 className={`group bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-bold transition-all duration-500 border border-border/50 cursor-pointer animate-fade-in-up animate-stagger-${Math.min(index + 1, 4)}`}
@@ -125,11 +112,17 @@ const EnhancedPortfolioSection = () => {
               >
                 {/* Image */}
                 <div className="relative overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  {mainImage ? (
+                    <img 
+                      src={mainImage.image_url} 
+                      alt={item.title}
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-64 bg-muted flex items-center justify-center">
+                      <span className="text-muted-foreground">No image available</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="bg-background/90 px-4 py-2 rounded-full text-[hsl(var(--neon-green))] font-semibold transition-colors duration-500">
@@ -162,7 +155,8 @@ const EnhancedPortfolioSection = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
       </section>
