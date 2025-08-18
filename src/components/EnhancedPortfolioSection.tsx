@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
-import portfolioKapitani from "@/assets/portfolio-kapitani.jpg";
-import portfolioSag from "@/assets/portfolio-sag-logistics.jpg";
-import portfolioYouthopia from "@/assets/portfolio-youthopia.jpg";
-import portfolioRaisuri from "@/assets/portfolio-raisuri.jpg";
+import portfolioKapitani from "@/assets/portfolio-kapitani-new.png";
+import portfolioSag from "@/assets/portfolio-sag-new.png";
+import portfolioYouthopia from "@/assets/portfolio-youthopia-new.png";
+import portfolioRaisuri from "@/assets/portfolio-raisuri-new.png";
 import PortfolioLightbox from "./PortfolioLightbox";
 
 const EnhancedPortfolioSection = () => {
