@@ -84,18 +84,18 @@ const EnhancedHeader = () => {
               >
                 Our Work
               </button>
-              <Link 
-                to="/blog"
-                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
-              >
-                Blog
-              </Link>
               <button 
                 onClick={() => scrollToSection('process')}
                 className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
               >
                 Process
               </button>
+              <Link 
+                to="/blog"
+                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
+              >
+                Blog
+              </Link>
               <button 
                 onClick={() => setIsSearchOpen(true)}
                 className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium flex items-center space-x-1"
