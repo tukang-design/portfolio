@@ -6,45 +6,45 @@
 
 @layer base {
   :root {
-    /* Dark Theme - Modern minimal palette */
-    --background: 222.2 84% 4.9%; /* Dark background */
+    /* Brand-Based Dark Theme - Using brand color as foundation */
+    --background: 150 25% 8%; /* Very dark brand green as base */
     --foreground: 210 40% 98%; /* Light text */
 
-    --card: 222.2 84% 4.9%;
+    --card: 150 25% 12%; /* Slightly lighter brand green for depth */
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 150 25% 12%;
     --popover-foreground: 210 40% 98%;
 
-    /* Primary - Lighter brand color for dark theme */
-    --primary: 150 35% 65%; /* Lighter green for better contrast */
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --primary-muted: 150 25% 45%;
+    /* Primary - Original Brand Color #22342B */
+    --primary: 150 25% 17%; /* Original brand color */
+    --primary-foreground: 0 0% 100%;
+    --primary-muted: 150 20% 25%;
     --primary-light: 150 15% 25%;
 
-    /* Accent CTA - Deep Red-Brown #8B4513 */
-    --accent-cta: 22 69% 55%; /* Slightly lighter for dark theme */
+    /* Accent CTA - Original Deep Red-Brown #8B4513 */
+    --accent-cta: 22 69% 31%; /* Original accent color */
     --accent-cta-foreground: 0 0% 100%;
-    --accent-cta-hover: 22 69% 45%;
+    --accent-cta-hover: 22 69% 25%; /* Darker for hover */
 
-    /* Secondary - Dark theme secondary */
-    --secondary: 217.2 32.6% 17.5%;
+    /* Secondary - Brand-tinted */
+    --secondary: 150 20% 15%;
     --secondary-foreground: 210 40% 98%;
 
-    /* Dark theme neutral tones */
-    --muted: 217.2 32.6% 17.5%;
+    /* Brand-tinted neutral tones */
+    --muted: 150 20% 15%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 150 15% 18%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    /* Dark theme borders and inputs */
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Brand-tinted borders and inputs */
+    --border: 150 20% 15%;
+    --input: 150 20% 15%;
+    --ring: 150 25% 17%;
 
     --radius: 0.75rem;
 
