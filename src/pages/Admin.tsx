@@ -54,58 +54,50 @@ const Admin = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-6 py-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* Portfolio Management */}
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Portfolio</CardTitle>
-              <FileImage className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Portfolio Items</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">4</div>
-              <p className="text-xs text-muted-foreground">Projects published</p>
+              <div className="text-2xl font-bold">12</div>
+              <p className="text-xs text-muted-foreground">+2 from last month</p>
             </CardContent>
           </Card>
-
-          {/* Blog Management */}
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+          
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Blog Articles</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">0</div>
-              <p className="text-xs text-muted-foreground">Articles published</p>
+              <div className="text-2xl font-bold">8</div>
+              <p className="text-xs text-muted-foreground">+1 from last week</p>
             </CardContent>
           </Card>
-
-          {/* Users */}
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+          
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Users</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Contact Leads</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">1</div>
-              <p className="text-xs text-muted-foreground">Registered users</p>
+              <div className="text-2xl font-bold">23</div>
+              <p className="text-xs text-muted-foreground">+5 this week</p>
             </CardContent>
           </Card>
-
-          {/* Analytics */}
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+          
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Page Views</CardTitle>
-              <BarChart className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">0</div>
-              <p className="text-xs text-muted-foreground">This month</p>
+              <div className="text-2xl font-bold">1,234</div>
+              <p className="text-xs text-muted-foreground">+12% from last month</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Quick Actions */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           <Card>
             <CardHeader>
               <CardTitle>Portfolio Management</CardTitle>
@@ -113,26 +105,11 @@ const Admin = () => {
             </CardHeader>
             <CardContent className="space-y-3">
               <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => navigate('/portfolio-management')}
+                onClick={() => navigate('/admin/portfolio')}
+                variant="outline" 
+                className="w-full justify-start"
               >
-                <FileImage className="mr-2 h-4 w-4" />
-                View All Portfolios
-              </Button>
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => navigate('/portfolio-management')}
-              >
-                Add New Project
-              </Button>
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => navigate('/portfolio-management')}
-              >
-                Manage Images
+                Portfolio Management
               </Button>
             </CardContent>
           </Card>
@@ -143,15 +120,28 @@ const Admin = () => {
               <CardDescription>Create and manage blog articles and content</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button className="w-full justify-start" variant="outline">
-                <FileText className="mr-2 h-4 w-4" />
-                View All Articles
+              <Button 
+                onClick={() => navigate('/admin/blog')}
+                variant="outline" 
+                className="w-full justify-start"
+              >
+                Content Management
               </Button>
-              <Button className="w-full justify-start" variant="outline">
-                Write New Article
-              </Button>
-              <Button className="w-full justify-start" variant="outline">
-                Manage Categories
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Lead Management</CardTitle>
+              <CardDescription>Manage contact inquiries and leads</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button 
+                onClick={() => navigate('/admin/leads')}
+                variant="outline" 
+                className="w-full justify-start"
+              >
+                Lead Management
               </Button>
             </CardContent>
           </Card>

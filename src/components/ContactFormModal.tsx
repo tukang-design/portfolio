@@ -32,6 +32,15 @@ interface ContactFormModalProps {
     features: string[];
     description: string;
   };
+  onSubmitInquiry?: (formData: {
+    name: string;
+    email: string;
+    phone?: string;
+    service: string;
+    budget?: string;
+    timeline?: string;
+    message: string;
+  }) => Promise<boolean>;
 }
 
 const ContactFormModal = ({ 
@@ -39,7 +48,8 @@ const ContactFormModal = ({
   onClose, 
   onSuccess, 
   preSelectedService,
-  contextData 
+  contextData,
+  onSubmitInquiry
 }: ContactFormModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -55,15 +65,31 @@ const ContactFormModal = ({
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Here you would typically send the data to your backend
-    console.log("Form submitted:", data);
-    
-    setIsSubmitting(false);
-    onClose();
-    onSuccess();
+    try {
+      if (onSubmitInquiry) {
+        await onSubmitInquiry({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          service: data.service,
+          budget: data.budget,
+          timeline: data.timeline,
+          message: data.message
+        });
+      } else {
+        // Fallback - simulate form submission
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log("Form submitted:", data);
+      }
+      
+      setIsSubmitting(false);
+      onClose();
+      onSuccess();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setIsSubmitting(false);
+      // You could add error handling UI here
+    }
   };
 
   const handleWhatsAppContact = () => {

@@ -13,6 +13,7 @@ import BlogNew from "./pages/BlogNew";
 import BlogEdit from "./pages/BlogEdit";
 import BlogArticle from "./pages/BlogArticle";
 import PortfolioManagement from "./pages/PortfolioManagement";
+import LeadManagement from "./pages/LeadManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,10 +29,11 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/portfolio-management" element={<PortfolioManagement />} />
+            <Route path="/admin/portfolio" element={<PortfolioManagement />} />
             <Route path="/admin/blog" element={<BlogManagement />} />
             <Route path="/admin/blog/new" element={<BlogNew />} />
             <Route path="/admin/blog/:id/edit" element={<BlogEdit />} />
+            <Route path="/admin/leads" element={<LeadManagement />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

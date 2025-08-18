@@ -15,6 +15,7 @@ const EnhancedServicesSection = () => {
     handleFormSuccess,
     closeSuccessModal,
     openNewInquiry,
+    submitContactInquiry,
     serviceContexts
   } = useContactForm();
 
@@ -129,6 +130,7 @@ const EnhancedServicesSection = () => {
         onSuccess={handleFormSuccess}
         preSelectedService={preSelectedService}
         contextData={contextData}
+        onSubmitInquiry={submitContactInquiry}
       />
 
       <SuccessModal

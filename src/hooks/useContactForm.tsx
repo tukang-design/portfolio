@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface ServiceContext {
   title: string;
@@ -27,6 +28,41 @@ export const useContactForm = () => {
   const handleFormSuccess = () => {
     setIsContactFormOpen(false);
     setIsSuccessModalOpen(true);
+  };
+
+  const submitContactInquiry = async (formData: {
+    name: string;
+    email: string;
+    phone?: string;
+    service: string;
+    budget?: string;
+    timeline?: string;
+    message: string;
+  }) => {
+    try {
+      const { error } = await supabase
+        .from('contact_inquiries')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service_interest: formData.service,
+          budget: formData.budget,
+          timeline: formData.timeline,
+          message: formData.message,
+          source: 'website'
+        });
+
+      if (error) {
+        console.error('Error submitting contact inquiry:', error);
+        throw error;
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Failed to submit contact inquiry:', error);
+      throw error;
+    }
   };
 
   const closeSuccessModal = () => {
@@ -74,6 +110,7 @@ export const useContactForm = () => {
     handleFormSuccess,
     closeSuccessModal,
     openNewInquiry,
+    submitContactInquiry,
     serviceContexts
   };
 };
