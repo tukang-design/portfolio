@@ -49,7 +49,7 @@ const PortfolioSection = () => {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6">
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-primary mb-6">
             From brand new logos to full-scale websites, here's a look at our craftsmanship.
           </h2>
         </div>
@@ -70,8 +70,7 @@ const PortfolioSection = () => {
               
               {/* Content */}
               <div className="p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-bold text-primary">#{item.id}</span>
+                <div className="flex items-center justify-end mb-4">
                   <span className="text-xs text-muted-foreground bg-accent px-3 py-1 rounded-full">
                     {item.category}
                   </span>

@@ -7,7 +7,7 @@ const ServicesSection = () => {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6">
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-primary mb-6">
             Meet Your Tukang
           </h2>
           <p className="text-xl text-muted-foreground">

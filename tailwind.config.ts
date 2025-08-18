@@ -20,6 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				'jakarta': ['Plus Jakarta Sans', 'sans-serif'],
+				'heading': ['hooneorinigyosil', 'Plus Jakarta Sans', 'sans-serif'],
 				sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
 			},
 			colors: {
@@ -33,6 +34,11 @@ export default {
 					foreground: 'hsl(var(--primary-foreground))',
 					muted: 'hsl(var(--primary-muted))',
 					light: 'hsl(var(--primary-light))'
+				},
+				'accent-cta': {
+					DEFAULT: 'hsl(var(--accent-cta))',
+					foreground: 'hsl(var(--accent-cta-foreground))',
+					hover: 'hsl(var(--accent-cta-hover))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',

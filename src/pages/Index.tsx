@@ -1,19 +1,19 @@
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
+import EnhancedHeader from "@/components/EnhancedHeader";
+import EnhancedHeroSection from "@/components/EnhancedHeroSection";
 import ProblemsSection from "@/components/ProblemsSection";
-import ServicesSection from "@/components/ServicesSection";
-import PortfolioSection from "@/components/PortfolioSection";
+import EnhancedServicesSection from "@/components/EnhancedServicesSection";
+import EnhancedPortfolioSection from "@/components/EnhancedPortfolioSection";
 import ProcessSection from "@/components/ProcessSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      <HeroSection />
+      <EnhancedHeader />
+      <EnhancedHeroSection />
       <ProblemsSection />
-      <ServicesSection />
-      <PortfolioSection />
+      <EnhancedServicesSection />
+      <EnhancedPortfolioSection />
       <ProcessSection />
       <Footer />
     </div>

@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    /* Brand Colors - Modern minimal palette */
-    --background: 0 0% 100%;
+    /* Brand Colors - Modern minimal palette with beige backgrounds */
+    --background: 60 56% 91%; /* Light beige #F5F5DC */
     --foreground: 150 25% 15%; /* Dark forest green derived from brand */
 
     --card: 0 0% 100%;
@@ -22,12 +22,17 @@
     --primary-muted: 150 20% 25%;
     --primary-light: 150 15% 85%;
 
+    /* Accent CTA - Deep Red-Brown #8B4513 */
+    --accent-cta: 22 69% 31%; /* #8B4513 for primary CTAs */
+    --accent-cta-foreground: 0 0% 100%;
+    --accent-cta-hover: 22 69% 25%;
+
     /* Secondary - Complementary warm tone */
     --secondary: 30 25% 95%;
     --secondary-foreground: 150 25% 17%;
 
-    /* Neutral tones for modern minimal look */
-    --muted: 0 0% 96%;
+    /* Neutral tones for modern minimal look with beige tints */
+    --muted: 60 25% 93%;
     --muted-foreground: 0 0% 45%;
 
     --accent: 150 15% 92%;
@@ -45,7 +50,7 @@
 
     /* Custom design tokens */
     --hero-gradient: linear-gradient(135deg, hsl(150 25% 17%), hsl(150 30% 25%));
-    --section-bg: 0 0% 98%;
+    --section-bg: 60 25% 95%; /* Light beige for sections */
     --glass-bg: 150 25% 17% / 0.05;
     
     /* Shadows */
@@ -117,7 +122,33 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .animate-stagger-1 { animation-delay: 0.1s; }
+  .animate-stagger-2 { animation-delay: 0.2s; }
+  .animate-stagger-3 { animation-delay: 0.3s; }
+  .animate-stagger-4 { animation-delay: 0.4s; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

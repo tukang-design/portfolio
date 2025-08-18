@@ -11,7 +11,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Headlines */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-primary mb-6 leading-tight">
             Brand Nampak Lesu?<br />
             <span className="text-primary-muted">Website Tak Bawa Sales?</span>
           </h1>

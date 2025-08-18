@@ -23,7 +23,7 @@ const ProblemsSection = () => {
     <section className="py-20 bg-section-bg">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6">
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-primary mb-6">
             Stop Losing Customers to a Bad First Impression.
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
@@ -33,13 +33,12 @@ const ProblemsSection = () => {
         
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {problems.map((problem, index) => (
-            <div key={index} className="bg-card rounded-xl p-8 shadow-soft border border-border/50 hover:shadow-bold transition-all duration-300">
+            <div key={index} className={`bg-card rounded-xl p-8 shadow-soft border border-border/50 hover:shadow-bold transition-all duration-300 animate-fade-in-up animate-stagger-${index + 1}`}>
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0 p-3 bg-destructive/10 rounded-lg">
                   {problem.icon}
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-primary mb-2">#{index + 1}</div>
                   <h3 className="text-lg font-bold text-foreground mb-3">
                     "{problem.title}"
                   </h3>
