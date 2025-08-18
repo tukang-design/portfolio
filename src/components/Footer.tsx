@@ -48,14 +48,12 @@ const Footer = () => {
               <ul className="space-y-3 text-muted-foreground">
                 <li>studio@tukang.design</li>
                 <li>
-                  <Button 
-                    variant="cta" 
-                    size="lg"
+                  <button 
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-bold tracking-wide h-12 px-8 bg-accent-cta text-accent-cta-foreground hover:bg-accent-cta-hover border-2 border-accent-cta hover:border-accent-cta-hover transform hover:translate-y-[-1px] shadow-lg hover:shadow-xl transition-all duration-300 mt-2"
                     onClick={() => openContactForm()}
-                    className="mt-2"
                   >
                     Get a Quote
-                  </Button>
+                  </button>
                 </li>
               </ul>
             </div>
