@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import { useContactForm } from "@/hooks/useContactForm";
 import ContactFormModal from "./ContactFormModal";
 import SuccessModal from "./SuccessModal";
+import SearchModal from "./SearchModal";
 
 const EnhancedHeader = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const {
     isContactFormOpen,
     isSuccessModalOpen,
@@ -65,6 +69,13 @@ const EnhancedHeader = () => {
               >
                 Process
               </button>
+              <button 
+                onClick={() => setIsSearchOpen(true)}
+                className="text-foreground hover:text-[hsl(var(--neon-green))] transition-colors font-medium"
+                aria-label="Search"
+              >
+                <Search className="h-4 w-4" />
+              </button>
             </nav>
 
             {/* CTA Button */}
@@ -91,6 +102,11 @@ const EnhancedHeader = () => {
         isOpen={isSuccessModalOpen}
         onClose={closeSuccessModal}
         onNewInquiry={openNewInquiry}
+      />
+
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
       />
     </>
   );

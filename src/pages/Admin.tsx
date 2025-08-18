@@ -1,11 +1,15 @@
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useAnalytics } from '@/hooks/useAnalytics';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileImage, FileText, Users, BarChart } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
+import { FileImage, FileText, Users, BarChart, RefreshCw } from 'lucide-react';
+import SEOHead from '@/components/SEOHead';
 
 const Admin = () => {
   const { user, isAdmin, loading, signOut } = useAuth();
+  const { data, loading: analyticsLoading, refresh } = useAnalytics();
   const navigate = useNavigate();
 
   if (loading) {
@@ -39,18 +43,30 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card border-b border-border">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-heading font-bold text-primary">Admin Dashboard</h1>
-            <Button onClick={signOut} variant="outline">
-              Sign Out
-            </Button>
+    <>
+      <SEOHead 
+        title="Admin Dashboard - Tukang Design"
+        description="Admin dashboard for managing content, leads, and analytics."
+      />
+      
+      <div className="min-h-screen bg-background">
+        {/* Header */}
+        <header className="bg-card border-b border-border">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex items-center justify-between">
+              <h1 className="text-2xl font-heading font-bold text-primary">Admin Dashboard</h1>
+              <div className="flex items-center space-x-2">
+                <Button onClick={refresh} variant="outline" disabled={analyticsLoading}>
+                  <RefreshCw className={`h-4 w-4 mr-2 ${analyticsLoading ? 'animate-spin' : ''}`} />
+                  Refresh
+                </Button>
+                <Button onClick={signOut} variant="outline">
+                  Sign Out
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
       {/* Main Content */}
       <main className="container mx-auto px-6 py-8">
@@ -58,40 +74,62 @@ const Admin = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Portfolio Items</CardTitle>
+              <FileImage className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">12</div>
-              <p className="text-xs text-muted-foreground">+2 from last month</p>
+              {analyticsLoading ? (
+                <Skeleton className="h-8 w-16 mb-2" />
+              ) : (
+                <div className="text-2xl font-bold">{data.totalPortfolios}</div>
+              )}
+              <p className="text-xs text-muted-foreground">Featured projects</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Blog Articles</CardTitle>
+              <FileText className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">8</div>
-              <p className="text-xs text-muted-foreground">+1 from last week</p>
+              {analyticsLoading ? (
+                <Skeleton className="h-8 w-16 mb-2" />
+              ) : (
+                <div className="text-2xl font-bold">{data.totalBlogs}</div>
+              )}
+              <p className="text-xs text-muted-foreground">Published articles</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Contact Leads</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">23</div>
-              <p className="text-xs text-muted-foreground">+5 this week</p>
+              {analyticsLoading ? (
+                <Skeleton className="h-8 w-16 mb-2" />
+              ) : (
+                <div className="text-2xl font-bold">{data.totalLeads}</div>
+              )}
+              <p className="text-xs text-muted-foreground">{data.recentLeads.length} recent inquiries</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Page Views</CardTitle>
+              <CardTitle className="text-sm font-medium">Total Blog Views</CardTitle>
+              <BarChart className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">1,234</div>
-              <p className="text-xs text-muted-foreground">+12% from last month</p>
+              {analyticsLoading ? (
+                <Skeleton className="h-8 w-16 mb-2" />
+              ) : (
+                <div className="text-2xl font-bold">
+                  {data.blogViews.reduce((sum, blog) => sum + blog.view_count, 0)}
+                </div>
+              )}
+              <p className="text-xs text-muted-foreground">All articles combined</p>
             </CardContent>
           </Card>
         </div>
@@ -148,6 +186,7 @@ const Admin = () => {
         </div>
       </main>
     </div>
+    </>
   );
 };
 
