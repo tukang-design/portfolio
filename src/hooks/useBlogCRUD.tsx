@@ -39,7 +39,7 @@ export const useBlogCRUD = () => {
           published_at: data.status === 'published' ? new Date().toISOString() : null,
         })
         .select()
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
 
@@ -161,7 +161,7 @@ export const useBlogCRUD = () => {
         .from('blog_categories')
         .insert({ name, slug, description })
         .select()
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
 

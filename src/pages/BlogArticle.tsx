@@ -76,7 +76,7 @@ const BlogArticle = () => {
         `)
         .eq('slug', slug)
         .eq('status', 'published')
-        .single();
+        .maybeSingle();
 
       if (error) {
         if (error.code === 'PGRST116') {

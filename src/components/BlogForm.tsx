@@ -79,7 +79,7 @@ const BlogForm = ({ articleId, onSuccess }: BlogFormProps) => {
           article_tags (tag)
         `)
         .eq('id', articleId)
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
 

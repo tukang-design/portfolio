@@ -184,7 +184,7 @@ export const PortfolioForm = ({ isOpen, onClose, onSuccess, portfolio }: Portfol
             services: services,
           })
           .select()
-          .single();
+          .maybeSingle();
 
         if (error) throw error;
 

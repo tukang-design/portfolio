@@ -69,7 +69,7 @@ const RelatedArticles = ({
           .from('blog_categories')
           .select('id')
           .eq('slug', categorySlug)
-          .single();
+          .maybeSingle();
 
         if (!error && categoryData) {
           query = query.eq('category_id', categoryData.id);
@@ -107,7 +107,7 @@ const RelatedArticles = ({
             .from('blog_categories')
             .select('id')
             .eq('slug', categorySlug)
-            .single();
+            .maybeSingle();
 
           if (categoryData) {
             additionalQuery.neq('category_id', categoryData.id);
