@@ -51,14 +51,14 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: hsl(var(--background));
+    background: hsl(142 77% 10%);
     flex-direction: column;
     padding: 2rem;
-    border-top: 1px solid hsl(var(--border));
+    border-top: 1px solid hsl(142 30% 25%);
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition-smooth);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .nav-menu.active {
