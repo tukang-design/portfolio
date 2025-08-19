@@ -7,13 +7,11 @@ import { AuthProvider } from "@/hooks/useAuth";
 
 // Get base path from environment for GitHub Pages
 const getBasePath = () => {
-  if (typeof window !== 'undefined') {
-    // Runtime detection for GitHub Pages
-    if (window.location.hostname.includes('github.io')) {
-      return '/portfolio';
-    }
+  // Runtime detection for GitHub Pages
+  if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+    return '/portfolio';
   }
-  // Build time detection
+  // Build time detection - matches vite.config.ts logic exactly
   return import.meta.env.PROD && !import.meta.env.VITE_CUSTOM_DOMAIN ? '/portfolio' : '';
 };
 import Index from "./pages/Index";

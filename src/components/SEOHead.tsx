@@ -18,7 +18,7 @@ const SEOHead = ({
   description = "Professional brand design and website development. Transform your business with powerful brand assets that work. 13 years experience.",
   keywords = "brand design, website development, logo design, branding agency, creative services, web design",
   image = "/og-image.jpg",
-  url = window.location.href,
+  url = typeof window !== 'undefined' ? window.location.href : '',
   type = "website",
   publishedTime,
   modifiedTime,
