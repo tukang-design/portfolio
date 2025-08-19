@@ -20,7 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				'jakarta': ['Plus Jakarta Sans', 'sans-serif'],
-				'heading': ['hooneorinigyosil', 'Plus Jakarta Sans', 'sans-serif'],
+				'heading': ['Plus Jakarta Sans', 'sans-serif'],
 				sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
 			},
 			colors: {
