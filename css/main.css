@@ -346,6 +346,121 @@ section {
   background: hsl(var(--background));
 }
 
+/* Problems Section */
+.problems {
+  background: hsl(var(--background));
+  padding: 4rem 0;
+}
+
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.problem-card {
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+  border: 1px solid hsl(var(--border));
+}
+
+.problem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.problem-icon {
+  color: #dc2626; /* Red color for warning */
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.problem-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  line-height: 1.4;
+}
+
+/* Process Section */
+.process {
+  background: hsl(var(--section-bg));
+  padding: 4rem 0;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  align-items: center;
+}
+
+.process-step {
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+  border: 1px solid hsl(var(--border));
+  position: relative;
+}
+
+.process-step:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.process-number {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: hsl(var(--neon-green));
+  color: hsl(var(--background));
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.process-icon {
+  color: hsl(var(--neon-green));
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.process-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+}
+
+.process-description {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
+.process-connector {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, hsl(var(--neon-green)), transparent);
+  justify-self: center;
+}
+
 .contact {
   background: hsl(var(--background));
 }

@@ -10,6 +10,19 @@
   .portfolio-grid {
     grid-template-columns: 1fr;
   }
+
+  .problems-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .process-connector {
+    display: none;
+  }
   
   .contact-content {
     grid-template-columns: 1fr;
