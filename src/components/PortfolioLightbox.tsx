@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, X, ExternalLink } from "lucide-react";
 
@@ -67,9 +68,19 @@ const PortfolioLightbox = ({ isOpen, onClose, item }: PortfolioLightboxProps) =>
     }
   };
 
-  return (
+  const modalContent = (
     <div 
-      className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 w-screen h-screen bg-black/90 backdrop-blur-sm animate-fade-in"
+      style={{ 
+        zIndex: 9999,
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100vw',
+        height: '100vh'
+      }}
       onClick={handleBackdropClick}
     >
       <div className="h-full w-full overflow-hidden">
@@ -214,6 +225,8 @@ const PortfolioLightbox = ({ isOpen, onClose, item }: PortfolioLightboxProps) =>
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default PortfolioLightbox;
