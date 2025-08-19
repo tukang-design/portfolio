@@ -23,20 +23,29 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Build
-      run: npm run build
-      env:
-        NODE_ENV: production
-        VITE_CUSTOM_DOMAIN: ${{ vars.VITE_CUSTOM_DOMAIN || secrets.VITE_CUSTOM_DOMAIN }}
+    - name: Create build directory
+      run: |
+        mkdir -p dist
+        # Copy all static files to dist directory
+        cp index.html dist/
+        cp logo.png dist/
+        cp -r css dist/
+        cp -r js dist/
+        # Copy public directory contents (if any)
+        if [ -d "public" ]; then
+          cp -r public/* dist/ 2>/dev/null || true
+        fi
+        # Copy any additional assets from src/assets that might be referenced
+        if [ -d "src/assets" ]; then
+          mkdir -p dist/assets
+          cp -r src/assets/* dist/assets/ 2>/dev/null || true
+        fi
+        # Copy CNAME if it exists
+        if [ -f "CNAME" ]; then
+          cp CNAME dist/
+        fi
+        # Create .nojekyll to prevent Jekyll processing
+        touch dist/.nojekyll
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
