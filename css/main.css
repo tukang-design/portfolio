@@ -1,17 +1,17 @@
 /* CSS Variables - Design System */
 :root {
-  /* Light Theme - Original beige/white design */
-  --background: 60 56% 91%; /* Light beige #F5F5DC */
-  --foreground: 150 25% 15%; /* Dark forest green */
-  --card: 0 0% 100%; /* Pure white for cards */
-  --card-foreground: 150 25% 15%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 150 25% 15%;
+  /* Dark Theme - Matching Original React Design */
+  --background: 142 77% 10%; /* Dark forest green */
+  --foreground: 0 0% 98%; /* White text */
+  --card: 142 77% 10%; /* Dark green cards */
+  --card-foreground: 0 0% 98%;
+  --popover: 142 77% 10%;
+  --popover-foreground: 0 0% 98%;
   
-  /* White primary elements */
-  --primary: 0 0% 100%; /* White for main elements */
-  --primary-foreground: 150 25% 17%; /* Dark green for contrast */
-  --primary-light: 150 15% 85%; /* Light version */
+  /* Primary elements */
+  --primary: 0 0% 98%; /* White for buttons */
+  --primary-foreground: 142 77% 10%; /* Dark green text on white */
+  --primary-light: 142 50% 20%; /* Lighter green variant */
   
   /* Original accent colors */
   --accent-cta: 22 69% 31%; /* Original brown/red #8B4513 */
@@ -19,37 +19,37 @@
   --accent-cta-hover: 22 69% 25%;
   
   /* Bright neon green for highlights */
-  --neon-green: 120 100% 40%; /* Bright green */
-  --neon-green-muted: 120 60% 50%;
+  --neon-green: 120 100% 50%; /* Bright neon green */
+  --neon-green-muted: 120 80% 40%;
   
   /* Neutral tones */
-  --secondary: 30 25% 95%; /* Light warm tone */
-  --secondary-foreground: 150 25% 17%;
-  --muted: 60 25% 93%; /* Light beige muted */
-  --muted-foreground: 0 0% 45%;
-  --accent: 150 15% 92%;
-  --accent-foreground: 150 25% 17%;
+  --secondary: 142 50% 15%; /* Darker green tone */
+  --secondary-foreground: 0 0% 98%;
+  --muted: 142 30% 20%; /* Muted green */
+  --muted-foreground: 0 0% 70%;
+  --accent: 142 40% 25%;
+  --accent-foreground: 0 0% 98%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 90%;
-  --input: 0 0% 95%;
-  --ring: 150 25% 17%;
+  --border: 142 30% 25%;
+  --input: 142 50% 15%;
+  --ring: 120 100% 50%;
   --radius: 0.75rem;
   
   /* Background variations */
-  --section-bg: 0 0% 98%; /* Very light gray for sections */
-  --section-alt: 60 56% 88%; /* Slightly darker beige */
+  --section-bg: 142 50% 15%; /* Dark green for sections */
+  --section-alt: 142 40% 18%; /* Slightly lighter green */
 
   /* Enhanced gradients */
   --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
-  --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--section-alt)), hsl(var(--primary-light)));
+  --gradient-hero: linear-gradient(135deg, hsl(142 77% 10%), hsl(142 50% 15%), hsl(142 40% 20%));
   --gradient-cta: linear-gradient(135deg, hsl(var(--accent-cta)), hsl(var(--accent-cta-hover)));
 
   /* Modern shadows */
-  --shadow-soft: 0 4px 20px hsl(150 25% 17% / 0.08);
-  --shadow-medium: 0 8px 30px hsl(150 25% 17% / 0.12);
-  --shadow-bold: 0 12px 40px hsl(150 25% 17% / 0.15);
-  --shadow-xl: 0 20px 60px hsl(150 25% 17% / 0.20);
+  --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.3);
+  --shadow-medium: 0 8px 30px hsl(0 0% 0% / 0.4);
+  --shadow-bold: 0 12px 40px hsl(0 0% 0% / 0.5);
+  --shadow-xl: 0 20px 60px hsl(0 0% 0% / 0.6);
 
   /* Smooth transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -287,14 +287,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-hero {
-  background: hsla(var(--foreground), 0.1);
-  color: hsl(var(--foreground));
-  border: 2px solid hsla(var(--foreground), 0.2);
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: 2px solid hsl(var(--primary));
 }
 
 .btn-hero:hover {
-  background: hsla(var(--foreground), 0.2);
-  transform: translateY(-2px);
+  background: hsla(var(--primary), 0.9);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .btn-cta {
@@ -339,11 +339,11 @@ section {
 }
 
 .services {
-  background: hsl(var(--background));
+  background: hsl(var(--section-bg));
 }
 
 .portfolio {
-  background: hsl(var(--section-bg));
+  background: hsl(var(--background));
 }
 
 .contact {
