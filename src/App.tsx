@@ -4,6 +4,18 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
+
+// Get base path from environment for GitHub Pages
+const getBasePath = () => {
+  if (typeof window !== 'undefined') {
+    // Runtime detection for GitHub Pages
+    if (window.location.hostname.includes('github.io')) {
+      return '/portfolio';
+    }
+  }
+  // Build time detection
+  return import.meta.env.PROD && !import.meta.env.VITE_CUSTOM_DOMAIN ? '/portfolio' : '';
+};
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
@@ -24,7 +36,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename={getBasePath()}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
