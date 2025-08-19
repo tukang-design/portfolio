@@ -25,23 +25,6 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="./src/main.tsx" async></script>
-    <script>
-      // Fallback detection for script loading
-      window.addEventListener('error', function(e) {
-        if (e.target && e.target.tagName === 'SCRIPT') {
-          console.error('[Script Loading] Failed to load:', e.target.src);
-          document.body.innerHTML = '<div style="padding: 2rem; font-family: sans-serif;"><h1>Loading Error</h1><p>Failed to load application script. Please check console for details.</p></div>';
-        }
-      });
-      
-      // Timeout detection
-      setTimeout(function() {
-        if (!window.React) {
-          console.error('[Script Loading] Timeout - React not loaded after 10 seconds');
-          document.body.innerHTML = '<div style="padding: 2rem; font-family: sans-serif;"><h1>Loading Timeout</h1><p>Application failed to load within 10 seconds.</p></div>';
-        }
-      }, 10000);
-    </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
