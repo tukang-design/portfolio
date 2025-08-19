@@ -1,43 +1,60 @@
 /* CSS Variables - Design System */
 :root {
-  /* Colors - Dark Theme */
-  --background: 8 13 14;
-  --foreground: 248 248 242;
-  --card: 11 16 18;
-  --card-foreground: 248 248 242;
-  --popover: 11 16 18;
-  --popover-foreground: 248 248 242;
-  --primary: 90 150 90;
-  --primary-foreground: 248 248 242;
-  --primary-light: 100 160 100;
-  --secondary: 245 243 225;
-  --secondary-foreground: 8 13 14;
-  --muted: 32 40 42;
-  --muted-foreground: 163 163 163;
-  --accent: 100 160 100;
-  --accent-foreground: 248 248 242;
-  --destructive: 220 38 38;
-  --destructive-foreground: 248 248 242;
-  --border: 32 40 42;
-  --input: 32 40 42;
-  --ring: 90 150 90;
+  /* Light Theme - Original beige/white design */
+  --background: 60 56% 91%; /* Light beige #F5F5DC */
+  --foreground: 150 25% 15%; /* Dark forest green */
+  --card: 0 0% 100%; /* Pure white for cards */
+  --card-foreground: 150 25% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 150 25% 15%;
+  
+  /* White primary elements */
+  --primary: 0 0% 100%; /* White for main elements */
+  --primary-foreground: 150 25% 17%; /* Dark green for contrast */
+  --primary-light: 150 15% 85%; /* Light version */
+  
+  /* Original accent colors */
+  --accent-cta: 22 69% 31%; /* Original brown/red #8B4513 */
+  --accent-cta-foreground: 0 0% 100%;
+  --accent-cta-hover: 22 69% 25%;
+  
+  /* Bright neon green for highlights */
+  --neon-green: 120 100% 40%; /* Bright green */
+  --neon-green-muted: 120 60% 50%;
+  
+  /* Neutral tones */
+  --secondary: 30 25% 95%; /* Light warm tone */
+  --secondary-foreground: 150 25% 17%;
+  --muted: 60 25% 93%; /* Light beige muted */
+  --muted-foreground: 0 0% 45%;
+  --accent: 150 15% 92%;
+  --accent-foreground: 150 25% 17%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 90%;
+  --input: 0 0% 95%;
+  --ring: 150 25% 17%;
   --radius: 0.75rem;
-  --neon-green: 57 255 20;
-  --neon-green-muted: 100 200 80;
-  --section-bg: 6 10 11;
+  
+  /* Background variations */
+  --section-bg: 0 0% 98%; /* Very light gray for sections */
+  --section-alt: 60 56% 88%; /* Slightly darker beige */
 
-  /* Gradients */
+  /* Enhanced gradients */
   --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
-  --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--primary-light)), hsl(var(--accent)));
+  --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--section-alt)), hsl(var(--primary-light)));
+  --gradient-cta: linear-gradient(135deg, hsl(var(--accent-cta)), hsl(var(--accent-cta-hover)));
 
-  /* Shadows */
-  --shadow-soft: 0 4px 6px -1px hsl(var(--primary) / 0.1), 0 2px 4px -1px hsl(var(--primary) / 0.06);
-  --shadow-bold: 0 10px 15px -3px hsl(var(--primary) / 0.1), 0 4px 6px -2px hsl(var(--primary) / 0.05);
-  --shadow-xl: 0 20px 25px -5px hsl(var(--primary) / 0.1), 0 10px 10px -5px hsl(var(--primary) / 0.04);
+  /* Modern shadows */
+  --shadow-soft: 0 4px 20px hsl(150 25% 17% / 0.08);
+  --shadow-medium: 0 8px 30px hsl(150 25% 17% / 0.12);
+  --shadow-bold: 0 12px 40px hsl(150 25% 17% / 0.15);
+  --shadow-xl: 0 20px 60px hsl(150 25% 17% / 0.20);
 
-  /* Transitions */
+  /* Smooth transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: all 0.15s ease-out;
+  --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   /* Typography */
   --font-heading: 'Plus Jakarta Sans', sans-serif;
@@ -72,10 +89,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
   color: hsl(var(--foreground));
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .section-subtitle {
@@ -200,16 +220,18 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   z-index: 10;
   text-align: center;
-  max-width: 4rem;
+  max-width: 64rem;
   margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  font-weight: 700;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 900;
   color: hsl(var(--foreground));
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
+  margin-bottom: 2rem;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
   animation: fadeInUp 0.8s ease-out;
 }
 
@@ -276,16 +298,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-cta {
-  background: hsl(var(--neon-green));
-  color: hsl(var(--background));
-  padding: 1rem 2rem;
+  background: var(--gradient-cta);
+  color: hsl(var(--accent-cta-foreground));
+  padding: 1.25rem 2.5rem;
   font-weight: 700;
-  box-shadow: var(--shadow-soft);
+  font-size: 1.125rem;
+  box-shadow: var(--shadow-medium);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsla(0, 0%, 100%, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-cta:hover::before {
+  left: 100%;
 }
 
 .btn-cta:hover {
-  background: hsl(var(--neon-green-muted));
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-bold);
 }
 
@@ -329,16 +369,34 @@ section {
 
 .service-card {
   background: hsl(var(--card));
-  border-radius: 1rem;
-  padding: 2rem;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
   box-shadow: var(--shadow-soft);
   border: 1px solid hsl(var(--border));
-  transition: var(--transition-smooth);
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-cta);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
 }
 
 .service-card:hover {
   box-shadow: var(--shadow-xl);
-  transform: translateY(-4px);
+  transform: translateY(-8px);
 }
 
 .service-header {
@@ -357,9 +415,11 @@ section {
 }
 
 .service-title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: hsl(var(--foreground));
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
 }
 
 .service-subtitle {
@@ -399,17 +459,31 @@ section {
 
 .portfolio-item {
   background: hsl(var(--card));
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   overflow: hidden;
   box-shadow: var(--shadow-soft);
   border: 1px solid hsla(var(--border), 0.5);
-  transition: var(--transition-smooth);
+  transition: var(--transition-bounce);
   cursor: pointer;
+  position: relative;
+}
+
+.portfolio-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 30%, hsla(var(--neon-green), 0.1) 50%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-item:hover::after {
+  opacity: 1;
 }
 
 .portfolio-item:hover {
-  box-shadow: var(--shadow-bold);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-8px) scale(1.02);
 }
 
 .portfolio-image {
