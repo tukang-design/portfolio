@@ -41,9 +41,9 @@
   --section-alt: 142 40% 18%; /* Slightly lighter green */
 
   /* Enhanced gradients */
-  --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+  --gradient-primary: linear-gradient(135deg, hsl(0 0% 98%), hsl(142 50% 20%));
   --gradient-hero: linear-gradient(135deg, hsl(142 77% 10%), hsl(142 50% 15%), hsl(142 40% 20%));
-  --gradient-cta: linear-gradient(135deg, hsl(var(--accent-cta)), hsl(var(--accent-cta-hover)));
+  --gradient-cta: linear-gradient(135deg, hsl(22 69% 31%), hsl(22 69% 25%));
 
   /* Modern shadows */
   --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.3);
@@ -395,12 +395,12 @@ section {
   bottom: 0;
   left: 0;
   right: 0;
-  background: hsla(var(--card), 0.95);
+  background: hsla(142 77% 10% / 0.95);
   backdrop-filter: blur(10px);
-  border-top: 1px solid hsl(var(--border));
+  border-top: 1px solid hsl(142 30% 25%);
   padding: 1.5rem 2rem;
   transform: translateY(100%);
-  transition: var(--transition-smooth);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .problem-card:hover .problem-description {
@@ -408,7 +408,7 @@ section {
 }
 
 .problem-description p {
-  color: hsl(var(--muted-foreground));
+  color: hsl(0 0% 70%);
   font-size: 0.9rem;
   line-height: 1.5;
   margin: 0;
