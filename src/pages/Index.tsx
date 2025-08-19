@@ -10,8 +10,11 @@ import SEOHead from "@/components/SEOHead";
 import BackToTop from "@/components/BackToTop";
 import SitemapGenerator from "@/components/SitemapGenerator";
 import AdminIndicator from "@/components/AdminIndicator";
+import TestComponent from "@/components/TestComponent";
 
 const Index = () => {
+  console.log('[Index] Component rendering started');
+  
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -39,6 +42,13 @@ const Index = () => {
     ]
   };
 
+  // Temporarily show test component to verify React is working
+  const showTest = new URLSearchParams(window?.location?.search || '').get('test') === 'true';
+  
+  if (showTest) {
+    return <TestComponent />;
+  }
+  
   return (
     <>
       <SEOHead 
