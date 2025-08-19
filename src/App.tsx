@@ -19,7 +19,8 @@ const getBasePath = () => {
   console.log('[App] Environment:', {
     PROD: import.meta.env.PROD,
     VITE_CUSTOM_DOMAIN: import.meta.env.VITE_CUSTOM_DOMAIN,
-    NODE_ENV: import.meta.env.NODE_ENV
+    NODE_ENV: import.meta.env.NODE_ENV,
+    hostname: typeof window !== 'undefined' ? window.location.hostname : 'SSR'
   });
   return basePath;
 };

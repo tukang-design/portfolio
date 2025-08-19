@@ -36,7 +36,7 @@ jobs:
       run: npm run build
       env:
         NODE_ENV: production
-        VITE_CUSTOM_DOMAIN: ${{ secrets.VITE_CUSTOM_DOMAIN }}
+        VITE_CUSTOM_DOMAIN: ${{ vars.VITE_CUSTOM_DOMAIN || secrets.VITE_CUSTOM_DOMAIN }}
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
