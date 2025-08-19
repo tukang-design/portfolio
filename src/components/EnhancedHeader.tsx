@@ -59,6 +59,7 @@ const EnhancedHeader = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-2">
+              <img src="/logo.png" alt="Tukang Design Logo" className="h-8 w-8" />
               <Link to="/" className="font-heading font-bold text-xl text-white hover:text-primary transition-colors">
                 Tukang Design
               </Link>

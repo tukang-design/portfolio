@@ -89,10 +89,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 2rem);
+  font-weight: 500;
   color: hsl(var(--foreground));
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-subtitle {
   font-size: 1.25rem;
-  color: hsl(var(--foreground));
+  color: hsla(var(--foreground), 0.3);
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -226,11 +226,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 900;
+  font-size: clamp(3.5rem, 8vw, 4rem);
+  font-weight: 700;
   color: hsl(var(--foreground));
   margin-bottom: 2rem;
-  line-height: 0.95;
+  line-height: 1.25;
   letter-spacing: -0.03em;
   animation: fadeInUp 0.8s ease-out;
 }
@@ -240,7 +240,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-description {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
   color: hsla(var(--foreground), 0.9);
   margin-bottom: 2rem;
   max-width: 48rem;
@@ -259,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-wave {
   position: absolute;
-  bottom: 0;
+  bottom: -7px;
   left: 0;
   right: 0;
 }
@@ -275,10 +275,10 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
   font-weight: 600;
   text-decoration: none;
   border-radius: var(--radius);
+  padding: 1rem 1.5rem;
   transition: var(--transition-smooth);
   border: none;
   cursor: pointer;
@@ -289,20 +289,20 @@ h1, h2, h3, h4, h5, h6 {
 .btn-hero {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  border: 2px solid hsl(var(--primary));
+  box-shadow: var(--shadow-medium);
+  border: none;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-hero:hover {
-  background: hsla(var(--primary), 0.9);
-  transform: translateY(-2px) scale(1.05);
+  background: hsl(var(--primary));
+  transform: translateY(-1.5px) scale(1.03);
 }
 
 .btn-cta {
   background: var(--gradient-cta);
   color: hsl(var(--accent-cta-foreground));
-  padding: 1.25rem 2.5rem;
-  font-weight: 700;
-  font-size: 1.125rem;
   box-shadow: var(--shadow-medium);
   border: none;
   position: relative;
@@ -860,7 +860,8 @@ section {
   background: hsl(var(--card));
   border-radius: 1rem;
   padding: 2rem;
-  max-width: 500px;
+  min-width: 500px;
+  max-width: 960px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;

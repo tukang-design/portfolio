@@ -4,47 +4,47 @@
 const portfolioData = [
   {
     id: '1',
-    title: 'Kapitani International',
-    category: 'Brand Design',
-    description: 'Complete Brand Identity & Website',
+    title: 'Kapitani: Farm Management App',
+    category: 'UI Redesign & Design System Library',
+    description: 'App UI Overhaul & MyGAP Pre-Certification Automation',
     details: 'Comprehensive brand identity design for an international maritime company, including logo design, brand guidelines, and a professional website that reflects their global presence and expertise.',
     image: 'src/assets/portfolio-kapitani-new.png',
-    services: ['Logo Design', 'Brand Guidelines', 'Website Design'],
+    services: ['UI Design', 'UX Design', 'Design System Library'],
     timeline: '6 weeks',
-    client: 'Kapitani International'
+    client: 'Kapitani'
   },
   {
     id: '2',
-    title: 'Raisuri Technology',
-    category: 'Website Design',
-    description: 'Modern Tech Company Website',
+    title: 'Raisuri Football Academy',
+    category: 'Logo Redesign & Jersey Design',
+    description: 'Kids Football Academy Brand Identity',
     details: 'A sleek, modern website for a technology company specializing in innovative solutions. The design focuses on showcasing their technical expertise while maintaining user-friendly navigation.',
     image: 'src/assets/portfolio-raisuri-new.png',
-    services: ['Website Design', 'UI/UX Design', 'Development'],
+    services: ['Logo Redesign', 'Brand Guideline', 'Kit Design'],
     timeline: '4 weeks',
-    client: 'Raisuri Technology'
+    client: 'Raisuri Football Academy'
   },
   {
     id: '3',
-    title: 'SAG Logistics',
-    category: 'Brand Design',
-    description: 'Logistics Brand Identity',
+    title: 'SA Global Logistics Sdn Bhd',
+    category: 'Company Profile & Web Development',
+    description: 'Corporate Brand Identity',
     details: 'Professional brand identity for a logistics company, emphasizing reliability, efficiency, and global reach. The design system works across all touchpoints from business cards to vehicle branding.',
     image: 'src/assets/portfolio-sag-new.png',
-    services: ['Logo Design', 'Brand Identity', 'Print Design'],
+    services: ['Company Profile Design', 'Web Design & Development'],
     timeline: '5 weeks',
-    client: 'SAG Logistics'
+    client: 'SA Global Logistics Sdn Bhd'
   },
   {
     id: '4',
-    title: 'Youthopia Event',
-    category: 'Event Branding',
-    description: 'Youth Event Brand Identity',
+    title: 'Youthopia',
+    category: 'Logo Design & Brand Identity',
+    description: 'Edu-tech logo and brand identity',
     details: 'Vibrant and energetic brand identity for a youth-focused event. The design captures the spirit of creativity and innovation while appealing to a young, dynamic audience.',
     image: 'src/assets/portfolio-youthopia-new.png',
-    services: ['Event Branding', 'Marketing Materials', 'Social Media Graphics'],
+    services: ['Logo Design', 'Brand Guideline'],
     timeline: '3 weeks',
-    client: 'Youthopia Event'
+    client: 'Youthopia'
   }
 ];
 
