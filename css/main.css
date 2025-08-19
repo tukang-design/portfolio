@@ -226,7 +226,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title {
-  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 900;
   color: hsl(var(--foreground));
   margin-bottom: 2rem;
@@ -367,6 +367,8 @@ section {
   box-shadow: var(--shadow-soft);
   transition: var(--transition-smooth);
   border: 1px solid hsl(var(--border));
+  position: relative;
+  overflow: hidden;
 }
 
 .problem-card:hover {
@@ -386,6 +388,30 @@ section {
   font-weight: 600;
   color: hsl(var(--foreground));
   line-height: 1.4;
+}
+
+.problem-description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: hsla(var(--card), 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid hsl(var(--border));
+  padding: 1.5rem 2rem;
+  transform: translateY(100%);
+  transition: var(--transition-smooth);
+}
+
+.problem-card:hover .problem-description {
+  transform: translateY(0);
+}
+
+.problem-description p {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
 }
 
 /* Process Section */
