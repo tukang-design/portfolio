@@ -456,5 +456,22 @@
     <script src="js/main.js"></script>
     <script src="js/contact.js"></script>
     <script src="js/portfolio.js"></script>
+    
+    <!-- Portfolio initialization verification -->
+    <script>
+        // Backup initialization to ensure portfolio loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const mainImg = document.querySelector('#portfolioMainImage img');
+                // Check if image needs initialization
+                if (mainImg && (!mainImg.src || mainImg.src === '' || mainImg.src === window.location.href)) {
+                    // Ensure the portfolio function is available and call it
+                    if (typeof initInteractivePortfolio === 'function') {
+                        initInteractivePortfolio();
+                    }
+                }
+            }, 200);
+        });
+    </script>
 </body>
 </html>

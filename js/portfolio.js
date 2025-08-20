@@ -442,6 +442,7 @@ function updateNavigationButtons() {
 // Make functions globally available
 window.selectProject = selectProject;
 window.selectImage = selectImage;
+window.initInteractivePortfolio = initInteractivePortfolio;
 
 // Add event listeners for pausing auto-transition on user interaction
 document.addEventListener('DOMContentLoaded', () => {
