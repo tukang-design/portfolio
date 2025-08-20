@@ -1,0 +1,180 @@
+/* Optimized CSS - Performance-focused version */
+/* This file contains only the most critical styles for above-the-fold content */
+
+/* CSS Variables - Essential only */
+:root {
+  --background: 142 77% 10%;
+  --foreground: 0 0% 98%;
+  --neon-green: 120 100% 50%;
+  --accent-cta: 22 69% 31%;
+  --accent-cta-hover: 22 69% 25%;
+  --gradient-hero: linear-gradient(135deg, hsl(142 70% 8%), hsl(142 60% 12%), hsl(142 50% 15%));
+  --transition-fast: all 0.15s ease-out;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --radius: 0.75rem;
+}
+
+/* Critical Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-heading);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Critical Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Critical Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: hsla(var(--background), 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid hsl(142 30% 25%);
+  z-index: 1000;
+  transition: var(--transition-fast);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.brand-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(var(--neon-green));
+  text-decoration: none;
+  font-family: var(--font-heading);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: hsl(var(--foreground));
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+/* Critical Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-hero);
+  position: relative;
+  padding-top: 5rem;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  color: hsl(var(--neon-green));
+  font-weight: 700;
+  font-size: inherit;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  color: hsla(var(--foreground), 0.8);
+  margin: 1.5rem 0;
+  line-height: 1.6;
+}
+
+/* Critical Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-cta {
+  background: hsl(var(--accent-cta));
+  color: white;
+}
+
+.btn-cta:hover {
+  background: hsl(var(--accent-cta-hover));
+  transform: translateY(-2px);
+}
+
+/* Critical Mobile */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-description {
+    font-size: 1.125rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Loading optimization */
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+}

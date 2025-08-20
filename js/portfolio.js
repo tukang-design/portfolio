@@ -1,4 +1,37 @@
-// Portfolio functionality
+// Portfolio functionality - Performance Optimized
+
+// Performance tracking and image caching
+const performanceTracker = {
+    imageCache: new Map(),
+    preloadPromises: new Map(),
+    imagesPreloaded: false
+};
+
+// Optimized image preloading
+function preloadImage(src) {
+    if (performanceTracker.imageCache.has(src)) {
+        return Promise.resolve(performanceTracker.imageCache.get(src));
+    }
+    
+    if (performanceTracker.preloadPromises.has(src)) {
+        return performanceTracker.preloadPromises.get(src);
+    }
+    
+    const promise = new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+            performanceTracker.imageCache.set(src, img);
+            resolve(img);
+        };
+        img.onerror = reject;
+        img.loading = 'lazy'; // Enable lazy loading
+        img.decoding = 'async'; // Enable async decoding
+        img.src = src;
+    });
+    
+    performanceTracker.preloadPromises.set(src, promise);
+    return promise;
+}
 
 // Static portfolio data (fallback for when Supabase is not available)
 const portfolioData = [
@@ -9,6 +42,13 @@ const portfolioData = [
     description: 'App UI Overhaul & MyGAP Pre-Certification Automation',
     details: 'Comprehensive brand identity design for an international maritime company, including logo design, brand guidelines, and a professional website that reflects their global presence and expertise.',
     image: 'src/assets/portfolio-kapitani-new.png',
+    images: [
+      'src/assets/portfolio-kapitani-new.png',
+      'src/assets/portfolio-kapitani.jpg',
+      'src/assets/portfolio-kapitani-2.png',
+      'src/assets/portfolio-kapitani-3.jpg',
+      'src/assets/portfolio-kapitani-4.png'
+    ],
     services: ['UI Design', 'UX Design', 'Design System Library'],
     timeline: '6 weeks',
     client: 'Kapitani'
@@ -20,6 +60,13 @@ const portfolioData = [
     description: 'Kids Football Academy Brand Identity',
     details: 'A sleek, modern website for a technology company specializing in innovative solutions. The design focuses on showcasing their technical expertise while maintaining user-friendly navigation.',
     image: 'src/assets/portfolio-raisuri-new.png',
+    images: [
+      'src/assets/portfolio-raisuri-new.png',
+      'src/assets/portfolio-raisuri.jpg',
+      'src/assets/portfolio-raisuri-2.png',
+      'src/assets/portfolio-raisuri-3.jpg',
+      'src/assets/portfolio-raisuri-4.png'
+    ],
     services: ['Logo Redesign', 'Brand Guideline', 'Kit Design'],
     timeline: '4 weeks',
     client: 'Raisuri Football Academy'
@@ -31,6 +78,13 @@ const portfolioData = [
     description: 'Corporate Brand Identity',
     details: 'Professional brand identity for a logistics company, emphasizing reliability, efficiency, and global reach. The design system works across all touchpoints from business cards to vehicle branding.',
     image: 'src/assets/portfolio-sag-new.png',
+    images: [
+      'src/assets/portfolio-sag-new.png',
+      'src/assets/portfolio-sag-logistics.jpg',
+      'src/assets/portfolio-sag-2.png',
+      'src/assets/portfolio-sag-3.jpg',
+      'src/assets/portfolio-sag-4.png'
+    ],
     services: ['Company Profile Design', 'Web Design & Development'],
     timeline: '5 weeks',
     client: 'SA Global Logistics Sdn Bhd'
@@ -42,6 +96,13 @@ const portfolioData = [
     description: 'Edu-tech logo and brand identity',
     details: 'Vibrant and energetic brand identity for a youth-focused event. The design captures the spirit of creativity and innovation while appealing to a young, dynamic audience.',
     image: 'src/assets/portfolio-youthopia-new.png',
+    images: [
+      'src/assets/portfolio-youthopia-new.png',
+      'src/assets/portfolio-youthopia.jpg',
+      'src/assets/portfolio-youthopia-2.png',
+      'src/assets/portfolio-youthopia-3.jpg',
+      'src/assets/portfolio-youthopia-4.png'
+    ],
     services: ['Logo Design', 'Brand Guideline'],
     timeline: '3 weeks',
     client: 'Youthopia'
@@ -102,84 +163,17 @@ function renderPortfolio(items = portfolioData) {
   portfolioGrid.innerHTML = portfolioHTML;
 }
 
-// Portfolio details modal function
-function openPortfolioDetails(itemId) {
-  const item = portfolioData.find(p => p.id === itemId);
-  if (!item) return;
-
-  const modal = document.createElement('div');
-  modal.className = 'modal active';
-  modal.id = 'portfolioModal';
-  
-  modal.innerHTML = `
-    <div class="modal-content portfolio-modal">
-      <div class="modal-header">
-        <h3>${item.title}</h3>
-        <button class="modal-close" onclick="closePortfolioModal()">&times;</button>
-      </div>
-      
-      <div class="portfolio-modal-content">
-        <div class="portfolio-modal-image">
-          <img src="${item.image}" alt="${item.title}" style="width: 100%; border-radius: 0.5rem;">
-        </div>
-        
-        <div class="portfolio-modal-info">
-          <div class="portfolio-modal-meta">
-            <span class="portfolio-category">${item.category}</span>
-            ${item.timeline ? `<span class="portfolio-timeline">Timeline: ${item.timeline}</span>` : ''}
-          </div>
-          
-          <h4>${item.description}</h4>
-          <p>${item.details}</p>
-          
-          ${item.services && item.services.length > 0 ? `
-            <div class="portfolio-services">
-              <h5>Services Provided:</h5>
-              <ul>
-                ${item.services.map(service => `<li>${service}</li>`).join('')}
-              </ul>
-            </div>
-          ` : ''}
-          
-          ${item.client ? `
-            <div class="portfolio-client">
-              <strong>Client:</strong> ${item.client}
-            </div>
-          ` : ''}
-          
-          <div class="portfolio-modal-actions">
-            <button class="btn btn-cta" onclick="closePortfolioModal(); openContactForm('Custom Project')">
-              Start Your Project
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-  document.body.style.overflow = 'hidden';
-  
-  // Close modal when clicking outside
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closePortfolioModal();
-    }
-  });
-}
-
-function closePortfolioModal() {
-  const modal = document.getElementById('portfolioModal');
-  if (modal) {
-    modal.remove();
-    document.body.style.overflow = '';
-  }
-}
-
 // Load portfolio on page load
 document.addEventListener('DOMContentLoaded', () => {
+  // Performance: Preload critical portfolio images
+  const criticalImages = portfolioData.slice(0, 2).flatMap(project => project.images || [project.image]);
+  Promise.all(criticalImages.map(preloadImage))
+    .then(() => console.log('🚀 Critical portfolio images preloaded'))
+    .catch(err => console.warn('Image preload warning:', err));
+  
   // Try to load from Supabase first, fallback to static data
   loadPortfolioData();
+  initInteractivePortfolio();
 });
 
 async function loadPortfolioData() {
@@ -187,15 +181,298 @@ async function loadPortfolioData() {
     // If we have Supabase available, we could fetch from there
     // For now, we'll use the static data
     renderPortfolio(portfolioData);
+    
+    // Preload remaining images after initial render
+    requestIdleCallback(() => {
+      const remainingImages = portfolioData.slice(2).flatMap(project => project.images || [project.image]);
+      Promise.all(remainingImages.map(preloadImage))
+        .then(() => {
+          performanceTracker.imagesPreloaded = true;
+          console.log('📸 All portfolio images preloaded');
+        });
+    });
   } catch (error) {
     console.error('Error loading portfolio:', error);
     renderPortfolio(portfolioData);
   }
 }
 
+// Interactive Portfolio System
+let currentProjectIndex = 0;
+let currentImageIndex = 0;
+let autoTransitionInterval = null;
+let autoTransitionTimeout = null;
+const AUTO_TRANSITION_DELAY = 4000; // 4 seconds per image
+const PROJECT_TRANSITION_DELAY = 6000; // 6 seconds before moving to next project (longer pause)
+
+function initInteractivePortfolio() {
+  renderPortfolioDisplay(portfolioData[currentProjectIndex]);
+  setupNavigationControls();
+  startAutoTransition();
+}
+
+function renderPortfolioDisplay(project) {
+  const mainImage = document.getElementById('portfolioMainImage');
+  const thumbnails = document.getElementById('portfolioThumbnails');
+  const projectInfo = document.getElementById('portfolioProjectInfo');
+  
+  if (!mainImage || !thumbnails || !projectInfo) return;
+
+  const images = project.images || [project.image];
+  currentImageIndex = 0;
+  
+  // Set main image
+  const mainImageElement = mainImage.querySelector('img');
+  if (mainImageElement) {
+    mainImageElement.src = images[0];
+    mainImageElement.alt = project.title;
+  }
+  
+  // Render thumbnails with progress bars
+  if (images.length > 1) {
+    thumbnails.innerHTML = images.map((img, index) => `
+      <div class="portfolio-thumbnail-auto ${index === 0 ? 'active' : ''}" 
+           onclick="selectImage(${index})" 
+           data-index="${index}">
+        <img src="${img}" alt="${project.title} - Image ${index + 1}">
+        <div class="portfolio-thumbnail-progress" style="width: ${index === 0 ? '0%' : '0%'}"></div>
+      </div>
+    `).join('');
+    
+    thumbnails.style.display = 'flex';
+    startAutoTransition();
+  } else {
+    thumbnails.style.display = 'none';
+    stopAutoTransition();
+  }
+  
+  // Render project info with all details
+  projectInfo.innerHTML = `
+    <h3 class="portfolio-project-title">${project.title}</h3>
+    <div class="portfolio-project-category">${project.category}</div>
+    <p class="portfolio-project-description">${project.description}</p>
+    <p class="portfolio-project-details-text">${project.details}</p>
+    
+    <div class="portfolio-project-details">
+      <div class="portfolio-detail-item">
+        <div class="portfolio-detail-label">Client</div>
+        <div class="portfolio-detail-value">${project.client}</div>
+      </div>
+      
+      <div class="portfolio-detail-item">
+        <div class="portfolio-detail-label">Timeline</div>
+        <div class="portfolio-detail-value">${project.timeline}</div>
+      </div>
+      
+      <div class="portfolio-detail-item">
+        <div class="portfolio-detail-label">Services</div>
+        <div class="portfolio-detail-value">${project.services.join(', ')}</div>
+      </div>
+    </div>
+  `;
+}
+
+function selectImage(index) {
+  const project = portfolioData[currentProjectIndex];
+  const images = project.images || [project.image];
+  
+  if (index === currentImageIndex || index >= images.length) return;
+  
+  currentImageIndex = index;
+  
+  // Update main image
+  const mainImageElement = document.querySelector('#portfolioMainImage img');
+  if (mainImageElement) {
+    mainImageElement.style.opacity = '0.5';
+    setTimeout(() => {
+      mainImageElement.src = images[index];
+      mainImageElement.style.opacity = '1';
+    }, 150);
+  }
+  
+  // Update active thumbnail
+  const thumbnails = document.querySelectorAll('.portfolio-thumbnail-auto');
+  thumbnails.forEach((thumb, i) => {
+    thumb.classList.toggle('active', i === index);
+    // Reset progress bar for non-active thumbnails
+    const progressBar = thumb.querySelector('.portfolio-thumbnail-progress');
+    if (progressBar) {
+      progressBar.style.width = i === index ? '0%' : '0%';
+    }
+  });
+  
+  // Restart auto transition
+  startAutoTransition();
+}
+
+function startAutoTransition() {
+  stopAutoTransition();
+  
+  const project = portfolioData[currentProjectIndex];
+  const images = project.images || [project.image];
+  
+  if (images.length <= 1) return;
+  
+  const activeProgress = document.querySelector('.portfolio-thumbnail-auto.active .portfolio-thumbnail-progress');
+  
+  if (activeProgress) {
+    // Check if this is the last image (use longer delay for project transition)
+    const isLastImage = currentImageIndex === images.length - 1;
+    const transitionDelay = isLastImage ? PROJECT_TRANSITION_DELAY : AUTO_TRANSITION_DELAY;
+    
+    // Animate progress bar
+    activeProgress.style.width = '0%';
+    activeProgress.style.transition = `width ${transitionDelay}ms linear`;
+    
+    setTimeout(() => {
+      activeProgress.style.width = '100%';
+    }, 50);
+    
+    // Set timeout to switch to next image or project
+    autoTransitionTimeout = setTimeout(() => {
+      const nextIndex = (currentImageIndex + 1) % images.length;
+      
+      // Check if we've completed all images in current project
+      if (nextIndex === 0 && currentImageIndex === images.length - 1) {
+        // All images have been shown, move to next project
+        const nextProjectIndex = (currentProjectIndex + 1) % portfolioData.length;
+        selectProject(nextProjectIndex, true); // Pass true to indicate auto transition
+      } else {
+        // Continue with next image in current project
+        selectImage(nextIndex);
+      }
+    }, transitionDelay);
+  }
+}
+
+function stopAutoTransition() {
+  if (autoTransitionTimeout) {
+    clearTimeout(autoTransitionTimeout);
+    autoTransitionTimeout = null;
+  }
+  
+  // Reset all progress bars
+  const progressBars = document.querySelectorAll('.portfolio-thumbnail-progress');
+  progressBars.forEach(bar => {
+    bar.style.width = '0%';
+    bar.style.transition = 'width 0.1s linear';
+  });
+}
+
+function selectProject(index, isAutoTransition = false) {
+  if (index === currentProjectIndex) return;
+  
+  currentProjectIndex = index;
+  currentImageIndex = 0;
+  
+  // Stop current auto transition
+  stopAutoTransition();
+  
+  // Add smooth transition effect for auto transitions
+  if (isAutoTransition) {
+    const portfolioSection = document.querySelector('.portfolio-image-section');
+    if (portfolioSection) {
+      portfolioSection.style.opacity = '0.7';
+      portfolioSection.style.transform = 'scale(0.98)';
+      portfolioSection.style.transition = 'all 0.3s ease';
+      
+      setTimeout(() => {
+        // Render new project
+        renderPortfolioDisplay(portfolioData[currentProjectIndex]);
+        updateNavigationButtons();
+        
+        // Reset and animate back
+        setTimeout(() => {
+          portfolioSection.style.opacity = '1';
+          portfolioSection.style.transform = 'scale(1)';
+          
+          // Reset styles after animation
+          setTimeout(() => {
+            portfolioSection.style.transition = '';
+          }, 300);
+        }, 50);
+      }, 150);
+    } else {
+      // Fallback if section not found
+      renderPortfolioDisplay(portfolioData[currentProjectIndex]);
+      updateNavigationButtons();
+    }
+  } else {
+    // Immediate transition for manual navigation
+    renderPortfolioDisplay(portfolioData[currentProjectIndex]);
+    updateNavigationButtons();
+  }
+}
+
+function setupNavigationControls() {
+  const prevBtn = document.getElementById('prevProject');
+  const nextBtn = document.getElementById('nextProject');
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const newIndex = currentProjectIndex > 0 ? currentProjectIndex - 1 : portfolioData.length - 1;
+      selectProject(newIndex);
+    });
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const newIndex = currentProjectIndex < portfolioData.length - 1 ? currentProjectIndex + 1 : 0;
+      selectProject(newIndex);
+    });
+  }
+  
+  updateNavigationButtons();
+}
+
+function updateNavigationButtons() {
+  const prevBtn = document.getElementById('prevProject');
+  const nextBtn = document.getElementById('nextProject');
+  
+  // Enable/disable buttons based on current position
+  if (prevBtn) {
+    prevBtn.disabled = false; // Always enabled for circular navigation
+  }
+  
+  if (nextBtn) {
+    nextBtn.disabled = false; // Always enabled for circular navigation
+  }
+}
+
 // Make functions globally available
-window.openPortfolioDetails = openPortfolioDetails;
-window.closePortfolioModal = closePortfolioModal;
+window.selectProject = selectProject;
+window.selectImage = selectImage;
+
+// Add event listeners for pausing auto-transition on user interaction
+document.addEventListener('DOMContentLoaded', () => {
+  // Pause auto-transition when user hovers over thumbnails
+  document.addEventListener('mouseenter', (e) => {
+    if (e.target && e.target.closest && e.target.closest('.portfolio-thumbnail-auto')) {
+      stopAutoTransition();
+    }
+  }, true);
+  
+  // Resume auto-transition when user stops hovering
+  document.addEventListener('mouseleave', (e) => {
+    if (e.target && e.target.closest && e.target.closest('.portfolio-thumbnails-auto')) {
+      startAutoTransition();
+    }
+  }, true);
+  
+  // Pause on focus (for keyboard navigation)
+  document.addEventListener('focusin', (e) => {
+    if (e.target && e.target.closest && e.target.closest('.portfolio-thumbnail-auto')) {
+      stopAutoTransition();
+    }
+  }, true);
+  
+  // Resume when focus leaves
+  document.addEventListener('focusout', (e) => {
+    if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('.portfolio-thumbnails-auto')) {
+      startAutoTransition();
+    }
+  }, true);
+});
 
 // Add portfolio modal styles
 const portfolioStyles = `
