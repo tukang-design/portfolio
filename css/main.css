@@ -71,7 +71,6 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -80,7 +79,6 @@ body {
   color: hsl(var(--foreground));
   line-height: 1.6;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
 }
 
 /* Typography */
@@ -224,8 +222,6 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--gradient-hero);
   overflow: hidden;
   padding-top: 80px;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .hero-bg {
@@ -496,25 +492,19 @@ section {
 
 .services {
   background: linear-gradient(135deg, hsl(142, 80%, 5%) 0%, hsl(142, 60%, 8%) 100%);
-  padding: 5rem 0;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .portfolio {
   position: relative;
   overflow: hidden;
-  padding: 4rem 0;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .portfolio-content {
@@ -1018,10 +1008,7 @@ section {
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding: 4rem 0;
   min-height: 100vh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 /* Animated Bad Impression Icons */
@@ -1374,9 +1361,6 @@ section {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 4rem 0;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .section-header {
