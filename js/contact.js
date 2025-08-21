@@ -64,6 +64,11 @@ async function handleFormSubmit(e) {
   const submitBtn = form.querySelector('button[type="submit"]');
   const originalBtnText = submitBtn ? submitBtn.textContent : '';
   
+  // Track form submission attempt
+  if (typeof analytics !== 'undefined') {
+    analytics.trackContactFormEvent('form_submission_attempt');
+  }
+  
   // Show loading state
   if (submitBtn) {
     submitBtn.textContent = 'Sending...';
@@ -79,6 +84,11 @@ async function handleFormSubmit(e) {
       service: formData.get('service'),
       message: formData.get('message')
     };
+    
+    // Track service interest
+    if (typeof analytics !== 'undefined' && data.service) {
+      analytics.trackServiceInterest(data.service);
+    }
     
     // Validate required fields
     if (!data.name || !data.email || !data.message) {
@@ -153,10 +163,20 @@ async function handleFormSubmit(e) {
     
     // Success - show modal and reset form
     if (emailSent) {
+      // Track successful email submission
+      if (typeof analytics !== 'undefined') {
+        analytics.trackEmailSubmission(true);
+      }
+      
       showSuccessModal();
       form.reset();
       console.log('📧 Contact form submitted successfully');
     } else {
+      // Track failed email submission
+      if (typeof analytics !== 'undefined') {
+        analytics.trackEmailSubmission(false);
+      }
+      
       // All methods failed - show error instead of fallback
       console.log('❌ All email methods failed');
       showErrorMessage('Unable to send email at this time. Please try again later or contact us directly at studio@tukang.design');

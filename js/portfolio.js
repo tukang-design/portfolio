@@ -291,6 +291,11 @@ function selectImage(index) {
   
   currentImageIndex = index;
   
+  // Track portfolio image view
+  if (typeof analytics !== 'undefined') {
+    analytics.trackPortfolioImageView(project.title, index);
+  }
+  
   // Update main image
   const mainImageElement = document.querySelector('#portfolioMainImage img');
   if (mainImageElement) {
@@ -375,6 +380,12 @@ function selectProject(index, isAutoTransition = false) {
   
   currentProjectIndex = index;
   currentImageIndex = 0;
+  
+  // Track portfolio project view
+  if (typeof analytics !== 'undefined') {
+    const project = portfolioData[index];
+    analytics.trackPortfolioView(project.title, project.id);
+  }
   
   // Stop current auto transition
   stopAutoTransition();

@@ -358,6 +358,11 @@ window.addEventListener('load', updateActiveNavLink);
 
 // Contact Form Modal Functions
 function openContactForm(service = '') {
+  // Track contact form opening
+  if (typeof analytics !== 'undefined') {
+    analytics.trackContactFormEvent('form_opened');
+  }
+  
   if (contactModal) {
     const modalService = document.getElementById('modalService');
     const modalTitle = document.getElementById('modalTitle');
