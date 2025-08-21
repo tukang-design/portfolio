@@ -50,19 +50,44 @@
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) with Enhanced Consent -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4B77H7TRLM"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      
+      // Configure default consent state
+      gtag('consent', 'default', {
+        'analytics_storage': 'granted',
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted',
+        'personalization_storage': 'granted',
+        'functionality_storage': 'granted',
+        'security_storage': 'granted'
+      });
+      
       gtag('js', new Date());
-
-      gtag('config', 'G-4B77H7TRLM');
+      
+      // Enhanced GA4 configuration with behavioral and advertising signals
+      gtag('config', 'G-4B77H7TRLM', {
+        'anonymize_ip': false,
+        'allow_google_signals': true,
+        'allow_ad_personalization_signals': true,
+        'enhanced_conversions': true,
+        'link_attribution': true,
+        'custom_map': {
+          'custom_parameter_1': 'interaction_type'
+        }
+      });
     </script>
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Consent Management -->
+    <script src="js/consent-manager.js"></script>
 </head>
 <body>
     <!-- Header -->
