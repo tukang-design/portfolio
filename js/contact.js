@@ -11,13 +11,24 @@ const EMAIL_CONFIG = {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('📧 Initializing contact form...');
+  
   // Initialize EmailJS if available
   if (typeof emailjs !== 'undefined') {
+    console.log('✅ EmailJS library found');
     emailjs.init(EMAIL_CONFIG.emailjsPublicKey);
+    console.log('✅ EmailJS initialized with public key:', EMAIL_CONFIG.emailjsPublicKey);
+  } else {
+    console.log('❌ EmailJS library not found - check if script is loaded');
   }
   
+  // Log configuration
+  console.log('📧 EmailJS Configuration:', EMAIL_CONFIG);
+  
   // Attach form listeners
-  const contactForms = document.querySelectorAll('#contactForm, .contact-form');
+  const contactForms = document.querySelectorAll('#contactForm, .contact-form, #modalContactForm');
+  console.log('📧 Found contact forms:', contactForms.length);
+  
   contactForms.forEach(form => {
     form.addEventListener('submit', handleFormSubmit);
   });
@@ -81,17 +92,30 @@ async function handleFormSubmit(e) {
     // Try multiple email sending methods
     let emailSent = false;
     
+    console.log('🔍 Checking EmailJS availability...');
+    console.log('EmailJS defined:', typeof emailjs !== 'undefined');
+    console.log('Public key configured:', EMAIL_CONFIG.emailjsPublicKey !== 'YOUR_PUBLIC_KEY');
+    console.log('EmailJS config:', EMAIL_CONFIG);
+    
     // Method 1: EmailJS (Primary method for automatic sending)
     if (typeof emailjs !== 'undefined' && EMAIL_CONFIG.emailjsPublicKey !== 'YOUR_PUBLIC_KEY') {
       try {
+        console.log('🚀 Attempting EmailJS send...');
         await sendViaEmailJS(data);
         emailSent = true;
         console.log('✅ Email sent via EmailJS');
       } catch (error) {
-        console.log('❌ EmailJS failed:', error.message);
+        console.log('❌ EmailJS failed:', error);
+        console.log('Error details:', error.message);
       }
     } else {
-      console.log('⚠️ EmailJS not configured - update your API keys in contact.js');
+      console.log('⚠️ EmailJS not available or not configured properly');
+      if (typeof emailjs === 'undefined') {
+        console.log('❌ EmailJS library not loaded');
+      }
+      if (EMAIL_CONFIG.emailjsPublicKey === 'YOUR_PUBLIC_KEY') {
+        console.log('❌ EmailJS public key not configured');
+      }
     }
     
     // Method 2: Netlify Forms (if deployed on Netlify)    // Method 2: Netlify Forms (if deployed on Netlify)
@@ -133,10 +157,9 @@ async function handleFormSubmit(e) {
       form.reset();
       console.log('📧 Contact form submitted successfully');
     } else {
-      // All methods failed - use mailto as final fallback
-      console.log('⚠️ All email methods failed, using mailto fallback');
-      createMailtoLink(data);
-      showSuccessModal(); // Still show success as we provided a solution
+      // All methods failed - show error instead of fallback
+      console.log('❌ All email methods failed');
+      showErrorMessage('Unable to send email at this time. Please try again later or contact us directly at studio@tukang.design');
     }
     
   } catch (error) {
