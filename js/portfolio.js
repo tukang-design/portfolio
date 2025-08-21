@@ -38,9 +38,9 @@ const portfolioData = [
   {
     id: '1',
     title: 'Kapitani: Farm Management App',
-    category: 'UI Redesign & Design System Library',
-    description: 'App UI Overhaul & MyGAP Pre-Certification Automation',
-    details: 'Comprehensive brand identity design for an international maritime company, including logo design, brand guidelines, and a professional website that reflects their global presence and expertise.',
+    category: 'UI Revamp & Design System Library',
+    description: 'A complete UI and UX revamp of the Kapitani farm management app. The project included a new design system and integrated a myGAP pre-application process, streamlining farm task activities for an enhanced user experience.',
+    details: 'A complete UI and UX revamp of the Kapitani farm management app. The project included a new design system and integrated a myGAP pre-application process, streamlining farm task activities for an enhanced user experience.',
     image: 'src/assets/portfolio-kapitani-new.png',
     images: [
       'src/assets/portfolio-kapitani-new.png',
@@ -49,16 +49,16 @@ const portfolioData = [
       'src/assets/portfolio-kapitani-3.jpg',
       'src/assets/portfolio-kapitani-4.png'
     ],
-    services: ['UI Design', 'UX Design', 'Design System Library'],
-    timeline: '6 weeks',
+    services: ['UI/UX Revamp', 'Design System Library', 'App UI Design', 'UX Research'],
+    timeline: '4 Months',
     client: 'Kapitani'
   },
   {
     id: '2',
-    title: 'Raisuri Football Academy',
-    category: 'Logo Redesign & Jersey Design',
-    description: 'Kids Football Academy Brand Identity',
-    details: 'A sleek, modern website for a technology company specializing in innovative solutions. The design focuses on showcasing their technical expertise while maintaining user-friendly navigation.',
+    title: 'Raisuri: Junior Football Academy Club',
+    category: 'Logo Redesign & Brand Expansion',
+    description: 'A total reimagining of the Raisuri Junior Football Academy\'s brand. The new logo is a modern, flexible, and scalable design that ensures brand consistency across all touchpoints, giving the club a young and passionate feel.',
+    details: 'A total reimagining of the Raisuri Junior Football Academy\'s brand. The new logo is a modern, flexible, and scalable design that ensures brand consistency across all touchpoints, giving the club a young and passionate feel.',
     image: 'src/assets/portfolio-raisuri-new.png',
     images: [
       'src/assets/portfolio-raisuri-new.png',
@@ -67,16 +67,16 @@ const portfolioData = [
       'src/assets/portfolio-raisuri-3.jpg',
       'src/assets/portfolio-raisuri-4.png'
     ],
-    services: ['Logo Redesign', 'Brand Guideline', 'Kit Design'],
-    timeline: '4 weeks',
-    client: 'Raisuri Football Academy'
+    services: ['Logo Redesign', 'Brand Identity', 'Kit Design', 'Visual Identity'],
+    timeline: '2 Months',
+    client: 'Raisuri'
   },
   {
     id: '3',
-    title: 'SA Global Logistics Sdn Bhd',
-    category: 'Company Profile & Web Development',
-    description: 'Corporate Brand Identity',
-    details: 'Professional brand identity for a logistics company, emphasizing reliability, efficiency, and global reach. The design system works across all touchpoints from business cards to vehicle branding.',
+    title: 'SAG Logistics: Local Logistics Solution Provider',
+    category: 'Corporate Brand Refresh & Web Development',
+    description: 'A brand identity refresh for SA Global Logistics, starting with a new company profile design. This visual style was then expanded to a new website, ensuring a modern and cohesive brand presence across all digital platforms.',
+    details: 'A brand identity refresh for SA Global Logistics, starting with a new company profile design. This visual style was then expanded to a new website, ensuring a modern and cohesive brand presence across all digital platforms.',
     image: 'src/assets/portfolio-sag-new.png',
     images: [
       'src/assets/portfolio-sag-new.png',
@@ -85,16 +85,16 @@ const portfolioData = [
       'src/assets/portfolio-sag-3.jpg',
       'src/assets/portfolio-sag-4.png'
     ],
-    services: ['Company Profile Design', 'Web Design & Development'],
-    timeline: '5 weeks',
-    client: 'SA Global Logistics Sdn Bhd'
+    services: ['Brand Identity Refresh', 'Corporate Profile Design', 'Web Design', 'Web Development'],
+    timeline: '1 Month',
+    client: 'SA Global Logistics'
   },
   {
     id: '4',
-    title: 'Youthopia',
+    title: 'Youthopia: Junior Edu-tech Company',
     category: 'Logo Design & Brand Identity',
-    description: 'Edu-tech logo and brand identity',
-    details: 'Vibrant and energetic brand identity for a youth-focused event. The design captures the spirit of creativity and innovation while appealing to a young, dynamic audience.',
+    description: 'Designed a comprehensive brand identity and logo for a new edu-tech platform for kids. The visual identity targets both young students and their parents, with a design that is both playful and trustworthy.',
+    details: 'Designed a comprehensive brand identity and logo for a new edu-tech platform for kids. The visual identity targets both young students and their parents, with a design that is both playful and trustworthy.',
     image: 'src/assets/portfolio-youthopia-new.png',
     images: [
       'src/assets/portfolio-youthopia-new.png',
@@ -103,8 +103,8 @@ const portfolioData = [
       'src/assets/portfolio-youthopia-3.jpg',
       'src/assets/portfolio-youthopia-4.png'
     ],
-    services: ['Logo Design', 'Brand Guideline'],
-    timeline: '3 weeks',
+    services: ['Logo Design', 'Brand Identity', 'Brand Guidelines', 'Educational Branding'],
+    timeline: '3 Months',
     client: 'Youthopia'
   }
 ];
