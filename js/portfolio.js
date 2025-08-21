@@ -176,6 +176,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initInteractivePortfolio();
 });
 
+// Additional initialization on window load for better browser compatibility
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    // Double-check that portfolio is initialized
+    const mainImg = document.querySelector('#portfolioMainImage img');
+    if (!mainImg || !mainImg.src || mainImg.src === '') {
+      console.log('Window load: Re-initializing portfolio');
+      initInteractivePortfolio();
+    }
+  }, 300);
+});
+
 async function loadPortfolioData() {
   try {
     // If we have Supabase available, we could fetch from there
