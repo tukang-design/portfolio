@@ -71,6 +71,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -79,6 +80,7 @@ body {
   color: hsl(var(--foreground));
   line-height: 1.6;
   overflow-x: hidden;
+  scroll-snap-type: y mandatory;
 }
 
 /* Typography */
@@ -222,6 +224,8 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--gradient-hero);
   overflow: hidden;
   padding-top: 80px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .hero-bg {
@@ -495,12 +499,22 @@ section {
   padding: 5rem 0;
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .portfolio {
   position: relative;
   overflow: hidden;
   padding: 4rem 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .portfolio-content {
@@ -1005,6 +1019,9 @@ section {
   position: relative;
   overflow: hidden;
   padding: 4rem 0;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Animated Bad Impression Icons */
@@ -1354,6 +1371,12 @@ section {
 
 .contact {
   background: hsl(var(--background));
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .section-header {
@@ -2473,6 +2496,76 @@ section.contact .contact-content,
     min-width: 100%;
     padding: 1.25rem 2rem;
   }
+  
+  /* Mobile Scroll Snap Adjustments */
+  .hero,
+  .services,
+  .portfolio,
+  .problems,
+  .contact {
+    scroll-snap-align: center;
+    padding: 2rem 0;
+  }
+  
+  .hero {
+    min-height: 100vh;
+    scroll-snap-align: start;
+  }
+}
+
+/* Scroll Snap Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
+  
+  .hero,
+  .services,
+  .portfolio,
+  .problems,
+  .contact {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+}
+
+/* Scroll Direction Indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: hsla(var(--foreground), 0.6);
+  font-size: 0.9rem;
+  text-align: center;
+  animation: scrollBounce 2s infinite;
+  z-index: 10;
+}
+
+.scroll-hint::after {
+  content: '↓';
+  display: block;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  color: hsl(var(--neon-green));
+}
+
+@keyframes scrollBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Hide scroll hint after first scroll */
+.scrolled .scroll-hint {
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 /* Animation Stagger Classes */
