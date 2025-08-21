@@ -302,6 +302,7 @@ function selectImage(index) {
     mainImageElement.style.opacity = '0.5';
     setTimeout(() => {
       mainImageElement.src = images[index];
+      mainImageElement.alt = `${project.title} - Portfolio project image ${index + 1} of ${images.length}`;
       mainImageElement.style.opacity = '1';
     }, 150);
   }
