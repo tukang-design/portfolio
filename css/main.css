@@ -705,14 +705,6 @@ section {
   margin-bottom: 1rem;
 }
 
-.portfolio-project-description {
-  color: hsl(var(--muted-foreground));
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
-
 .portfolio-project-details-text {
   color: hsl(var(--muted-foreground));
   font-size: 1rem;

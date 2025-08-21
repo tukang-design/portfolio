@@ -262,7 +262,6 @@ function renderPortfolioDisplay(project) {
   projectInfo.innerHTML = `
     <h3 class="portfolio-project-title">${project.title}</h3>
     <div class="portfolio-project-category">${project.category}</div>
-    <p class="portfolio-project-description">${project.description}</p>
     <p class="portfolio-project-details-text">${project.details}</p>
     
     <div class="portfolio-project-details">
