@@ -1005,10 +1005,12 @@ section {
 .problems {
   background: linear-gradient(135deg, hsl(142, 80%, 5%) 0%, hsl(142, 60%, 8%) 100%);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
+  padding: 4rem 0;
 }
 
 /* Animated Bad Impression Icons */
@@ -1283,6 +1285,34 @@ section {
   margin: 0;
 }
 
+/* Contact content within problems section */
+.problems .contact-content {
+  margin-top: 4rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.problems .contact-header h2 {
+  color: hsl(var(--foreground));
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, hsl(var(--neon-green)), hsl(var(--foreground)));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.problems .contact-header .section-subtitle {
+  color: hsl(var(--muted-foreground));
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.problems .contact-cta {
+  margin-top: 2rem;
+}
+
 /* Process Section */
 .process {
   background: hsl(var(--section-bg));
@@ -1354,13 +1384,6 @@ section {
   height: 60px;
   background: linear-gradient(to bottom, hsl(var(--neon-green)), transparent);
   justify-self: center;
-}
-
-.contact {
-  background: hsl(var(--background));
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
 }
 
 .section-header {
