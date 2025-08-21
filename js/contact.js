@@ -4,9 +4,9 @@
 // Configuration
 const EMAIL_CONFIG = {
   toEmail: 'studio@tukang.design',
-  emailjsServiceId: 'service_portfolio',
-  emailjsTemplateId: 'template_contact',
-  emailjsPublicKey: 'YOUR_EMAILJS_PUBLIC_KEY'
+  emailjsServiceId: 'service_5dm9j7o', // Your EmailJS Service ID
+  emailjsTemplateId: 'template_m7c3xzk', // Your actual EmailJS Template ID
+  emailjsPublicKey: 'H8BsO0E-u0xNaYTbr' // Your EmailJS Public Key
 };
 
 // Initialize when page loads
@@ -81,13 +81,28 @@ async function handleFormSubmit(e) {
     // Try multiple email sending methods
     let emailSent = false;
     
-    // Method 1: Netlify Forms (if deployed on Netlify)
-    try {
-      await sendViaNetlifyForms(form, data);
-      emailSent = true;
-      console.log('✅ Email sent via Netlify Forms');
-    } catch (error) {
-      console.log('❌ Netlify Forms failed:', error.message);
+    // Method 1: EmailJS (Primary method for automatic sending)
+    if (typeof emailjs !== 'undefined' && EMAIL_CONFIG.emailjsPublicKey !== 'YOUR_PUBLIC_KEY') {
+      try {
+        await sendViaEmailJS(data);
+        emailSent = true;
+        console.log('✅ Email sent via EmailJS');
+      } catch (error) {
+        console.log('❌ EmailJS failed:', error.message);
+      }
+    } else {
+      console.log('⚠️ EmailJS not configured - update your API keys in contact.js');
+    }
+    
+    // Method 2: Netlify Forms (if deployed on Netlify)    // Method 2: Netlify Forms (if deployed on Netlify)
+    if (!emailSent) {
+      try {
+        await sendViaNetlifyForms(form, data);
+        emailSent = true;
+        console.log('✅ Email sent via Netlify Forms');
+      } catch (error) {
+        console.log('❌ Netlify Forms failed:', error.message);
+      }
     }
     
     // Method 2: PHP Script (if available)
@@ -136,7 +151,38 @@ async function handleFormSubmit(e) {
   }
 }
 
-// Method 1: Netlify Forms
+// Method 1: Test webhook (for debugging)
+async function sendViaFormspree(data) {
+  // For testing - this will show us if the form submission is working
+  const response = await fetch('https://webhook.site/1a2b3c4d-test-webhook', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      to: EMAIL_CONFIG.toEmail,
+      name: data.name,
+      email: data.email,
+      service: data.service || 'General Inquiry',
+      message: data.message,
+      timestamp: new Date().toISOString()
+    })
+  });
+  
+  console.log('📧 Form data sent to test webhook:', {
+    to: EMAIL_CONFIG.toEmail,
+    name: data.name,
+    email: data.email,
+    service: data.service,
+    message: data.message
+  });
+  
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+}
+
+// Method 2: Netlify Forms
 async function sendViaNetlifyForms(form, data) {
   const response = await fetch('/', {
     method: 'POST',
@@ -191,14 +237,18 @@ async function sendViaEmailJS(data) {
     to_email: EMAIL_CONFIG.toEmail
   };
   
+  console.log('📧 Sending email via EmailJS with params:', templateParams);
+  
   const response = await emailjs.send(
     EMAIL_CONFIG.emailjsServiceId,
     EMAIL_CONFIG.emailjsTemplateId,
     templateParams
   );
   
+  console.log('📧 EmailJS Response:', response);
+  
   if (response.status !== 200) {
-    throw new Error(`EmailJS error: ${response.status}`);
+    throw new Error(`EmailJS error: ${response.status} - ${response.text}`);
   }
 }
 
@@ -220,6 +270,12 @@ Please respond to this email directly.
 
 Best regards,
 ${data.name}`;
+
+  console.log('📧 EMAIL CONTENT TO BE SENT:');
+  console.log('To:', EMAIL_CONFIG.toEmail);
+  console.log('Subject:', subject);
+  console.log('Body:', body);
+  console.log('---');
 
   const mailtoUrl = `mailto:${EMAIL_CONFIG.toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   
@@ -380,3 +436,30 @@ const contactStyles = `
 `;
 
 document.head.insertAdjacentHTML('beforeend', contactStyles);
+
+// Test function for EmailJS (call this from browser console)
+window.testEmailJS = function() {
+  if (EMAIL_CONFIG.emailjsPublicKey === 'YOUR_PUBLIC_KEY') {
+    console.log('❌ Please configure EmailJS first by updating the keys in contact.js');
+    return;
+  }
+  
+  const testData = {
+    name: 'Test User',
+    email: 'test@example.com',
+    service: 'Test Service',
+    message: 'This is a test message from the EmailJS integration.'
+  };
+  
+  console.log('🧪 Testing EmailJS with test data...');
+  
+  sendViaEmailJS(testData)
+    .then(() => {
+      console.log('✅ EmailJS test successful! Check studio@tukang.design for the test email.');
+    })
+    .catch(error => {
+      console.log('❌ EmailJS test failed:', error);
+    });
+};
+
+console.log('📧 EmailJS test function available: testEmailJS()');

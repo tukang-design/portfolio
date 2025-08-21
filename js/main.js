@@ -362,16 +362,28 @@ function openContactForm(service = '') {
     const modalService = document.getElementById('modalService');
     const modalTitle = document.getElementById('modalTitle');
     
+    // Set the service in the dropdown
     if (service && modalService) {
+      // If specific service is provided, select it
       modalService.value = service;
+    } else {
+      // Reset to default option
+      modalService.value = '';
     }
     
+    // Update modal title
     if (modalTitle) {
       modalTitle.textContent = service ? `Get Your ${service}` : 'Get Your Free Quote';
     }
     
     contactModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Focus on first input for better UX
+    setTimeout(() => {
+      const nameInput = document.getElementById('modalName');
+      if (nameInput) nameInput.focus();
+    }, 100);
   }
 }
 
