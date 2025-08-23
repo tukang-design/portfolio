@@ -1,5 +1,28 @@
 // Main JavaScript functionality
 
+// Performance optimization: Create a more efficient debounce function
+function optimizedDebounce(func, delay) {
+  let timeoutId;
+  let lastExecTime = 0;
+  
+  return function executedFunction(...args) {
+    const currentTime = Date.now();
+    
+    const execute = () => {
+      lastExecTime = currentTime;
+      func.apply(this, args);
+    };
+    
+    clearTimeout(timeoutId);
+    
+    if (currentTime - lastExecTime > delay) {
+      execute();
+    } else {
+      timeoutId = setTimeout(execute, delay);
+    }
+  };
+}
+
 // Ensure DOM is fully loaded
 function initializeWhenReady(callback) {
   if (document.readyState === 'loading') {
@@ -477,12 +500,13 @@ function debounce(func, wait) {
   };
 }
 
-// Optimized scroll handler
-const optimizedScrollHandler = debounce(() => {
+// Optimized scroll handler - consolidate all scroll events
+const optimizedScrollHandler = optimizedDebounce(() => {
   updateActiveNavLink();
 }, 10);
 
-window.addEventListener('scroll', optimizedScrollHandler);
+// Use passive listeners for better performance
+window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -508,63 +532,73 @@ function initProblemCardTouchInteraction() {
   if (window.innerWidth <= 768) {
     const problemCards = document.querySelectorAll('.problem-card');
     
-    problemCards.forEach(card => {
+    problemCards.forEach((card, index) => {
       let isExpanded = false;
       
       // Handle touch/click events
       card.addEventListener('click', (e) => {
         e.preventDefault();
         
-        // Toggle expanded state
+        // Mark this card as interacted (hide indicator permanently)
+        card.classList.add('interacted');
+        
+        // Close all other cards first
+        problemCards.forEach((otherCard, otherIndex) => {
+          if (otherIndex !== index) {
+            otherCard.classList.remove('tapped');
+          }
+        });
+        
+        // Toggle current card
         if (isExpanded) {
           card.classList.remove('tapped');
           isExpanded = false;
         } else {
-          // Close other expanded cards first
-          problemCards.forEach(otherCard => {
-            if (otherCard !== card) {
-              otherCard.classList.remove('tapped');
-            }
-          });
-          
-          // Expand this card
           card.classList.add('tapped');
           isExpanded = true;
-          
-          // Auto-collapse after 5 seconds
-          setTimeout(() => {
-            if (card.classList.contains('tapped')) {
-              card.classList.remove('tapped');
-              isExpanded = false;
-            }
-          }, 5000);
         }
       });
       
       // Handle touch events for better mobile experience
       card.addEventListener('touchstart', (e) => {
-        card.style.transform = 'translateY(-2px)';
-      });
+        if (!card.classList.contains('tapped')) {
+          card.style.transform = 'translateY(-2px)';
+        }
+      }, { passive: true });
       
       card.addEventListener('touchend', (e) => {
         if (!card.classList.contains('tapped')) {
-          card.style.transform = '';
+          setTimeout(() => {
+            card.style.transform = '';
+          }, 100);
         }
-      });
+      }, { passive: true });
     });
   }
-  
-  // Re-initialize on window resize
-  window.addEventListener('resize', debounce(() => {
-    if (window.innerWidth <= 768) {
+}
+
+// Performance optimized resize handler
+const handleResize = optimizedDebounce(() => {
+  // Re-initialize mobile interactions if needed
+  if (window.innerWidth <= 768) {
+    // Only re-initialize if not already initialized
+    const existingCards = document.querySelectorAll('.problem-card[data-mobile-initialized]');
+    if (existingCards.length === 0) {
       initProblemCardTouchInteraction();
-    } else {
-      // Remove mobile interactions on desktop
-      const problemCards = document.querySelectorAll('.problem-card');
-      problemCards.forEach(card => {
-        card.classList.remove('tapped');
-        card.style.transform = '';
+      document.querySelectorAll('.problem-card').forEach(card => {
+        card.setAttribute('data-mobile-initialized', 'true');
       });
     }
-  }, 250));
-}
+  } else {
+    // Clean up mobile interactions on desktop
+    const problemCards = document.querySelectorAll('.problem-card');
+    problemCards.forEach(card => {
+      card.classList.remove('tapped', 'interacted');
+      card.style.transform = '';
+      card.removeAttribute('data-mobile-initialized');
+    });
+  }
+}, 250);
+
+// Add resize listener
+window.addEventListener('resize', handleResize, { passive: true });

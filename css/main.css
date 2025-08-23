@@ -71,6 +71,10 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  /* Performance optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
 }
 
 body {
@@ -78,6 +82,41 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   line-height: 1.6;
+  /* Performance optimization */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Performance optimizations for animated elements */
+.hero,
+.problem-card,
+.btn,
+.nav-link,
+.whatsapp-float,
+.portfolio-thumbnail-auto,
+.floating-icon {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .problem-card::after {
+    animation: none !important;
+  }
+}
+
+body {
   overflow-x: hidden;
 }
 
@@ -1251,16 +1290,7 @@ section {
     animation: tap-pulse 2s infinite;
   }
   
-  .problem-card::before {
-    content: '👆';
-    position: absolute;
-    bottom: 18px;
-    right: 22px;
-    font-size: 12px;
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: 1;
-  }
+  /* Remove the emoji icon - no longer needed */
 }
 
 .problem-card:hover {
@@ -1290,10 +1320,11 @@ section {
     transform: translateY(0);
   }
   
-  /* Hide tap indicator when card is expanded */
+  /* Hide tap indicator when card is expanded or has been tapped */
   .problem-card.tapped::after,
-  .problem-card.tapped::before {
+  .problem-card.interacted::after {
     opacity: 0;
+    animation: none;
   }
 }
 
