@@ -134,7 +134,7 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.5rem; /* Standardized to 1.5rem */
 }
 
 /* Header */
@@ -154,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2.5rem;
+  padding: 1rem 1.5rem; /* Consistent with container padding */
   margin: 0 auto;
 }
 
@@ -216,7 +216,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Hero Section */
 .hero {
   position: relative;
-  min-height: 100vh;
+  height: 100vh; /* Changed from min-height to height for full viewport */
   display: flex;
   align-items: center;
   background: var(--gradient-hero);
@@ -487,7 +487,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Sections */
 section {
-  padding: 5rem 0;
+  padding: 3rem 0; /* Reduced from 5rem to 3rem for better mobile optimization */
 }
 
 .services {
@@ -510,7 +510,7 @@ section {
 .portfolio-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 4rem;
+  gap: 3rem; /* Reduced from 4rem for better mobile optimization */
   max-width: 1400px;
   margin: 0 auto;
   align-items: stretch;
@@ -951,7 +951,7 @@ section {
 @media (max-width: 768px) {
   .portfolio-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem; /* Reduced from 2rem for better mobile optimization */
     min-height: 500px;
   }
   
@@ -2507,12 +2507,14 @@ section.contact .contact-content,
   .problems,
   .contact {
     scroll-snap-align: center;
-    padding: 2rem 0;
+    padding: 1.5rem 0; /* Reduced from 2rem to 1.5rem for more content visibility */
   }
   
   .hero {
-    min-height: 100vh;
+    height: 100vh; /* Ensure full height on mobile */
     scroll-snap-align: start;
+    padding-top: 80px; /* Account for fixed header */
+    padding-bottom: 1rem; /* Minimal bottom padding */
   }
 }
 
@@ -2535,7 +2537,7 @@ section.contact .contact-content,
 /* Scroll Direction Indicator */
 .scroll-hint {
   position: absolute;
-  bottom: 2rem;
+  bottom: 3rem; /* Increased from 2rem for better spacing */
   left: 50%;
   transform: translateX(-50%);
   color: hsla(var(--foreground), 0.6);
