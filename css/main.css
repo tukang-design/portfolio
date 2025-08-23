@@ -1224,6 +1224,43 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly; /* Space elements evenly */
+  cursor: pointer; /* Indicate interactivity */
+}
+
+/* Mobile tap indicator */
+.problem-card::after {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Show tap indicator on mobile only */
+@media (max-width: 768px) {
+  .problem-card::after {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    animation: tap-pulse 2s infinite;
+  }
+  
+  .problem-card::before {
+    content: '👆';
+    position: absolute;
+    bottom: 18px;
+    right: 22px;
+    font-size: 12px;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 .problem-card:hover {
@@ -1233,6 +1270,31 @@ section {
 
 .problem-card:hover .problem-content {
   transform: translateY(-60px); /* Push content up on hover */
+}
+
+/* Mobile tap/touch states */
+@media (max-width: 768px) {
+  .problem-card.tapped,
+  .problem-card:active {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+  
+  .problem-card.tapped .problem-content,
+  .problem-card:active .problem-content {
+    transform: translateY(-60px);
+  }
+  
+  .problem-card.tapped .problem-description,
+  .problem-card:active .problem-description {
+    transform: translateY(0);
+  }
+  
+  /* Hide tap indicator when card is expanded */
+  .problem-card.tapped::after,
+  .problem-card.tapped::before {
+    opacity: 0;
+  }
 }
 
 .problem-icon {
@@ -2561,6 +2623,22 @@ section.contact .contact-content,
   }
   60% {
     transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Tap pulse animation for mobile problem cards */
+@keyframes tap-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
   }
 }
 

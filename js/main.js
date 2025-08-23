@@ -37,6 +37,7 @@ initializeWhenReady(() => {
   initModals();
   initMagneticDots();
   initScrollAnimations();
+  initProblemCardTouchInteraction(); // Add mobile touch interaction
   
   console.log('Tukang Design: All features initialized successfully!');
 });
@@ -500,3 +501,70 @@ document.addEventListener('DOMContentLoaded', () => {
 window.openContactForm = openContactForm;
 window.closeContactModal = closeContactModal;
 window.closeSuccessModal = closeSuccessModal;
+
+// Mobile touch interaction for problem cards
+function initProblemCardTouchInteraction() {
+  // Only add touch interaction on mobile devices
+  if (window.innerWidth <= 768) {
+    const problemCards = document.querySelectorAll('.problem-card');
+    
+    problemCards.forEach(card => {
+      let isExpanded = false;
+      
+      // Handle touch/click events
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Toggle expanded state
+        if (isExpanded) {
+          card.classList.remove('tapped');
+          isExpanded = false;
+        } else {
+          // Close other expanded cards first
+          problemCards.forEach(otherCard => {
+            if (otherCard !== card) {
+              otherCard.classList.remove('tapped');
+            }
+          });
+          
+          // Expand this card
+          card.classList.add('tapped');
+          isExpanded = true;
+          
+          // Auto-collapse after 5 seconds
+          setTimeout(() => {
+            if (card.classList.contains('tapped')) {
+              card.classList.remove('tapped');
+              isExpanded = false;
+            }
+          }, 5000);
+        }
+      });
+      
+      // Handle touch events for better mobile experience
+      card.addEventListener('touchstart', (e) => {
+        card.style.transform = 'translateY(-2px)';
+      });
+      
+      card.addEventListener('touchend', (e) => {
+        if (!card.classList.contains('tapped')) {
+          card.style.transform = '';
+        }
+      });
+    });
+  }
+  
+  // Re-initialize on window resize
+  window.addEventListener('resize', debounce(() => {
+    if (window.innerWidth <= 768) {
+      initProblemCardTouchInteraction();
+    } else {
+      // Remove mobile interactions on desktop
+      const problemCards = document.querySelectorAll('.problem-card');
+      problemCards.forEach(card => {
+        card.classList.remove('tapped');
+        card.style.transform = '';
+      });
+    }
+  }, 250));
+}
