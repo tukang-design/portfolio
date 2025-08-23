@@ -2669,7 +2669,43 @@ section.contact .contact-content,
   border-bottom: 1px solid #25D366;
 }
 
-/* 4. Contact Section WhatsApp */
+/* 4. Contact Section WhatsApp - Updated for inline layout */
+.contact-buttons-inline {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  background: #22c55e;
+  color: white;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.btn-whatsapp svg {
+  flex-shrink: 0;
+}
+
 .contact-whatsapp {
   text-align: center;
   margin-top: 16px;
@@ -2744,6 +2780,19 @@ section.contact .contact-content,
   
   .hero-whatsapp {
     margin-top: 16px;
+  }
+  
+  /* Mobile layout for inline contact buttons */
+  .contact-buttons-inline {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .btn-whatsapp {
+    width: 100%;
+    max-width: 280px;
+    font-size: 0.95rem;
+    padding: 12px 20px;
   }
 }
 
