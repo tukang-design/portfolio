@@ -2590,6 +2590,7 @@ section.contact .contact-content,
   right: 25px;
   z-index: 1000;
   animation: whatsapp-pulse 2s infinite;
+  border-radius: 100px;
 }
 
 .whatsapp-btn {
