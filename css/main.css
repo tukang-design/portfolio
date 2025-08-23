@@ -2580,3 +2580,177 @@ section.contact .contact-content,
 .animate-stagger-2 { animation-delay: 0.2s; }
 .animate-stagger-3 { animation-delay: 0.3s; }
 .animate-stagger-4 { animation-delay: 0.4s; }
+
+/* ===== WHATSAPP INTEGRATION STYLES ===== */
+
+/* 1. Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1000;
+  animation: whatsapp-pulse 2s infinite;
+}
+
+.whatsapp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.whatsapp-btn:hover {
+  background: #22c55e;
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+  color: white;
+  text-decoration: none;
+}
+
+.whatsapp-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+@keyframes whatsapp-pulse {
+  0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+  50% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.7); }
+  100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+}
+
+/* 2. Services Section WhatsApp Links */
+.whatsapp-alternative {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.whatsapp-link {
+  color: #25D366;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.whatsapp-link:hover {
+  color: #22c55e;
+  text-decoration: none;
+  border-bottom: 1px solid #25D366;
+}
+
+/* 3. Hero Section WhatsApp */
+.hero-whatsapp {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.whatsapp-quick-link {
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.whatsapp-quick-link:hover {
+  color: #25D366;
+  text-decoration: none;
+  border-bottom: 1px solid #25D366;
+}
+
+/* 4. Contact Section WhatsApp */
+.contact-whatsapp {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.whatsapp-contact-link {
+  color: #25D366;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  padding: 8px 0;
+  display: inline-block;
+}
+
+.whatsapp-contact-link:hover {
+  color: #22c55e;
+  text-decoration: none;
+  border-bottom: 2px solid #25D366;
+}
+
+/* 5. Header Navigation WhatsApp */
+.nav-link.whatsapp-nav {
+  display: flex;
+  align-items: center;
+  color: #25D366 !important;
+  transition: all 0.3s ease;
+}
+
+.nav-link.whatsapp-nav:hover {
+  color: #22c55e !important;
+  transform: scale(1.1);
+}
+
+.nav-link.whatsapp-nav svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 6. Footer WhatsApp */
+.whatsapp-footer {
+  color: #25D366 !important;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-footer:hover {
+  color: #22c55e !important;
+  text-decoration: none;
+}
+
+/* Mobile Responsiveness for WhatsApp Elements */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .whatsapp-btn {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .whatsapp-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .whatsapp-contact-link {
+    font-size: 1rem;
+  }
+  
+  .hero-whatsapp {
+    margin-top: 16px;
+  }
+}
+
+/* Accessibility improvements */
+.whatsapp-btn:focus,
+.whatsapp-link:focus,
+.whatsapp-quick-link:focus,
+.whatsapp-contact-link:focus {
+  outline: 2px solid #25D366;
+  outline-offset: 2px;
+}
