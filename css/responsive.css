@@ -4,7 +4,7 @@
 @media (max-width: 1024px) {
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1rem;
   }
   
   .portfolio-grid {
@@ -142,7 +142,7 @@
   }
   
   .portfolio-content {
-    padding: 1.5rem;
+    padding: 0;
   }
   
   /* Contact */

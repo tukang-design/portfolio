@@ -536,7 +536,6 @@ section {
 .portfolio-thumbnails-auto {
   display: flex;
   gap: 0.75rem;
-  margin-top: 1rem;
   overflow-x: auto;
   padding: 0.5rem 0;
   scrollbar-width: none;
@@ -623,7 +622,6 @@ section {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
   border-bottom: 1px solid hsla(var(--border), 0.3);
 }
 
@@ -977,9 +975,8 @@ section {
   }
   
   .portfolio-header {
-    flex-direction: column;
     gap: 0.5rem;
-    align-items: flex-start;
+    align-items: center;
   }
   
   .portfolio-navigation {
@@ -1011,6 +1008,7 @@ section {
   overflow: hidden;
   min-height: 100vh;
   padding: 4rem 0;
+  padding-bottom: 4rem !important;
 }
 
 /* Animated Bad Impression Icons */
@@ -1431,7 +1429,7 @@ section {
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: 1rem; /* Doubled from 0.5rem */
+  margin: 1rem 0 0 0; 
   color: white;
   text-align: left;
 }
@@ -1441,7 +1439,7 @@ section {
   font-size: 2.5rem;
   font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 3rem; /* Doubled from 2rem */
+  margin: 1rem 0;
   background: linear-gradient(45deg, hsl(var(--neon-green)), hsl(0deg 0% 100%));
   background-clip: text;
   -webkit-background-clip: text;
@@ -1451,8 +1449,7 @@ section {
 @media (max-width: 767px) {
   .services-text-section {
     grid-column: 1;
-    padding-right: 0;
-    margin-bottom: 2rem;
+    padding: 0 0.5rem;
     text-align: left;
     overflow: visible;
   }
@@ -1476,7 +1473,7 @@ section {
   color: rgba(255, 255, 255, 0.6);
   font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 2.4rem; /* Doubled from 1.2rem */
+  margin-bottom: 1rem; /* Doubled from 1.2rem */
   text-align: left;
 }
 
@@ -1489,7 +1486,7 @@ section {
 .packages-combined-card {
   background: linear-gradient(135deg, hsl(142, 40%, 15%) 0%, hsl(142, 30%, 12%) 100%);
   border-radius: 1.5rem;
-  padding: 2.5rem;
+  padding: 1.5rem;
   box-shadow: var(--shadow-soft);
   border: 1px solid hsl(var(--border));
   transition: var(--transition-bounce);
@@ -1527,7 +1524,7 @@ section {
 /* Service Icon - positioned above title */
 .package-item .service-icon {
   align-self: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #194d2c;
 }
 
@@ -1545,14 +1542,14 @@ section {
   color: hsl(var(--muted-foreground));
   font-size: 1rem;
   line-height: 1.5;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: left;
 }
 
 /* Delivery Tag - positioned before features with spacing */
 .package-item .delivery-tag {
   align-self: flex-start;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 /* Delivery Tag */
@@ -2507,7 +2504,7 @@ section.contact .contact-content,
   .problems,
   .contact {
     scroll-snap-align: center;
-    padding: 1.5rem 0; /* Reduced from 2rem to 1.5rem for more content visibility */
+    padding: 2rem 0; /* Reduced from 2rem to 1.5rem for more content visibility */
   }
   
   .hero {
