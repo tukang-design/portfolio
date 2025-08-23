@@ -1309,10 +1309,6 @@ section {
   margin: 0 auto 2rem;
 }
 
-.problems .contact-cta {
-  margin-top: 2rem;
-}
-
 /* Process Section */
 .process {
   background: hsl(var(--section-bg));
