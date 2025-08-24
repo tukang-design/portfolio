@@ -190,12 +190,20 @@ function initMagneticDots() {
         
         // Get dimensions
         const rect = parentSection.getBoundingClientRect();
-        const dotSpacing = 24;
+        const dotSpacing = 40; // Increased spacing to reduce dots count
         const cols = Math.ceil(rect.width / dotSpacing);
         const rows = Math.ceil(rect.height / dotSpacing);
         
-        console.log(`Creating ${cols}x${rows} = ${cols * rows} dots for ${sectionName}`);
-        console.log(`Section dimensions: ${rect.width}x${rect.height}`);
+        // Limit maximum dots for performance
+        const maxDots = 500;
+        const totalDots = cols * rows;
+        
+        if (totalDots > maxDots) {
+          console.log(`Limiting dots to ${maxDots} for performance (would be ${totalDots})`);
+          return; // Skip creating dots if too many
+        }
+        
+        console.log(`Creating ${cols}x${rows} = ${totalDots} dots for ${sectionName}`);
         
         for (let row = 0; row < rows; row++) {
           for (let col = 0; col < cols; col++) {
@@ -249,9 +257,16 @@ function initMagneticDots() {
         const rect = parentSection.getBoundingClientRect();
         const cursorX = e.clientX - rect.left;
         const cursorY = e.clientY - rect.top;
-        const repulsionRadius = 120;
+        const repulsionRadius = 80; // Reduced radius for better performance
         
-        dots.forEach(dot => {
+        // Performance optimization: only update dots within viewport
+        const visibleDots = dots.filter(dot => {
+          const deltaX = Math.abs(dot.originalX - cursorX);
+          const deltaY = Math.abs(dot.originalY - cursorY);
+          return deltaX < repulsionRadius * 1.5 && deltaY < repulsionRadius * 1.5;
+        });
+        
+        visibleDots.forEach(dot => {
           if (!dot.element) return;
           
           const deltaX = dot.originalX - cursorX;
@@ -261,25 +276,22 @@ function initMagneticDots() {
           if (distance < repulsionRadius && distance > 0) {
             const force = (repulsionRadius - distance) / repulsionRadius;
             const angle = Math.atan2(deltaY, deltaX);
-            const repulsionDistance = force * 20;
+            const repulsionDistance = force * 15; // Reduced movement
             
             dot.currentX = dot.originalX + Math.cos(angle) * repulsionDistance;
             dot.currentY = dot.originalY + Math.sin(angle) * repulsionDistance;
             
-            // Increase opacity for dots within the affected area
-            const opacityBoost = 0.8 + (force * 0.2); // Range from 0.8 to 1.0
-            dot.element.style.opacity = opacityBoost;
+            // Simpler opacity change
+            dot.element.style.opacity = 0.3;
           } else {
             dot.currentX = dot.originalX;
             dot.currentY = dot.originalY;
-            
-            // Reset to default opacity
-            dot.element.style.opacity = 0.6;
+            dot.element.style.opacity = 0.1;
           }
           
           const translateX = dot.currentX - dot.originalX;
           const translateY = dot.currentY - dot.originalY;
-          dot.element.style.transform = `translate(${translateX}px, ${translateY}px)`;
+          dot.element.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`; // Use translate3d for GPU acceleration
         });
       } catch (error) {
         console.error(`Error updating dots for ${sectionName}:`, error);
@@ -291,8 +303,8 @@ function initMagneticDots() {
         if (dot.element) {
           dot.currentX = dot.originalX;
           dot.currentY = dot.originalY;
-          dot.element.style.transform = 'translate(0px, 0px)';
-          dot.element.style.opacity = 0.6; // Reset to default opacity
+          dot.element.style.transform = 'translate3d(0px, 0px, 0)'; // Use translate3d
+          dot.element.style.opacity = 0.1; // Reset to very subtle opacity
         }
       });
     }
@@ -300,8 +312,15 @@ function initMagneticDots() {
     // Initialize dots
     createDots();
     
-    // Add event listeners
+    // Add event listeners with throttling
+    let lastUpdate = 0;
+    const throttleDelay = 16; // ~60fps
+    
     parentSection.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastUpdate < throttleDelay) return;
+      lastUpdate = now;
+      
       if (animationId) cancelAnimationFrame(animationId);
       animationId = requestAnimationFrame(() => updateDotsPosition(e));
     });
