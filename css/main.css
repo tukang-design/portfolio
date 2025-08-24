@@ -284,9 +284,10 @@ h1, h2, h3, h4, h5, h6 {
 .dots-bg {
   position: absolute;
   inset: 0;
-  opacity: 0.1;
+  opacity: 1;
   overflow: hidden;
   pointer-events: none;
+  z-index: 1;
 }
 
 .section-dot {
@@ -1382,9 +1383,84 @@ section {
   text-align: center;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 
-.problems .contact-header h2 {
+/* Dynamic Circle Background for Contact Section - DISABLED */
+/*
+.contact-circle-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, hsl(var(--neon-green)), hsl(var(--neon-green-muted)));
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1;
+  opacity: 0.3;
+  will-change: transform, opacity;
+}
+
+.contact-circle-bg.pre-animate {
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0.6;
+}
+
+.contact-circle-bg.active {
+  transform: translate(-50%, -50%) scale(20);
+  opacity: 0.98;
+}
+*/
+
+/* Enhanced contact section styling */
+.contact {
+  position: relative;
+  background: hsl(142 70% 8%); /* Darker green background like hero */
+  padding: 200px 0;
+  overflow: hidden;
+  transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.contact .contact-content {
+  position: relative;
+  z-index: 2;
+  transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Dynamic text color transitions for contact section - DISABLED FOR NOW */
+/*
+.contact.contact-bg-active .contact-header h2 {
+  color: #000000 !important;
+  background: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.contact.contact-bg-active .contact-header p,
+.contact.contact-bg-active .section-subtitle {
+  color: #1a1a1a !important;
+  transition: color 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.contact.contact-bg-active .btn {
+  background: #000000;
+  color: hsl(var(--neon-green));
+  border-color: #000000;
+  transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.contact.contact-bg-active .btn:hover {
+  background: #1a1a1a;
+  color: hsl(var(--neon-green));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+*/
+
+/* Default contact header styling */
+.contact .contact-header h2 {
   color: hsl(var(--foreground));
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -1392,6 +1468,7 @@ section {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .problems .contact-header .section-subtitle {

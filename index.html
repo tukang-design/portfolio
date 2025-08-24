@@ -95,7 +95,7 @@
         <nav class="nav">
             <div class="nav-brand">
                 <a href="#home" class="brand-link">
-                    <img src="logo.png" alt="Tukang Design Logo" width="32" height="32" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                    <img src="logo.gif" alt="Tukang Design Logo" width="32" height="32" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
                     Tukang Design
                 </a>
             </div>
@@ -103,7 +103,7 @@
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#work" class="nav-link">Work</a>
-                <a href="#problems" class="nav-link">Contact</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
@@ -116,6 +116,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-bg"></div>
+        <div class="dots-bg" data-section="hero"></div>
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">
@@ -148,158 +149,6 @@
         </div>
     </section>
     
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="dots-bg" data-section="services"></div>
-        <div class="container">
-            <div class="services-grid">
-                <!-- Text Section - First Column -->
-                <div class="services-text-section">
-                    <h2 class="section-title">Meet Your Tukang</h2>
-                    <p class="section-subtitle">The Expert Craftsman for Your Brand.</p>
-                    <p>
-                        We offer two straightforward packages to get your business looking sharp and ready for customers. Cepat dan cun.
-                    </p>
-                    <p>
-                        Choose the package that fits your needs, or get both for a complete brand transformation.
-                    </p>
-                </div>
-
-                <!-- Package Cards Side by Side -->
-                <div class="packages-combined-card">
-                    <div class="packages-row">
-                        <!-- Brand Foundation Package -->
-                        <div class="package-item">
-                            <div class="service-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                    <path d="M12 7v10"/>
-                                    <path d="M8 11l8 2"/>
-                                </svg>
-                            </div>
-                            <h3 class="package-title shimmer-text">Brand Foundation Package</h3>
-                            <p class="package-description">Perfect for new businesses or those needing a serious refresh. We build a brand that you can be proud of.</p>
-                            
-                            <div class="delivery-tag" title="*Subject to project complexity and client feedback timeline. Rush delivery available upon request.">
-                                Delivery in 7 days
-                            </div>
-                            
-                            <div class="package-features-table">
-                                <div class="feature-row">Custom Logo Design Suite (multiple variations for all your needs)</div>
-                                <div class="feature-row">Professional Colour Palette</div>
-                                <div class="feature-row">Strategic Typography Styles</div>
-                                <div class="feature-row">Starter Brand Guideline</div>
-                            </div>
-                            
-                            <button class="btn btn-cta btn-full shimmer-text" onclick="openContactForm('Brand Foundation Package')">
-                                Get My Brand
-                            </button>
-                            
-                            <div class="whatsapp-alternative">
-                                <a href="https://wa.me/60174062788?text=Hi%20Tukang%20Design,%20I'd%20like%20to%20ask%20about%20the%20Brand%20Foundation%20Package." 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="whatsapp-link">
-                                    or Chat on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Vertical Divider -->
-                        <div class="package-vertical-divider"></div>
-
-                        <!-- Go-Live Website Package -->
-                        <div class="package-item">
-                            <div class="service-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M2 12h20"/>
-                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                                </svg>
-                            </div>
-                            <h3 class="package-title shimmer-text">Go-Live Website Package</h3>
-                            <p class="package-description">Your 24/7 digital storefront. We create a professional, effective website designed to turn visitors into customers.</p>
-                            
-                            <div class="delivery-tag" title="*Subject to project complexity and client feedback timeline. Rush delivery available upon request.">
-                                Delivery in 7 days
-                            </div>
-                            
-                            <div class="package-features-table">
-                                <div class="feature-row">1-Year Domain & Hosting Included</div>
-                                <div class="feature-row">Up to 3 Custom-Designed Pages (e.g., Home, About, Services/Contact)</div>
-                                <div class="feature-row">Mobile-Responsive Layout (looks perfect on any device)</div>
-                                <div class="feature-row">Contact Form & WhatsApp Integration (get inquiries instantly)</div>
-                            </div>
-                            
-                            <button class="btn btn-cta btn-full shimmer-text" onclick="openContactForm('Go-Live Website Package')">
-                                Get My Website
-                            </button>
-                            
-                            <div class="whatsapp-alternative">
-                                <a href="https://wa.me/60174062788?text=Hi%20Tukang%20Design,%20I'd%20like%20to%20ask%20about%20the%20Go-Live%20Website%20Package." 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="whatsapp-link">
-                                    or Chat on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="work" class="portfolio">
-        <div class="dots-bg" data-section="portfolio"></div>
-        
-        <div class="container">
-            <div class="portfolio-content">
-                <!-- Main Portfolio Display -->
-                <div class="portfolio-main-display">
-                    <div class="portfolio-image-container">
-                        <!-- Main Project Image -->
-                        <div class="portfolio-main-image" id="portfolioMainImage">
-                            <img src="" alt="Portfolio project showcase" class="portfolio-showcase-image" id="mainPortfolioImage" loading="lazy" decoding="async">
-                        </div>
-                        
-                        <!-- Thumbnail Gallery with Auto-Transition (Below Image) -->
-                        <div class="portfolio-thumbnails-auto" id="portfolioThumbnails">
-                            <!-- Thumbnails will be loaded here -->
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project Information and Navigation -->
-                <div class="portfolio-info-panel">
-                    <div class="portfolio-header">
-                        <h3 class="">Our Work</h3>
-                        <div class="portfolio-navigation">
-                            <button class="nav-control prev-btn" id="prevProject">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="15,18 9,12 15,6"></polyline>
-                                </svg>
-                            </button>
-                            <button class="nav-control next-btn" id="nextProject">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="9,18 15,12 9,6"></polyline>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-project-info" id="portfolioProjectInfo">
-                        <!-- Project information will be loaded here -->
-                        <div class="portfolio-loading">
-                            <p>Loading portfolio...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Problems Section -->
     <section id="problems" class="problems">
         <!-- Animated Bad Impression Icons -->
@@ -440,9 +289,167 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Contact Section integrated into problems -->
-            <div class="contact-content">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="services-grid">
+                <!-- Text Section - First Column -->
+                <div class="services-text-section">
+                    <h2 class="section-title">Meet Your Tukang</h2>
+                    <p class="section-subtitle">The Expert Craftsman for Your Brand.</p>
+                    <p>
+                        We offer two straightforward packages to get your business looking sharp and ready for customers. Cepat dan cun.
+                    </p>
+                    <p>
+                        Choose the package that fits your needs, or get both for a complete brand transformation.
+                    </p>
+                </div>
+
+                <!-- Package Cards Side by Side -->
+                <div class="packages-combined-card">
+                    <div class="packages-row">
+                        <!-- Brand Foundation Package -->
+                        <div class="package-item">
+                            <div class="service-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    <path d="M12 7v10"/>
+                                    <path d="M8 11l8 2"/>
+                                </svg>
+                            </div>
+                            <h3 class="package-title shimmer-text">Brand Foundation Package</h3>
+                            <p class="package-description">Perfect for new businesses or those needing a serious refresh. We build a brand that you can be proud of.</p>
+                            
+                            <div class="delivery-tag" title="*Subject to project complexity and client feedback timeline. Rush delivery available upon request.">
+                                Delivery in 7 days
+                            </div>
+                            
+                            <div class="package-features-table">
+                                <div class="feature-row">Custom Logo Design Suite (multiple variations for all your needs)</div>
+                                <div class="feature-row">Professional Colour Palette</div>
+                                <div class="feature-row">Strategic Typography Styles</div>
+                                <div class="feature-row">Starter Brand Guideline</div>
+                            </div>
+                            
+                            <button class="btn btn-cta btn-full shimmer-text" onclick="openContactForm('Brand Foundation Package')">
+                                Get My Brand
+                            </button>
+                            
+                            <div class="whatsapp-alternative">
+                                <a href="https://wa.me/60174062788?text=Hi%20Tukang%20Design,%20I'd%20like%20to%20ask%20about%20the%20Brand%20Foundation%20Package." 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   class="whatsapp-link">
+                                    or Chat on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Vertical Divider -->
+                        <div class="package-vertical-divider"></div>
+
+                        <!-- Go-Live Website Package -->
+                        <div class="package-item">
+                            <div class="service-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M2 12h20"/>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                            </div>
+                            <h3 class="package-title shimmer-text">Go-Live Website Package</h3>
+                            <p class="package-description">Your 24/7 digital storefront. We create a professional, effective website designed to turn visitors into customers.</p>
+                            
+                            <div class="delivery-tag" title="*Subject to project complexity and client feedback timeline. Rush delivery available upon request.">
+                                Delivery in 7 days
+                            </div>
+                            
+                            <div class="package-features-table">
+                                <div class="feature-row">1-Year Domain & Hosting Included</div>
+                                <div class="feature-row">Up to 3 Custom-Designed Pages (e.g., Home, About, Services/Contact)</div>
+                                <div class="feature-row">Mobile-Responsive Layout (looks perfect on any device)</div>
+                                <div class="feature-row">Contact Form & WhatsApp Integration (get inquiries instantly)</div>
+                            </div>
+                            
+                            <button class="btn btn-cta btn-full shimmer-text" onclick="openContactForm('Go-Live Website Package')">
+                                Get My Website
+                            </button>
+                            
+                            <div class="whatsapp-alternative">
+                                <a href="https://wa.me/60174062788?text=Hi%20Tukang%20Design,%20I'd%20like%20to%20ask%20about%20the%20Go-Live%20Website%20Package." 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   class="whatsapp-link">
+                                    or Chat on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="work" class="portfolio">
+        <div class="container">
+            <div class="portfolio-content">
+                <!-- Main Portfolio Display -->
+                <div class="portfolio-main-display">
+                    <div class="portfolio-image-container">
+                        <!-- Main Project Image -->
+                        <div class="portfolio-main-image" id="portfolioMainImage">
+                            <img src="" alt="Portfolio project showcase" class="portfolio-showcase-image" id="mainPortfolioImage" loading="lazy" decoding="async">
+                        </div>
+                        
+                        <!-- Thumbnail Gallery with Auto-Transition (Below Image) -->
+                        <div class="portfolio-thumbnails-auto" id="portfolioThumbnails">
+                            <!-- Thumbnails will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Information and Navigation -->
+                <div class="portfolio-info-panel">
+                    <div class="portfolio-header">
+                        <h3 class="">Our Work</h3>
+                        <div class="portfolio-navigation">
+                            <button class="nav-control prev-btn" id="prevProject">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15,18 9,12 15,6"></polyline>
+                                </svg>
+                            </button>
+                            <button class="nav-control next-btn" id="nextProject">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9,18 15,12 9,6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-project-info" id="portfolioProjectInfo">
+                        <!-- Project information will be loaded here -->
+                        <div class="portfolio-loading">
+                            <p>Loading portfolio...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="dots-bg" data-section="contact"></div>
+        
+        <div class="container">
+            <div class="contact-content" id="contactSection">
+                <!-- Dynamic Circle Background -->
+                <div class="contact-circle-bg"></div>
+                
                 <div class="contact-header">
                     <h2 class="text-center">Ready to Transform Your Business?</h2>
                     <p class="text-center section-subtitle">Let's discuss your project and see how we can help you create a powerful brand presence that drives results. Get your free consultation and personalized quote today.</p>

@@ -164,145 +164,160 @@ function initActiveNavLink() {
 
 // Magnetic Dots System - Enhanced for compatibility
 function initMagneticDots() {
-  const { heroBg, heroSection } = elements;
+  console.log('Initializing magnetic dots for all sections...');
   
-  console.log('Initializing magnetic dots...', { heroBg: !!heroBg, heroSection: !!heroSection });
+  // Find all sections with dots-bg
+  const sectionsWithDots = document.querySelectorAll('[data-section]');
   
-  if (!heroBg || !heroSection) {
-    console.warn('Hero elements not found, skipping magnetic dots');
-    return;
-  }
-
-  let dots = [];
-  let animationId = null;
-  
-  function createDots() {
-    try {
-      console.log('Creating magnetic dots...');
-      
-      // Clear existing dots
-      heroBg.innerHTML = '';
-      dots = [];
-      
-      // Get dimensions
-      const rect = heroSection.getBoundingClientRect();
-      const dotSpacing = 24;
-      const cols = Math.ceil(rect.width / dotSpacing);
-      const rows = Math.ceil(rect.height / dotSpacing);
-      
-      console.log(`Creating ${cols}x${rows} = ${cols * rows} dots`);
-      
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const dot = document.createElement('div');
-          dot.className = 'hero-dot';
-          dot.style.cssText = `
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(79, 209, 197, 0.6);
-            border-radius: 50%;
-            transition: all 0.2s ease-out;
-            will-change: transform, opacity;
-            left: ${col * dotSpacing}px;
-            top: ${row * dotSpacing}px;
-            z-index: 1;
-            opacity: 0.6;
-          `;
-          
-          heroBg.appendChild(dot);
-          
-          dots.push({
-            element: dot,
-            originalX: col * dotSpacing,
-            originalY: row * dotSpacing,
-            currentX: col * dotSpacing,
-            currentY: row * dotSpacing
-          });
-        }
-      }
-      
-      console.log(`Successfully created ${dots.length} dots`);
-    } catch (error) {
-      console.error('Error creating dots:', error);
-    }
-  }
-  
-  function updateDotsPosition(e) {
-    if (!heroSection || dots.length === 0) return;
+  sectionsWithDots.forEach(section => {
+    const sectionName = section.getAttribute('data-section');
+    const parentSection = section.closest('section');
     
-    try {
-      const rect = heroSection.getBoundingClientRect();
-      const cursorX = e.clientX - rect.left;
-      const cursorY = e.clientY - rect.top;
-      const repulsionRadius = 120;
+    if (!parentSection) return;
+    
+    console.log(`Setting up magnetic dots for ${sectionName} section`);
+    
+    let dots = [];
+    let animationId = null;
+    
+    function createDots() {
+      try {
+        console.log(`Creating magnetic dots for ${sectionName}...`);
+        
+        // Clear existing dots
+        section.innerHTML = '';
+        dots = [];
+        
+        // Get dimensions
+        const rect = parentSection.getBoundingClientRect();
+        const dotSpacing = 24;
+        const cols = Math.ceil(rect.width / dotSpacing);
+        const rows = Math.ceil(rect.height / dotSpacing);
+        
+        console.log(`Creating ${cols}x${rows} = ${cols * rows} dots for ${sectionName}`);
+        console.log(`Section dimensions: ${rect.width}x${rect.height}`);
+        
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < cols; col++) {
+            const dot = document.createElement('div');
+            dot.className = `${sectionName}-dot magnetic-dot`;
+            
+            // Use different colors for different sections
+            let dotColor = 'rgba(79, 209, 197, 0.2)'; // Default hero color - subtle opacity
+            if (sectionName === 'contact') {
+              dotColor = 'rgba(34, 197, 94, 0.2)'; // Brighter green for contact - subtle opacity
+            }
+            
+            dot.style.cssText = `
+              position: absolute;
+              width: 4px;
+              height: 4px;
+              background: ${dotColor};
+              border-radius: 50%;
+              transition: all 0.2s ease-out;
+              will-change: transform, opacity;
+              left: ${col * dotSpacing}px;
+              top: ${row * dotSpacing}px;
+              z-index: 1;
+              opacity: 1;
+            `;
+            
+            section.appendChild(dot);
+            
+            dots.push({
+              element: dot,
+              originalX: col * dotSpacing,
+              originalY: row * dotSpacing,
+              currentX: col * dotSpacing,
+              currentY: row * dotSpacing
+            });
+          }
+        }
+        
+        console.log(`Successfully created ${dots.length} dots for ${sectionName}`);
+        console.log(`Dots container:`, section);
+        console.log(`First dot style:`, dots[0]?.element.style.cssText);
+      } catch (error) {
+        console.error(`Error creating dots for ${sectionName}:`, error);
+      }
+    }
+  
+    function updateDotsPosition(e) {
+      if (!parentSection || dots.length === 0) return;
       
+      try {
+        const rect = parentSection.getBoundingClientRect();
+        const cursorX = e.clientX - rect.left;
+        const cursorY = e.clientY - rect.top;
+        const repulsionRadius = 120;
+        
+        dots.forEach(dot => {
+          if (!dot.element) return;
+          
+          const deltaX = dot.originalX - cursorX;
+          const deltaY = dot.originalY - cursorY;
+          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+          
+          if (distance < repulsionRadius && distance > 0) {
+            const force = (repulsionRadius - distance) / repulsionRadius;
+            const angle = Math.atan2(deltaY, deltaX);
+            const repulsionDistance = force * 20;
+            
+            dot.currentX = dot.originalX + Math.cos(angle) * repulsionDistance;
+            dot.currentY = dot.originalY + Math.sin(angle) * repulsionDistance;
+            
+            // Increase opacity for dots within the affected area
+            const opacityBoost = 0.8 + (force * 0.2); // Range from 0.8 to 1.0
+            dot.element.style.opacity = opacityBoost;
+          } else {
+            dot.currentX = dot.originalX;
+            dot.currentY = dot.originalY;
+            
+            // Reset to default opacity
+            dot.element.style.opacity = 0.6;
+          }
+          
+          const translateX = dot.currentX - dot.originalX;
+          const translateY = dot.currentY - dot.originalY;
+          dot.element.style.transform = `translate(${translateX}px, ${translateY}px)`;
+        });
+      } catch (error) {
+        console.error(`Error updating dots for ${sectionName}:`, error);
+      }
+    }
+    
+    function resetDotsPosition() {
       dots.forEach(dot => {
-        if (!dot.element) return;
-        
-        const deltaX = dot.originalX - cursorX;
-        const deltaY = dot.originalY - cursorY;
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        
-        if (distance < repulsionRadius && distance > 0) {
-          const force = (repulsionRadius - distance) / repulsionRadius;
-          const angle = Math.atan2(deltaY, deltaX);
-          const repulsionDistance = force * 20;
-          
-          dot.currentX = dot.originalX + Math.cos(angle) * repulsionDistance;
-          dot.currentY = dot.originalY + Math.sin(angle) * repulsionDistance;
-          
-          // Increase opacity for dots within the affected area
-          const opacityBoost = 0.8 + (force * 0.2); // Range from 0.8 to 1.0
-          dot.element.style.opacity = opacityBoost;
-        } else {
+        if (dot.element) {
           dot.currentX = dot.originalX;
           dot.currentY = dot.originalY;
-          
-          // Reset to default opacity
-          dot.element.style.opacity = 0.6;
+          dot.element.style.transform = 'translate(0px, 0px)';
+          dot.element.style.opacity = 0.6; // Reset to default opacity
         }
-        
-        const translateX = dot.currentX - dot.originalX;
-        const translateY = dot.currentY - dot.originalY;
-        dot.element.style.transform = `translate(${translateX}px, ${translateY}px)`;
       });
-    } catch (error) {
-      console.error('Error updating dots:', error);
     }
-  }
-  
-  function resetDotsPosition() {
-    dots.forEach(dot => {
-      if (dot.element) {
-        dot.currentX = dot.originalX;
-        dot.currentY = dot.originalY;
-        dot.element.style.transform = 'translate(0px, 0px)';
-        dot.element.style.opacity = 0.6; // Reset to default opacity
-      }
+    
+    // Initialize dots
+    createDots();
+    
+    // Add event listeners
+    parentSection.addEventListener('mousemove', (e) => {
+      if (animationId) cancelAnimationFrame(animationId);
+      animationId = requestAnimationFrame(() => updateDotsPosition(e));
     });
-  }
-  
-  // Initialize dots
-  createDots();
-  
-  // Add event listeners
-  heroSection.addEventListener('mousemove', (e) => {
-    if (animationId) cancelAnimationFrame(animationId);
-    animationId = requestAnimationFrame(() => updateDotsPosition(e));
+    
+    parentSection.addEventListener('mouseleave', resetDotsPosition);
+    
+    // Recreate on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(createDots, 250);
+    });
+    
+    // Force recreate after a delay to ensure layout is complete
+    setTimeout(createDots, 1000);
   });
-  
-  heroSection.addEventListener('mouseleave', resetDotsPosition);
-  
-  // Recreate on resize
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(createDots, 250);
-  });
-  
-  // Force recreate after a delay to ensure layout is complete
-  setTimeout(createDots, 1000);
 }
 
 // Scroll animations
@@ -311,6 +326,12 @@ function initScrollAnimations() {
   const observerOptions = {
     threshold: 0.3,
     rootMargin: '0px 0px -50px 0px'
+  };
+  
+  // Contact section dynamic background options - start animation from previous section
+  const contactObserverOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -10% 0px'
   };
   
   try {
@@ -324,10 +345,98 @@ function initScrollAnimations() {
         });
       }, observerOptions);
       
+      // Contact section specific observer for dynamic background - DISABLED
+      /*
+      const contactObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const contactSection = entry.target;
+          const circleBackground = contactSection.querySelector('.contact-circle-bg');
+          
+          console.log('🔍 Contact observer triggered:', {
+            isIntersecting: entry.isIntersecting,
+            target: entry.target.id,
+            circleBackground: !!circleBackground
+          });
+          
+          if (entry.isIntersecting && circleBackground) {
+            // Start the circle animation
+            circleBackground.classList.add('active');
+            // contactSection.classList.add('contact-bg-active'); // Disabled for now
+            console.log('🎨 Contact section animation triggered');
+          } else if (circleBackground) {
+            // Reset animation when out of view
+            circleBackground.classList.remove('active');
+            // contactSection.classList.remove('contact-bg-active'); // Disabled for now
+            console.log('🎨 Contact section animation reset');
+          }
+        });
+      }, contactObserverOptions);
+      */
+      
+      // Portfolio section observer to prepare contact animation - DISABLED
+      /*
+      const portfolioObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const contactSection = document.querySelector('#contact');
+          const circleBackground = contactSection?.querySelector('.contact-circle-bg');
+          
+          if (entry.isIntersecting && circleBackground) {
+            // Pre-animate the circle when portfolio comes into view
+            circleBackground.classList.add('pre-animate');
+            console.log('🎨 Contact pre-animation triggered from portfolio');
+          } else if (circleBackground) {
+            // Remove pre-animation when portfolio is out of view
+            circleBackground.classList.remove('pre-animate');
+          }
+        });
+      }, {
+        threshold: 0.8,
+        rootMargin: '0px 0px -20% 0px'
+      });
+      */
+      
       // Observe all sections with animations
       document.querySelectorAll('.problems, .services').forEach(section => {
         observer.observe(section);
       });
+      
+      // Observe portfolio section for contact pre-animation - DISABLED
+      /*
+      const portfolioSection = document.querySelector('#work');
+      if (portfolioSection) {
+        portfolioObserver.observe(portfolioSection);
+      }
+      */
+      
+      // Observe contact section for dynamic background - DISABLED
+      /*
+      const contactSection = document.querySelector('#contact');
+      console.log('🔍 Contact section found:', !!contactSection, contactSection?.id);
+      if (contactSection) {
+        contactObserver.observe(contactSection);
+        console.log('🎯 Contact observer attached to section');
+        
+        // Also check if circle background exists
+        const circleBackground = contactSection.querySelector('.contact-circle-bg');
+        console.log('🔍 Circle background found:', !!circleBackground);
+        
+        // Fallback scroll-based animation
+        window.addEventListener('scroll', () => {
+          const rect = contactSection.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          const isInView = rect.top < window.innerHeight * 0.8;
+          
+          if (isInView && circleBackground) {
+            circleBackground.classList.add('active');
+            contactSection.classList.add('contact-bg-active');
+          }
+        });
+        
+      } else {
+        console.error('❌ Contact section not found');
+      }
+      */
+      
     } else {
       // Fallback for browsers without IntersectionObserver
       console.warn('IntersectionObserver not supported, using fallback');
@@ -602,3 +711,55 @@ const handleResize = optimizedDebounce(() => {
 
 // Add resize listener
 window.addEventListener('resize', handleResize, { passive: true });
+
+// Dedicated Contact Section Animation (Fallback) - DISABLED
+/*
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const contactSection = document.querySelector('#contact');
+    const circleBackground = document.querySelector('.contact-circle-bg');
+    
+    console.log('🔍 Direct contact check:', {
+      contactSection: !!contactSection,
+      circleBackground: !!circleBackground,
+      sectionId: contactSection?.id
+    });
+    
+    if (contactSection && circleBackground) {
+      // Test animation immediately
+      console.log('🧪 Testing contact animation...');
+      
+      // Simple scroll-based animation
+      function checkContactAnimation() {
+        const rect = contactSection.getBoundingClientRect();
+        const triggerPoint = window.innerHeight * 0.7;
+        
+        console.log('📍 Contact position:', {
+          top: rect.top,
+          triggerPoint: triggerPoint,
+          shouldAnimate: rect.top < triggerPoint && rect.bottom > 0
+        });
+        
+        if (rect.top < triggerPoint && rect.bottom > 0) {
+          circleBackground.classList.add('active');
+          // contactSection.classList.add('contact-bg-active'); // Disabled for now
+          console.log('🎨 Contact animation activated!');
+        } else {
+          circleBackground.classList.remove('active');
+          // contactSection.classList.remove('contact-bg-active'); // Disabled for now
+        }
+      }
+      
+      // Check on scroll
+      window.addEventListener('scroll', checkContactAnimation, { passive: true });
+      
+      // Check immediately
+      checkContactAnimation();
+      
+      console.log('✅ Contact animation fallback initialized');
+    } else {
+      console.error('❌ Contact elements not found for animation');
+    }
+  }, 500); // Wait for DOM to be fully ready
+});
+*/

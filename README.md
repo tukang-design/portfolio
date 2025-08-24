@@ -1,4 +1,38 @@
-# Welcome to your Lovable project
+# Tukang Design Portfolio Website
+
+## Project Overview
+Professional portfolio website for Tukang Design, a Malaysia-based design agency with 13+ years of experience specializing in brand identity, UI/UX design, and web development.
+
+## Key Features
+- **Responsive Design**: Mobile-first approach with optimized layouts
+- **WhatsApp Integration**: Click-to-chat functionality across all sections
+- **Enhanced Portfolio Page**: Dedicated showcase with filtering and modal views
+- **Performance Optimized**: GPU acceleration, lazy loading, and smooth animations
+- **SEO Optimized**: Complete meta tags, social sharing, and analytics integration
+
+## Pages Structure
+
+### Main Page (`index.html`)
+- Hero section with clear value proposition
+- Services showcase with WhatsApp CTAs
+- Portfolio preview with 4 featured projects
+- Contact form with EmailJS integration
+- Footer with comprehensive links
+
+### Portfolio Page (`portfolio.html`)
+- Enhanced portfolio showcase with filtering
+- Modal system for detailed project views
+- Interactive project grid with hover effects
+- Category filtering (UI/UX, Branding, Combo)
+- Performance optimized image loading
+
+## Technical Implementation
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+- **Styling**: Custom CSS with CSS Variables and Grid/Flexbox
+- **Icons**: Custom SVG icons and Font Awesome
+- **Analytics**: Google Analytics 4 with enhanced tracking
+- **Email**: EmailJS for contact form functionality
+- **Performance**: Service Worker, lazy loading, optimized animations
 
 ## Project info
 

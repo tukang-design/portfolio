@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Tukang Design | Creative Brand & Web Design Projects</title>
+    <meta name="description" content="Explore our portfolio of successful brand design and website development projects. See how we transform businesses with powerful design solutions.">
+    <meta name="keywords" content="portfolio, brand design projects, website development, case studies, design showcase, tukang design">
+    <meta name="author" content="Tukang Design">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://tukang.design/portfolio.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tukang.design/portfolio.html">
+    <meta property="og:title" content="Portfolio - Tukang Design | Creative Brand & Web Design Projects">
+    <meta property="og:description" content="Explore our portfolio of successful brand design and website development projects. See how we transform businesses with powerful design solutions.">
+    <meta property="og:image" content="https://tukang.design/tukang-design-social-share.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Tukang Design">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tukang.design/portfolio.html">
+    <meta property="twitter:title" content="Portfolio - Tukang Design | Creative Brand & Web Design Projects">
+    <meta property="twitter:description" content="Explore our portfolio of successful brand design and website development projects. See how we transform businesses with powerful design solutions.">
+    <meta property="twitter:image" content="https://tukang.design/tukang-design-social-share.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="MY">
+    <meta name="geo.placename" content="Malaysia">
+    <meta name="language" content="English">
+    
+    <!-- Performance optimizations -->
+    <meta name="theme-color" content="#1a4d3a">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Jakarta Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4B77H7TRLM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4B77H7TRLM');
+    </script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/portfolio-page.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-link">
+                    <img src="logo.png" alt="Tukang Design Logo" width="32" height="32" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                    Tukang Design
+                </a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="portfolio.html" class="nav-link active">Portfolio</a>
+                <a href="index.html#problems" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Portfolio Hero Section -->
+    <section class="portfolio-hero">
+        <div class="container">
+            <div class="portfolio-hero-content">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <span>Portfolio</span>
+                </div>
+                <h1 class="portfolio-hero-title">
+                    Our Creative <span class="highlight">Portfolio</span>
+                </h1>
+                <p class="portfolio-hero-description">
+                    Explore our collection of successful brand transformations and website developments. 
+                    Each project represents a unique challenge solved through creative design and strategic thinking.
+                </p>
+                <div class="portfolio-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">13+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Filter Section -->
+    <section class="portfolio-filter-section">
+        <!-- Filters are now handled by the directory sidebar -->
+    </section>
+
+    <!-- Enhanced Portfolio List View -->
+    <section class="portfolio-showcase">
+        <div class="container">
+            <div class="portfolio-layout">
+                <!-- Left Directory/Categories -->
+                <div class="portfolio-directory">
+                    <h3 class="directory-title">Project Categories</h3>
+                    <ul class="category-list">
+                        <li><button class="category-btn active" data-filter="all">All Projects <span class="count">(4)</span></button></li>
+                        <li><button class="category-btn" data-filter="branding">Brand Design <span class="count">(2)</span></button></li>
+                        <li><button class="category-btn" data-filter="ui-ux">UI/UX Design <span class="count">(1)</span></button></li>
+                        <li><button class="category-btn" data-filter="combo">Complete Solutions <span class="count">(1)</span></button></li>
+                    </ul>
+                </div>
+
+                <!-- Right Portfolio List -->
+                <div class="portfolio-list" id="portfolioList">
+                    <!-- Portfolio items will be loaded here -->
+                <!-- Right Portfolio List -->
+                <div class="portfolio-list" id="portfolioList">
+                    <!-- Portfolio items will be loaded here -->
+                    <div class="portfolio-card" data-category="ui-ux" data-project-id="1" onclick="openFullscreenView('1')">
+                        <div class="card-image">
+                            <img src="src/assets/portfolio-kapitani-new.png" alt="Kapitani: Farm Management App" loading="lazy">
+                            <div class="image-overlay">
+                                <span class="view-project">View Details</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="project-category">UI Revamp & Design System Library</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <h3 class="project-title">Kapitani: Farm Management App</h3>
+                            <p class="project-description">A complete UI and UX revamp of the Kapitani farm management app. The project included a new design system and integrated a myGAP pre-application process, streamlining farm task activities for an enhanced user experience.</p>
+                            <div class="project-tags">
+                                <span class="tag">UI/UX Revamp</span>
+                                <span class="tag">Design System</span>
+                                <span class="tag">App Design</span>
+                            </div>
+                            <button class="explore-btn" onclick="event.stopPropagation(); openFullscreenView('1')">
+                                <span>Explore Project</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-card" data-category="branding" data-project-id="2" onclick="openFullscreenView('2')">
+                        <div class="card-image">
+                            <img src="src/assets/portfolio-raisuri-new.png" alt="Raisuri: Junior Football Academy Club" loading="lazy">
+                            <div class="image-overlay">
+                                <span class="view-project">View Details</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="project-category">Logo Redesign & Brand Expansion</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <h3 class="project-title">Raisuri: Junior Football Academy Club</h3>
+                            <p class="project-description">A total reimagining of the Raisuri Junior Football Academy's brand. The new logo is a modern, flexible, and scalable design that ensures brand consistency across all touchpoints, giving the club a young and passionate feel.</p>
+                            <div class="project-tags">
+                                <span class="tag">Logo Redesign</span>
+                                <span class="tag">Brand Identity</span>
+                                <span class="tag">Sports Branding</span>
+                            </div>
+                            <button class="explore-btn" onclick="event.stopPropagation(); openFullscreenView('2')">
+                                <span>Explore Project</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-card" data-category="combo" data-project-id="3" onclick="openFullscreenView('3')">
+                        <div class="card-image">
+                            <img src="src/assets/portfolio-sag-new.png" alt="SAG Logistics: Local Logistics Solution Provider" loading="lazy">
+                            <div class="image-overlay">
+                                <span class="view-project">View Details</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="project-category">Corporate Brand Refresh & Web Development</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <h3 class="project-title">SAG Logistics: Local Logistics Solution Provider</h3>
+                            <p class="project-description">A brand identity refresh for SA Global Logistics, starting with a new company profile design. This visual style was then expanded to a new website, ensuring a modern and cohesive brand presence across all digital platforms.</p>
+                            <div class="project-tags">
+                                <span class="tag">Brand Refresh</span>
+                                <span class="tag">Web Development</span>
+                                <span class="tag">Corporate Design</span>
+                            </div>
+                            <button class="explore-btn" onclick="event.stopPropagation(); openFullscreenView('3')">
+                                <span>Explore Project</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-card" data-category="branding" data-project-id="4" onclick="openFullscreenView('4')">
+                        <div class="card-image">
+                            <img src="src/assets/portfolio-youthopia-new.png" alt="Youthopia: Junior Edu-tech Company" loading="lazy">
+                            <div class="image-overlay">
+                                <span class="view-project">View Details</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="project-category">Logo Design & Brand Identity</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <h3 class="project-title">Youthopia: Junior Edu-tech Company</h3>
+                            <p class="project-description">Designed a comprehensive brand identity and logo for a new edu-tech platform for kids. The visual identity targets both young students and their parents, with a design that is both playful and trustworthy.</p>
+                            <div class="project-tags">
+                                <span class="tag">Logo Design</span>
+                                <span class="tag">Brand Identity</span>
+                                <span class="tag">Educational Branding</span>
+                            </div>
+                            <button class="explore-btn" onclick="event.stopPropagation(); openFullscreenView('4')">
+                                <span>Explore Project</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full-Screen Interactive Portfolio View -->
+    <section class="portfolio-fullscreen" id="portfolioFullscreen" style="display: none;">
+        <div class="fullscreen-container">
+            <!-- Instagram-style Progress Bars -->
+            <div class="story-progress-container">
+                <div class="progress-segment clickable" data-segment="0" onclick="jumpToImage(0)">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-segment clickable" data-segment="1" onclick="jumpToImage(1)">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-segment clickable" data-segment="2" onclick="jumpToImage(2)">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-segment clickable" data-segment="3" onclick="jumpToImage(3)">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-segment clickable" data-segment="4" onclick="jumpToImage(4)">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>            <!-- Background Image -->
+            <div class="fullscreen-background" id="fullscreenBg">
+                <img src="src/assets/portfolio-kapitani-new.png" alt="Current Portfolio Project" id="fullscreenImage">
+                <div class="background-overlay"></div>
+            </div>
+
+            <!-- Top Left: Project Type Badge -->
+                        <!-- Project Type Badge (Top Left) -->
+            <div class="project-type-badge" id="projectTypeBadge">
+                UI Revamp & Design System Library
+            </div>
+
+            <!-- Close Button (Top Right, aligned with badge) -->
+            <button class="fullscreen-close" onclick="exitFullscreenView()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Bottom Left: Project Details Panel (Collapsible) -->
+            <div class="project-details-panel" id="projectDetailsPanel">
+                <!-- Collapsed State -->
+                <div class="details-collapsed" id="detailsCollapsed">
+                    <h2 class="fullscreen-title" id="projectTitle">Kapitani: Farm Management App</h2>
+                    <button class="info-toggle-btn" onclick="toggleProjectDetails()" aria-label="Show project details">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4"></path>
+                            <path d="M12 8h.01"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Expanded State -->
+                <div class="details-expanded" id="detailsExpanded" style="display: none;">
+                    <div class="project-main-info">
+                        <div class="title-with-toggle">
+                            <h2 class="fullscreen-title" id="projectTitleExpanded">Kapitani: Farm Management App</h2>
+                            <button class="info-toggle-btn" onclick="toggleProjectDetails()" aria-label="Hide project details">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 6L6 18"></path>
+                                    <path d="M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="fullscreen-description" id="projectDescription">A complete UI and UX revamp of the Kapitani farm management app. The project included a new design system and integrated a myGAP pre-application process, streamlining farm task activities for an enhanced user experience.</p>
+                        
+                        <!-- Client & Timeline Info -->
+                        <div class="project-meta-info">
+                            <div class="meta-item" data-client>
+                                <span class="meta-label">Client</span>
+                                <span class="meta-value" id="clientName">Kapitani Technologies</span>
+                            </div>
+                            <div class="meta-item" data-timeline>
+                                <span class="meta-label">Timeline</span>
+                                <span class="meta-value" id="projectTimeline">4 Months</span>
+                            </div>
+                            <div class="meta-item" data-year>
+                                <span class="meta-label">Year</span>
+                                <span class="meta-value" id="projectYear">2024</span>
+                            </div>
+                        </div>
+                        
+                        <div class="services-list" id="servicesList">
+                            <div class="services-label">Services Included:</div>
+                            <div class="services-tags">
+                                <span class="service-tag">UI/UX Revamp</span>
+                                <span class="service-tag">Design System Library</span>
+                                <span class="service-tag">App UI Design</span>
+                                <span class="service-tag">UX Research</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            <!-- Close Button (Far Top Left) -->
+            <button class="fullscreen-close" onclick="exitFullscreenView()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Call-to-Action Overlay (appears after story completes) -->
+                        <!-- Story CTA Overlay -->
+            <div class="story-cta-overlay" id="storyCTA" style="display: none;" onclick="dismissCTAAndResume()">
+                <div class="cta-content" onclick="event.stopPropagation()">
+                    <h3>Interested in this project?</h3>
+                    <p>Let's discuss how I can help bring your vision to life.</p>
+                    <div class="cta-buttons">
+                        <button class="cta-button primary">Get In Touch</button>
+                        <button class="cta-button secondary" onclick="dismissCTAAndResume()">Back to Portfolio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Detail Modal -->
+    <div id="portfolioModal" class="portfolio-modal">
+        <div class="portfolio-modal-content">
+            <button class="portfolio-modal-close" id="portfolioModalClose">&times;</button>
+            <div class="portfolio-modal-body" id="portfolioModalBody">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="portfolio-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Create Something Amazing?</h2>
+                <p>Let's discuss your project and see how we can bring your vision to life.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-cta" onclick="openContactForm()">Start Your Project</button>
+                    <a href="https://wa.me/60174062788?text=Hi%20Tukang%20Design,%20I'd%20like%20to%20discuss%20a%20new%20project." 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="btn btn-whatsapp">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.488" fill="currentColor"/>
+                        </svg>
+                        Let's Chat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-brand">
+                        <img src="logo.png" alt="Tukang Design Logo" width="100" height="100" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                        <span><h4>Crafting powerful brand assets that work.</h4></span>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-nav-columns">
+                        <div class="footer-column">
+                            <h4>Services</h4>
+                            <ul class="footer-links">
+                                <li><a href="index.html#services">Brand Foundation</a></li>
+                                <li><a href="index.html#services">Website Development</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Company</h4>
+                            <ul class="footer-links">
+                                <li><a href="portfolio.html">Portfolio</a></li>
+                                <li><a href="index.html#problems">Contact</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Get In Touch</h4>
+                            <ul class="footer-links">
+                                <li><a href="mailto:studio@tukang.design">studio@tukang.design</a></li>
+                                <li><a href="https://wa.me/60174062788?text=Hi%20Tukang%20Design,%20I'm%20interested%20in%20your%20services." 
+                                       target="_blank" 
+                                       rel="noopener noreferrer"
+                                       class="whatsapp-footer">WhatsApp: +60 17-406 2788</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tukang Design. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/60174062788?text=Hi%20Tukang%20Design,%20I'm%20interested%20in%20your%20services." 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="whatsapp-btn"
+           title="Chat with us on WhatsApp">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.488" fill="currentColor"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Contact Modal (reuse from main page) -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Get Your Free Quote</h3>
+                <button class="modal-close" onclick="closeContactModal()">&times;</button>
+            </div>
+            <form class="modal-form" id="modalContactForm" name="contact">
+                <input type="hidden" name="form-name" value="contact" />
+                <div style="display: none;">
+                    <label>Don't fill this out: <input name="bot-field" /></label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modalName">Name *</label>
+                    <input type="text" id="modalName" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modalEmail">Email *</label>
+                    <input type="email" id="modalEmail" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modalService">Service *</label>
+                    <select id="modalService" name="service" required>
+                        <option value="">Select a service...</option>
+                        <option value="Brand Foundation Package">Brand Foundation Package</option>
+                        <option value="Go-Live Website Package">Go-Live Website Package</option>
+                        <option value="Branding & Website (Combo)">Branding & Website (Combo)</option>
+                        <option value="Other Inquiry">Other Inquiry</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modalMessage">Project Details *</label>
+                    <textarea id="modalMessage" name="message" rows="4" required placeholder="Tell us about your project requirements..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-cta btn-full">Send Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">✓</div>
+            <h3>Inquiry Sent Successfully!</h3>
+            <p>Your inquiry has been automatically sent to <strong>studio@tukang.design</strong>.</p>
+            <p class="text-small">We'll review your project details and get back to you within 24 hours.</p>
+            <button class="btn btn-cta" onclick="closeSuccessModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/portfolio-page.js"></script>
+</body>
+</html>
