@@ -194,14 +194,9 @@ function initMagneticDots() {
         const cols = Math.ceil(rect.width / dotSpacing);
         const rows = Math.ceil(rect.height / dotSpacing);
         
-        // Limit maximum dots for performance
-        const maxDots = 500;
+        // Limit maximum dots for performance, but don't skip creation entirely
+        const maxDots = 800; // Increased limit
         const totalDots = cols * rows;
-        
-        if (totalDots > maxDots) {
-          console.log(`Limiting dots to ${maxDots} for performance (would be ${totalDots})`);
-          return; // Skip creating dots if too many
-        }
         
         console.log(`Creating ${cols}x${rows} = ${totalDots} dots for ${sectionName}`);
         
@@ -211,9 +206,9 @@ function initMagneticDots() {
             dot.className = `${sectionName}-dot magnetic-dot`;
             
             // Use different colors for different sections
-            let dotColor = 'rgba(79, 209, 197, 0.1)'; // Default hero color - very subtle opacity
+            let dotColor = 'rgba(79, 209, 197, 0.3)'; // Default hero color - more visible
             if (sectionName === 'contact') {
-              dotColor = 'rgba(34, 197, 94, 0.1)'; // Brighter green for contact - very subtle opacity
+              dotColor = 'rgba(34, 197, 94, 0.3)'; // Brighter green for contact - more visible
             }
             
             dot.style.cssText = `
@@ -282,11 +277,11 @@ function initMagneticDots() {
             dot.currentY = dot.originalY + Math.sin(angle) * repulsionDistance;
             
             // Simpler opacity change
-            dot.element.style.opacity = 0.3;
+            dot.element.style.opacity = 0.6;
           } else {
             dot.currentX = dot.originalX;
             dot.currentY = dot.originalY;
-            dot.element.style.opacity = 0.1;
+            dot.element.style.opacity = 0.3;
           }
           
           const translateX = dot.currentX - dot.originalX;
@@ -304,7 +299,7 @@ function initMagneticDots() {
           dot.currentX = dot.originalX;
           dot.currentY = dot.originalY;
           dot.element.style.transform = 'translate3d(0px, 0px, 0)'; // Use translate3d
-          dot.element.style.opacity = 0.1; // Reset to very subtle opacity
+          dot.element.style.opacity = 0.3; // Reset to visible opacity
         }
       });
     }
