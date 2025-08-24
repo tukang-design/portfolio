@@ -394,47 +394,211 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="work" class="portfolio">
+    <section id="work" class="portfolio-showcase">
         <div class="container">
-            <div class="portfolio-content">
-                <!-- Main Portfolio Display -->
-                <div class="portfolio-main-display">
-                    <div class="portfolio-image-container">
-                        <!-- Main Project Image -->
-                        <div class="portfolio-main-image" id="portfolioMainImage">
-                            <img src="" alt="Portfolio project showcase" class="portfolio-showcase-image" id="mainPortfolioImage" loading="lazy" decoding="async">
+            <div class="portfolio-header-section">
+                <h2 class="section-title">Our Work</h2>
+                <p class="section-subtitle">Explore our collection of successful brand transformations and website developments.</p>
+            </div>
+            
+            <!-- Portfolio List -->
+            <div class="portfolio-list" id="portfolioList">
+                <!-- Portfolio Card 1: Kapitani -->
+                <div class="portfolio-card" data-category="ui-ux" data-project-id="1" onclick="openFullscreenView('1')">
+                    <div class="card-image">
+                        <img src="src/assets/portfolio-kapitani-new.png" alt="Kapitani: Farm Management App" loading="lazy">
+                        <div class="image-overlay">
+                            <span class="view-project">View Details</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="project-category">UI Revamp & Design System Library</span>
+                            <span class="project-year">2024</span>
+                        </div>
+                        <h3 class="project-title">Kapitani: Farm Management App</h3>
+                        <p class="project-description">A complete UI and UX revamp of the Kapitani farm management app. The project included a new design system and integrated a myGAP pre-application process, streamlining farm task activities for an enhanced user experience.</p>
+                        <div class="project-tags">
+                            <span class="tag">UI/UX Revamp</span>
+                            <span class="tag">Design System</span>
+                            <span class="tag">App Design</span>
+                        </div>
+                        <button class="explore-btn" onclick="event.stopPropagation(); openFullscreenView('1')">
+                            <span>Explore Project</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 2: Raisuri -->
+                <div class="portfolio-card" data-category="branding" data-project-id="2" onclick="openFullscreenView('2')">
+                    <div class="card-image">
+                        <img src="src/assets/portfolio-raisuri-new.png" alt="Raisuri: Junior Football Academy Club" loading="lazy">
+                        <div class="image-overlay">
+                            <span class="view-project">View Details</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="project-category">Logo Redesign & Brand Expansion</span>
+                            <span class="project-year">2024</span>
+                        </div>
+                        <h3 class="project-title">Raisuri: Junior Football Academy Club</h3>
+                        <p class="project-description">A total reimagining of the Raisuri Junior Football Academy's brand. The new logo is a modern, flexible, and scalable design that ensures brand consistency across all touchpoints, giving the club a young and passionate feel.</p>
+                        <div class="project-tags">
+                            <span class="tag">Logo Redesign</span>
+                            <span class="tag">Brand Identity</span>
+                            <span class="tag">Sports Branding</span>
+                        </div>
+                        <button class="explore-btn" onclick="event.stopPropagation(); openFullscreenView('2')">
+                            <span>Explore Project</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 3: SAG Logistics -->
+                <div class="portfolio-card" data-category="combo" data-project-id="3" onclick="openFullscreenView('3')">
+                    <div class="card-image">
+                        <img src="src/assets/portfolio-sag-new.png" alt="SAG Logistics: Local Logistics Solution Provider" loading="lazy">
+                        <div class="image-overlay">
+                            <span class="view-project">View Details</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="project-category">Corporate Brand Refresh & Web Development</span>
+                            <span class="project-year">2024</span>
+                        </div>
+                        <h3 class="project-title">SAG Logistics: Local Logistics Solution Provider</h3>
+                        <p class="project-description">A brand identity refresh for SA Global Logistics, starting with a new company profile design. This visual style was then expanded to a new website, ensuring a modern and cohesive brand presence across all digital platforms.</p>
+                        <div class="project-tags">
+                            <span class="tag">Brand Refresh</span>
+                            <span class="tag">Web Development</span>
+                            <span class="tag">Corporate Design</span>
+                        </div>
+                        <button class="explore-btn" onclick="event.stopPropagation(); openFullscreenView('3')">
+                            <span>Explore Project</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 4: Youthopia -->
+                <div class="portfolio-card" data-category="branding" data-project-id="4" onclick="openFullscreenView('4')">
+                    <div class="card-image">
+                        <img src="src/assets/portfolio-youthopia-new.png" alt="Youthopia: Junior Edu-tech Company" loading="lazy">
+                        <div class="image-overlay">
+                            <span class="view-project">View Details</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="project-category">Logo Design & Brand Identity</span>
+                            <span class="project-year">2024</span>
+                        </div>
+                        <h3 class="project-title">Youthopia: Junior Edu-tech Company</h3>
+                        <p class="project-description">Designed a comprehensive brand identity and logo for a new edu-tech platform for kids. The visual identity targets both young students and their parents, with a design that is both playful and trustworthy.</p>
+                        <div class="project-tags">
+                            <span class="tag">Logo Design</span>
+                            <span class="tag">Brand Identity</span>
+                            <span class="tag">Educational Branding</span>
+                        </div>
+                        <button class="explore-btn" onclick="event.stopPropagation(); openFullscreenView('4')">
+                            <span>Explore Project</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Fullscreen Modal -->
+    <section class="portfolio-fullscreen" id="portfolioFullscreen">
+        <div class="fullscreen-container">
+            <!-- Main Background Images (Story-like) -->
+            <div class="fullscreen-background" id="fullscreenBackground">
+                <!-- Images will be loaded dynamically -->
+            </div>
+
+            <!-- Close Button (Far Top Left) -->
+            <button class="fullscreen-close" onclick="exitFullscreenView()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Bottom Left: Project Details Panel (Collapsible) -->
+            <div class="project-details-panel" id="projectDetailsPanel">
+                <!-- Collapsed State -->
+                <div class="details-collapsed" id="detailsCollapsed">
+                    <h2 class="fullscreen-title" id="projectTitle">Project Title</h2>
+                    <button class="info-toggle-btn" onclick="toggleProjectDetails()" aria-label="Show project details">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4"></path>
+                            <path d="M12 8h.01"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Expanded State -->
+                <div class="details-expanded" id="detailsExpanded" style="display: none;">
+                    <div class="project-main-info">
+                        <div class="title-with-toggle">
+                            <h2 class="fullscreen-title" id="projectTitleExpanded">Project Title</h2>
+                            <button class="info-toggle-btn" onclick="toggleProjectDetails()" aria-label="Hide project details">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 6L6 18"></path>
+                                    <path d="M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="fullscreen-description" id="projectDescription">Project description will be loaded here.</p>
+                        
+                        <!-- Client & Timeline Info -->
+                        <div class="project-meta-info">
+                            <div class="meta-item" data-client>
+                                <span class="meta-label">Client</span>
+                                <span class="meta-value" id="clientName">Client Name</span>
+                            </div>
+                            <div class="meta-item" data-timeline>
+                                <span class="meta-label">Timeline</span>
+                                <span class="meta-value" id="projectTimeline">Timeline</span>
+                            </div>
+                            <div class="meta-item" data-year>
+                                <span class="meta-label">Year</span>
+                                <span class="meta-value" id="projectYear">2024</span>
+                            </div>
                         </div>
                         
-                        <!-- Thumbnail Gallery with Auto-Transition (Below Image) -->
-                        <div class="portfolio-thumbnails-auto" id="portfolioThumbnails">
-                            <!-- Thumbnails will be loaded here -->
+                        <div class="services-list" id="servicesList">
+                            <div class="services-label">Services Included:</div>
+                            <div class="services-tags">
+                                <!-- Service tags will be loaded dynamically -->
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Project Information and Navigation -->
-                <div class="portfolio-info-panel">
-                    <div class="portfolio-header">
-                        <h3 class="">Our Work</h3>
-                        <div class="portfolio-navigation">
-                            <button class="nav-control prev-btn" id="prevProject">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="15,18 9,12 15,6"></polyline>
-                                </svg>
-                            </button>
-                            <button class="nav-control next-btn" id="nextProject">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="9,18 15,12 9,6"></polyline>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-project-info" id="portfolioProjectInfo">
-                        <!-- Project information will be loaded here -->
-                        <div class="portfolio-loading">
-                            <p>Loading portfolio...</p>
-                        </div>
+            </div>
+
+            <!-- Story CTA Overlay -->
+            <div class="story-cta-overlay" id="storyCTA" style="display: none;" onclick="dismissCTAAndResume()">
+                <div class="cta-content" onclick="event.stopPropagation()">
+                    <h3>Interested in this project?</h3>
+                    <p>Let's discuss how I can help bring your vision to life.</p>
+                    <div class="cta-buttons">
+                        <button class="cta-button primary" onclick="openContactForm()">Get In Touch</button>
+                        <button class="cta-button secondary" onclick="dismissCTAAndResume()">Back to Portfolio</button>
                     </div>
                 </div>
             </div>

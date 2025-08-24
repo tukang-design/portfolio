@@ -777,3 +777,232 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 500); // Wait for DOM to be fully ready
 });
 */
+
+// ===== PORTFOLIO FULLSCREEN FUNCTIONALITY =====
+
+// Enhanced portfolio data
+const enhancedPortfolioData = [
+  {
+    id: '1',
+    title: 'Kapitani: Farm Management App',
+    category: 'UI Revamp & Design System Library',
+    description: 'A complete UI and UX revamp of the Kapitani farm management app. The project included a new design system and integrated a myGAP pre-application process, streamlining farm task activities for an enhanced user experience.',
+    images: [
+      'src/assets/portfolio-kapitani-new.png',
+      'src/assets/portfolio-kapitani.jpg',
+      'src/assets/portfolio-kapitani-2.png',
+      'src/assets/portfolio-kapitani-3.jpg',
+      'src/assets/portfolio-kapitani-4.png'
+    ],
+    services: ['UI/UX Revamp', 'Design System Library', 'App UI Design', 'UX Research'],
+    timeline: '4 Months',
+    client: 'Kapitani Technologies',
+    year: '2024'
+  },
+  {
+    id: '2',
+    title: 'Raisuri: Junior Football Academy Club',
+    category: 'Logo Redesign & Brand Expansion',
+    description: 'A total reimagining of the Raisuri Junior Football Academy\'s brand. The new logo is a modern, flexible, and scalable design that ensures brand consistency across all touchpoints, giving the club a young and passionate feel.',
+    images: [
+      'src/assets/portfolio-raisuri-new.png',
+      'src/assets/portfolio-raisuri.jpg',
+      'src/assets/portfolio-raisuri-2.png',
+      'src/assets/portfolio-raisuri-3.jpg',
+      'src/assets/portfolio-raisuri-4.png'
+    ],
+    services: ['Logo Redesign', 'Brand Identity', 'Kit Design', 'Visual Identity'],
+    timeline: '2 Months',
+    client: 'Raisuri Football Academy',
+    year: '2024'
+  },
+  {
+    id: '3',
+    title: 'SAG Logistics: Local Logistics Solution Provider',
+    category: 'Corporate Brand Refresh & Web Development',
+    description: 'A brand identity refresh for SA Global Logistics, starting with a new company profile design. This visual style was then expanded to a new website, ensuring a modern and cohesive brand presence across all digital platforms.',
+    images: [
+      'src/assets/portfolio-sag-new.png',
+      'src/assets/portfolio-sag-logistics.jpg',
+      'src/assets/portfolio-sag-2.png',
+      'src/assets/portfolio-sag-3.jpg',
+      'src/assets/portfolio-sag-4.png'
+    ],
+    services: ['Brand Identity Refresh', 'Corporate Profile Design', 'Web Design', 'Web Development'],
+    timeline: '1 Month',
+    client: 'SA Global Logistics',
+    year: '2024'
+  },
+  {
+    id: '4',
+    title: 'Youthopia: Junior Edu-tech Company',
+    category: 'Logo Design & Brand Identity',
+    description: 'Designed a comprehensive brand identity and logo for a new edu-tech platform for kids. The visual identity targets both young students and their parents, with a design that is both playful and trustworthy.',
+    images: [
+      'src/assets/portfolio-youthopia-new.png',
+      'src/assets/portfolio-youthopia.jpg',
+      'src/assets/portfolio-youthopia-2.png',
+      'src/assets/portfolio-youthopia-3.jpg',
+      'src/assets/portfolio-youthopia-4.png'
+    ],
+    services: ['Logo Design', 'Brand Identity', 'Brand Guidelines', 'Educational Branding'],
+    timeline: '3 Months',
+    client: 'Youthopia Education',
+    year: '2024'
+  }
+];
+
+// Global variables for portfolio functionality
+let currentStoryImages = [];
+let storyCurrentImageIndex = 0;
+let storyInterval = null;
+let isStoryProgressing = false;
+
+// Portfolio fullscreen functions
+window.openFullscreenView = function(projectId) {
+  console.log('🚀 Opening fullscreen view for project:', projectId);
+  
+  try {
+    const fullscreenSection = document.getElementById('portfolioFullscreen');
+    if (!fullscreenSection) {
+      console.error('❌ Fullscreen section not found!');
+      return;
+    }
+    
+    // Find project data
+    const project = enhancedPortfolioData[projectId - 1];
+    if (!project) {
+      console.error('❌ Project not found!');
+      return;
+    }
+    
+    console.log('✅ Project found:', project.title);
+    
+    // Show fullscreen section
+    fullscreenSection.style.display = 'block';
+    fullscreenSection.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Update content
+    const updateElement = (selector, content) => {
+      const el = fullscreenSection.querySelector(selector);
+      if (el) el.textContent = content;
+    };
+    
+    // Update all title elements
+    updateElement('#projectTitle', project.title);
+    updateElement('#projectTitleExpanded', project.title);
+    updateElement('#projectDescription', project.description);
+    updateElement('#clientName', project.client);
+    updateElement('#projectTimeline', project.timeline);
+    updateElement('#projectYear', project.year);
+    
+    // Update services
+    const servicesEl = fullscreenSection.querySelector('.services-tags');
+    if (servicesEl) {
+      servicesEl.innerHTML = project.services.map(service => 
+        `<span class="service-tag">${service}</span>`
+      ).join('');
+    }
+    
+    // Set background images and start slideshow
+    const backgroundEl = fullscreenSection.querySelector('#fullscreenBackground');
+    if (backgroundEl && project.images && project.images.length > 0) {
+      // Clear existing images
+      backgroundEl.innerHTML = '';
+      
+      // Add all images
+      project.images.forEach((imageSrc, index) => {
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.style.opacity = index === 0 ? '1' : '0';
+        img.style.position = 'absolute';
+        img.style.top = '0';
+        img.style.left = '0';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.transition = 'opacity 1s ease-in-out';
+        backgroundEl.appendChild(img);
+      });
+      
+      // Initialize slideshow
+      currentStoryImages = project.images;
+      storyCurrentImageIndex = 0;
+      startImageSlideshow();
+    }
+    
+    console.log('✅ Fullscreen view opened successfully');
+    
+  } catch (error) {
+    console.error('❌ Error opening fullscreen view:', error);
+  }
+};
+
+window.exitFullscreenView = function() {
+  console.log('🚪 Closing fullscreen view');
+  
+  // Stop slideshow
+  if (storyInterval) {
+    clearInterval(storyInterval);
+    storyInterval = null;
+  }
+  
+  const fullscreenSection = document.getElementById('portfolioFullscreen');
+  if (fullscreenSection) {
+    fullscreenSection.style.display = 'none';
+    fullscreenSection.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+};
+
+window.toggleProjectDetails = function() {
+  const collapsed = document.getElementById('detailsCollapsed');
+  const expanded = document.getElementById('detailsExpanded');
+  
+  if (collapsed && expanded) {
+    if (collapsed.style.display === 'none') {
+      collapsed.style.display = 'flex';
+      expanded.style.display = 'none';
+    } else {
+      collapsed.style.display = 'none';
+      expanded.style.display = 'block';
+    }
+  }
+};
+
+window.dismissCTAAndResume = function() {
+  const overlay = document.getElementById('storyCTA');
+  if (overlay) {
+    overlay.style.display = 'none';
+  }
+};
+
+function startImageSlideshow() {
+  if (!currentStoryImages || currentStoryImages.length <= 1) return;
+  
+  // Clear any existing interval
+  if (storyInterval) {
+    clearInterval(storyInterval);
+  }
+  
+  storyInterval = setInterval(() => {
+    const backgroundEl = document.getElementById('fullscreenBackground');
+    if (!backgroundEl) return;
+    
+    const images = backgroundEl.querySelectorAll('img');
+    if (images.length === 0) return;
+    
+    // Fade out current image
+    images[storyCurrentImageIndex].style.opacity = '0';
+    
+    // Move to next image
+    storyCurrentImageIndex = (storyCurrentImageIndex + 1) % images.length;
+    
+    // Fade in next image
+    setTimeout(() => {
+      images[storyCurrentImageIndex].style.opacity = '1';
+    }, 500);
+    
+  }, 3000); // Change image every 3 seconds
+}
