@@ -203,9 +203,9 @@ function initMagneticDots() {
             dot.className = `${sectionName}-dot magnetic-dot`;
             
             // Use different colors for different sections
-            let dotColor = 'rgba(79, 209, 197, 0.2)'; // Default hero color - subtle opacity
+            let dotColor = 'rgba(79, 209, 197, 0.1)'; // Default hero color - very subtle opacity
             if (sectionName === 'contact') {
-              dotColor = 'rgba(34, 197, 94, 0.2)'; // Brighter green for contact - subtle opacity
+              dotColor = 'rgba(34, 197, 94, 0.1)'; // Brighter green for contact - very subtle opacity
             }
             
             dot.style.cssText = `

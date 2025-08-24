@@ -350,12 +350,16 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   text-decoration: none;
   border-radius: var(--radius);
-  padding: 1rem 1.5rem;
-  transition: var(--transition-smooth);
+  padding: 14px 24px;
+  height: 48px;
+  min-height: 48px;
+  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
   font-size: 1rem;
   font-family: inherit;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-hero {
@@ -368,8 +372,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-hero:hover {
-  background: hsl(var(--primary));
-  transform: translateY(-1.5px) scale(1.03);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-bold);
 }
 
 .btn-cta {
@@ -397,7 +401,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-cta:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-bold);
 }
 
@@ -427,7 +431,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-bold);
 }
 
@@ -457,7 +461,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-bold);
 }
 
@@ -487,7 +491,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-neon:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-bold);
 }
 
@@ -517,7 +521,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-hero:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-bold);
 }
 
@@ -2863,7 +2867,9 @@ section.contact .contact-content,
   background: #25D366;
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 14px 24px;
+  height: 48px;
+  min-height: 48px;
   border-radius: var(--radius);
   text-decoration: none;
   font-weight: 600;
@@ -2873,6 +2879,8 @@ section.contact .contact-content,
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-whatsapp:hover {
