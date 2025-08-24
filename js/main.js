@@ -47,6 +47,12 @@ function getDOMElements() {
 
 let elements = {};
 
+// Global portfolio variables
+let currentPortfolio = null;
+let storyCurrentImageIndex = 0;
+let storyInterval = null;
+let currentStoryImages = [];
+
 // Initialize all functionality
 initializeWhenReady(() => {
   elements = getDOMElements();
@@ -511,7 +517,7 @@ function openContactForm(service = '') {
   }
   
   // Track portfolio CTA interaction if opened from portfolio
-  if (currentPortfolio) {
+  if (currentPortfolio && typeof trackPortfolioEvent === 'function') {
     trackPortfolioEvent('portfolio_cta_contact', {
       project_id: currentPortfolio.id,
       project_title: currentPortfolio.title,
@@ -571,6 +577,7 @@ function closeSuccessModal() {
 // Modal initialization
 function initModals() {
   const { contactModal, successModal } = elements;
+  const portfolioFullscreen = document.getElementById('portfolioFullscreen');
   
   // Close modals when clicking outside
   if (contactModal) {
@@ -589,11 +596,27 @@ function initModals() {
     });
   }
 
+  // Close portfolio fullscreen when clicking outside (on the fullscreen background)
+  if (portfolioFullscreen) {
+    portfolioFullscreen.addEventListener('click', (e) => {
+      // Only close if clicking directly on the fullscreen section (not on child elements)
+      if (e.target === portfolioFullscreen) {
+        exitFullscreenView();
+      }
+    });
+  }
+
   // Close modals with Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeContactModal();
       closeSuccessModal();
+      
+      // Also close portfolio fullscreen
+      const portfolioFullscreenEl = document.getElementById('portfolioFullscreen');
+      if (portfolioFullscreenEl && portfolioFullscreenEl.style.display !== 'none') {
+        exitFullscreenView();
+      }
     }
   });
 }
@@ -867,37 +890,34 @@ const enhancedPortfolioData = [
   }
 ];
 
-// Global variables for portfolio functionality
-let currentStoryImages = [];
-let storyCurrentImageIndex = 0;
-let storyInterval = null;
-let isStoryProgressing = false;
-
-// Portfolio filtering variables
+// Portfolio filtering variables (kept for analytics)
 let currentFilter = 'all';
 
-// Portfolio filtering functions
-function filterPortfolio(category) {
-    currentFilter = category;
+// Render portfolio cards (simplified without filtering)
+function renderPortfolioCards() {
+    const portfolioList = document.getElementById('portfolioList');
+    if (!portfolioList) return;
     
-    // Update active button
-    document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.querySelector(`[data-filter="${category}"]`).classList.add('active');
+    const cardsHTML = enhancedPortfolioData.map(project => `
+        <div class="portfolio-card" 
+             data-category="${project.filterCategory}" 
+             data-project-id="${project.id}"
+             data-project-title="${project.title}"
+             onclick="openFullscreenView('${project.id}')">
+            <div class="card-image">
+                <img src="${project.images[0]}" alt="${project.title}" loading="lazy">
+                <div class="image-overlay">
+                    <h3 class="card-title">${project.title}</h3>
+                    <p class="card-category">${project.category}</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
     
-    // Filter portfolio cards
-    const cards = document.querySelectorAll('.portfolio-card');
-    cards.forEach(card => {
-        const cardCategory = card.dataset.category;
-        if (category === 'all' || cardCategory === category) {
-            card.style.display = 'flex';
-            card.classList.remove('hidden');
-        } else {
-            card.style.display = 'none';
-            card.classList.add('hidden');
-        }
-    });
+    portfolioList.innerHTML = cardsHTML;
+    
+    // Add analytics tracking to cards
+    initPortfolioAnalytics();
 }
 
 // Initialize category event listeners
@@ -1005,33 +1025,6 @@ function initPortfolioAnalytics() {
     });
 }
 
-// Render portfolio cards
-function renderPortfolioCards() {
-    const portfolioList = document.getElementById('portfolioList');
-    if (!portfolioList) return;
-    
-    const cardsHTML = enhancedPortfolioData.map(project => `
-        <div class="portfolio-card" 
-             data-category="${project.filterCategory}" 
-             data-project-id="${project.id}"
-             data-project-title="${project.title}"
-             onclick="openFullscreenView('${project.id}')">
-            <div class="card-image">
-                <img src="${project.images[0]}" alt="${project.title}" loading="lazy">
-                <div class="image-overlay">
-                    <h3 class="card-title">${project.title}</h3>
-                    <p class="card-category">${project.category}</p>
-                </div>
-            </div>
-        </div>
-    `).join('');
-    
-    portfolioList.innerHTML = cardsHTML;
-    
-    // Add analytics tracking to cards
-    initPortfolioAnalytics();
-}
-
 // Portfolio fullscreen functions
 window.openFullscreenView = function(projectId) {
   console.log('🚀 Opening fullscreen view for project:', projectId);
@@ -1092,31 +1085,52 @@ window.openFullscreenView = function(projectId) {
       ).join('');
     }
     
-    // Set background images and start slideshow
+    // Update category badge
+    const categoryBadge = fullscreenSection.querySelector('#projectTypeBadge');
+    if (categoryBadge) {
+      categoryBadge.textContent = project.category;
+    }
+    
+    // Initialize progress indicators
+    initProgressIndicators(project.images.length);
+    
+    // Set background images with synchronized loading
     const backgroundEl = fullscreenSection.querySelector('#fullscreenBackground');
     if (backgroundEl && project.images && project.images.length > 0) {
       // Clear existing images
       backgroundEl.innerHTML = '';
       
-      // Add all images
-      project.images.forEach((imageSrc, index) => {
-        const img = document.createElement('img');
-        img.src = imageSrc;
-        img.style.opacity = index === 0 ? '1' : '0';
-        img.style.position = 'absolute';
-        img.style.top = '0';
-        img.style.left = '0';
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'cover';
-        img.style.transition = 'opacity 1s ease-in-out';
-        backgroundEl.appendChild(img);
+      // Preload all images for synchronized loading
+      const imagePromises = project.images.map((imageSrc, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve({ img, index });
+          img.onerror = reject;
+          img.src = imageSrc;
+        });
       });
       
-      // Initialize slideshow
-      currentStoryImages = project.images;
-      storyCurrentImageIndex = 0;
-      startImageSlideshow();
+      // Wait for all images to load, then add them to DOM
+      Promise.all(imagePromises).then(loadedImages => {
+        loadedImages.forEach(({ img, index }) => {
+          img.style.opacity = index === 0 ? '1' : '0';
+          img.style.position = 'absolute';
+          img.style.top = '0';
+          img.style.left = '0';
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'cover';
+          img.style.transition = 'opacity 0.8s ease-in-out';
+          backgroundEl.appendChild(img);
+        });
+        
+        // Initialize slideshow after all images are loaded
+        currentStoryImages = project.images;
+        storyCurrentImageIndex = 0;
+        startImageSlideshow();
+      }).catch(error => {
+        console.error('❌ Error loading portfolio images:', error);
+      });
     }
     
     console.log('✅ Fullscreen view opened successfully');
@@ -1125,6 +1139,117 @@ window.openFullscreenView = function(projectId) {
     console.error('❌ Error opening fullscreen view:', error);
   }
 };
+
+// Initialize Instagram-style progress bars
+function initProgressIndicators(totalImages) {
+  console.log('🔄 Initializing progress indicators for', totalImages, 'images');
+  const progressContainer = document.getElementById('storyProgressContainer');
+  
+  if (progressContainer) {
+    console.log('✅ Progress container found:', progressContainer);
+    // Create progress segments
+    progressContainer.innerHTML = '';
+    for (let i = 0; i < totalImages; i++) {
+      const segment = document.createElement('div');
+      segment.className = 'progress-segment clickable';
+      segment.setAttribute('data-segment', i);
+      segment.onclick = () => jumpToImage(i);
+      
+      const fill = document.createElement('div');
+      fill.className = 'progress-fill';
+      segment.appendChild(fill);
+      
+      progressContainer.appendChild(segment);
+    }
+    console.log('✅ Created', totalImages, 'progress segments');
+  } else {
+    console.error('❌ Progress container not found!');
+  }
+  
+  // Set initial progress
+  updateProgress(0, totalImages);
+}
+
+// Update progress bars
+function updateProgress(currentIndex, totalImages) {
+  console.log('📊 Updating progress:', currentIndex, 'of', totalImages);
+  const segments = document.querySelectorAll('.progress-segment');
+  console.log('📊 Found', segments.length, 'progress segments');
+  
+  segments.forEach((segment, index) => {
+    const fill = segment.querySelector('.progress-fill');
+    if (fill) {
+      if (index < currentIndex) {
+        // Completed segments
+        fill.style.width = '100%';
+        console.log('✅ Segment', index, 'completed');
+      } else if (index === currentIndex) {
+        // Current segment - will be animated by slideshow
+        fill.style.width = '0%';
+        console.log('🔄 Segment', index, 'current');
+      } else {
+        // Future segments
+        fill.style.width = '0%';
+        console.log('⏳ Segment', index, 'pending');
+      }
+    } else {
+      console.error('❌ No progress-fill found in segment', index);
+    }
+  });
+}
+
+// Jump to specific image (from progress bar click)
+function jumpToImage(index) {
+  if (!currentStoryImages || index < 0 || index >= currentStoryImages.length) return;
+  
+  const backgroundEl = document.getElementById('fullscreenBackground');
+  if (!backgroundEl) return;
+  
+  const images = backgroundEl.querySelectorAll('img');
+  if (images.length === 0) return;
+  
+  // Clear any existing interval
+  if (storyInterval) {
+    clearInterval(storyInterval);
+    storyInterval = null;
+  }
+  
+  // Hide current image
+  images[storyCurrentImageIndex].style.opacity = '0';
+  
+  // Show target image
+  storyCurrentImageIndex = index;
+  images[storyCurrentImageIndex].style.opacity = '1';
+  
+  // Update progress
+  updateProgress(storyCurrentImageIndex, currentStoryImages.length);
+  
+  // Start progress fill animation for current segment
+  const currentSegment = document.querySelector(`[data-segment="${storyCurrentImageIndex}"]`);
+  if (currentSegment) {
+    const fill = currentSegment.querySelector('.progress-fill');
+    fill.style.width = '0%';
+    fill.style.transition = 'width 3s linear';
+    
+    setTimeout(() => {
+      fill.style.width = '100%';
+    }, 100);
+  }
+  
+  // Track manual navigation
+  trackPortfolioEvent('portfolio_slideshow_manual', {
+    project_id: currentPortfolio?.id || 'unknown',
+    project_title: currentPortfolio?.title || 'unknown',
+    image_index: storyCurrentImageIndex,
+    total_images: images.length,
+    action: 'manual_navigate'
+  });
+  
+  // Resume slideshow from this point
+  setTimeout(() => {
+    startImageSlideshow();
+  }, 3000);
+}
 
 window.exitFullscreenView = function() {
   console.log('🚪 Closing fullscreen view');
@@ -1192,20 +1317,43 @@ window.dismissCTAAndResume = function() {
     overlay.style.display = 'none';
     
     // Track CTA dismissal
-    trackPortfolioEvent('portfolio_cta_dismiss', {
-      project_id: currentPortfolio?.id || 'unknown',
-      project_title: currentPortfolio?.title || 'unknown',
-      action: 'dismiss_cta'
-    });
+    if (currentPortfolio) {
+      trackPortfolioEvent('portfolio_cta_dismiss', {
+        project_id: currentPortfolio.id || 'unknown',
+        project_title: currentPortfolio.title || 'unknown',
+        action: 'dismiss_cta_overlay'
+      });
+    }
+    
+    // Close the fullscreen view and return to portfolio
+    exitFullscreenView();
   }
 };
 
 function startImageSlideshow() {
   if (!currentStoryImages || currentStoryImages.length <= 1) return;
   
+  console.log('🎬 Starting image slideshow with', currentStoryImages.length, 'images');
+  
   // Clear any existing interval
   if (storyInterval) {
     clearInterval(storyInterval);
+  }
+  
+  // Start progress fill animation for current segment
+  const currentSegment = document.querySelector(`[data-segment="${storyCurrentImageIndex}"]`);
+  if (currentSegment) {
+    const fill = currentSegment.querySelector('.progress-fill');
+    console.log('🔄 Starting progress animation for segment', storyCurrentImageIndex);
+    fill.style.width = '0%';
+    fill.style.transition = 'width 3s linear';
+    
+    setTimeout(() => {
+      fill.style.width = '100%';
+      console.log('✅ Progress animation started for segment', storyCurrentImageIndex);
+    }, 100);
+  } else {
+    console.error('❌ Current segment not found:', storyCurrentImageIndex);
   }
   
   storyInterval = setInterval(() => {
@@ -1215,11 +1363,38 @@ function startImageSlideshow() {
     const images = backgroundEl.querySelectorAll('img');
     if (images.length === 0) return;
     
+    // Check if we're at the last image
+    const isLastImage = storyCurrentImageIndex === images.length - 1;
+    
     // Fade out current image
     images[storyCurrentImageIndex].style.opacity = '0';
     
+    if (isLastImage) {
+      // Show CTA overlay after last image
+      clearInterval(storyInterval);
+      storyInterval = null;
+      
+      setTimeout(() => {
+        const ctaOverlay = document.getElementById('storyCTA');
+        if (ctaOverlay) {
+          ctaOverlay.style.display = 'flex';
+          
+          // Track CTA shown
+          trackPortfolioEvent('portfolio_cta_shown', {
+            project_id: currentPortfolio?.id || 'unknown',
+            project_title: currentPortfolio?.title || 'unknown',
+            action: 'show_cta_overlay'
+          });
+        }
+      }, 800);
+      return;
+    }
+    
     // Move to next image
     storyCurrentImageIndex = (storyCurrentImageIndex + 1) % images.length;
+    
+    // Update progress
+    updateProgress(storyCurrentImageIndex, images.length);
     
     // Track automatic slideshow progression
     trackPortfolioEvent('portfolio_slideshow_auto', {
@@ -1233,7 +1408,19 @@ function startImageSlideshow() {
     // Fade in next image
     setTimeout(() => {
       images[storyCurrentImageIndex].style.opacity = '1';
-    }, 500);
+    }, 400);
+    
+    // Start progress fill animation for new current segment
+    const nextSegment = document.querySelector(`[data-segment="${storyCurrentImageIndex}"]`);
+    if (nextSegment) {
+      const fill = nextSegment.querySelector('.progress-fill');
+      fill.style.width = '0%';
+      fill.style.transition = 'width 3s linear';
+      
+      setTimeout(() => {
+        fill.style.width = '100%';
+      }, 500);
+    }
     
   }, 3000); // Change image every 3 seconds
 }
@@ -1242,9 +1429,6 @@ function startImageSlideshow() {
 document.addEventListener('DOMContentLoaded', () => {
     // Render portfolio cards
     renderPortfolioCards();
-    
-    // Initialize category filters
-    initCategoryFilters();
     
     console.log('✅ Portfolio functionality initialized');
 });

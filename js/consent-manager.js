@@ -49,11 +49,12 @@ class ConsentManager {
                 bottom: 0;
                 left: 0;
                 right: 0;
-                background: hsl(var(--background));
+                background: #1a1a1a;
                 border-top: 2px solid hsl(var(--neon-green));
                 padding: 1rem;
                 z-index: 10000;
-                box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+                box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+                backdrop-filter: blur(10px);
             }
             
             .consent-content {
@@ -74,10 +75,11 @@ class ConsentManager {
                 color: hsl(var(--neon-green));
                 margin-bottom: 0.5rem;
                 font-size: 1.1rem;
+                font-weight: 600;
             }
             
             .consent-text p {
-                color: hsl(var(--muted-foreground));
+                color: #e5e5e5;
                 font-size: 0.9rem;
                 line-height: 1.4;
                 margin: 0;
@@ -94,19 +96,46 @@ class ConsentManager {
                 font-size: 0.9rem;
                 padding: 0.5rem 1rem;
                 white-space: nowrap;
+                border-radius: 0.5rem;
+                border: 1px solid transparent;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+            
+            .btn-cta {
+                background: hsl(var(--neon-green));
+                color: #000000;
+                font-weight: 600;
+            }
+            
+            .btn-cta:hover {
+                background: hsl(var(--neon-green));
+                opacity: 0.9;
+                transform: translateY(-1px);
+            }
+            
+            .btn-secondary {
+                background: #333333;
+                color: #ffffff;
+                border-color: #404040;
+            }
+            
+            .btn-secondary:hover {
+                background: #404040;
+                border-color: #606060;
             }
             
             .btn-link {
                 background: none;
                 border: none;
-                color: hsl(var(--muted-foreground));
+                color: #9ca3af;
                 text-decoration: underline;
                 cursor: pointer;
                 font-size: 0.8rem;
             }
             
             .btn-link:hover {
-                color: hsl(var(--foreground));
+                color: #ffffff;
             }
             
             @media (max-width: 768px) {
