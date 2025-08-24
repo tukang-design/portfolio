@@ -401,8 +401,20 @@
                 <p class="section-subtitle">Explore our collection of successful brand transformations and website developments.</p>
             </div>
             
-            <!-- Portfolio List -->
-            <div class="portfolio-list" id="portfolioList">
+            <div class="portfolio-layout">
+                <!-- Left Directory/Categories -->
+                <div class="portfolio-directory">
+                    <h3 class="directory-title">Project Categories</h3>
+                    <ul class="category-list">
+                        <li><button class="category-btn active" data-filter="all">All Projects <span class="count">(4)</span></button></li>
+                        <li><button class="category-btn" data-filter="ui-ux">UI/UX Design <span class="count">(1)</span></button></li>
+                        <li><button class="category-btn" data-filter="branding">Brand Design <span class="count">(2)</span></button></li>
+                        <li><button class="category-btn" data-filter="combo">Complete Solutions <span class="count">(1)</span></button></li>
+                    </ul>
+                </div>
+
+                <!-- Right Portfolio List -->
+                <div class="portfolio-list" id="portfolioList">
                 <!-- Portfolio Card 1: Kapitani -->
                 <div class="portfolio-card" data-category="ui-ux" data-project-id="1" onclick="openFullscreenView('1')">
                     <div class="card-image">

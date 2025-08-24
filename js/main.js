@@ -510,6 +510,17 @@ function openContactForm(service = '') {
     analytics.trackContactFormEvent('form_opened');
   }
   
+  // Track portfolio CTA interaction if opened from portfolio
+  if (currentPortfolio) {
+    trackPortfolioEvent('portfolio_cta_contact', {
+      project_id: currentPortfolio.id,
+      project_title: currentPortfolio.title,
+      category: currentPortfolio.filterCategory,
+      action: 'open_contact_form',
+      source: 'portfolio_fullscreen'
+    });
+  }
+  
   if (contactModal) {
     const modalService = document.getElementById('modalService');
     const modalTitle = document.getElementById('modalTitle');
@@ -786,6 +797,7 @@ const enhancedPortfolioData = [
     id: '1',
     title: 'Kapitani: Farm Management App',
     category: 'UI Revamp & Design System Library',
+    filterCategory: 'ui-ux',
     description: 'A complete UI and UX revamp of the Kapitani farm management app. The project included a new design system and integrated a myGAP pre-application process, streamlining farm task activities for an enhanced user experience.',
     images: [
       'src/assets/portfolio-kapitani-new.png',
@@ -803,6 +815,7 @@ const enhancedPortfolioData = [
     id: '2',
     title: 'Raisuri: Junior Football Academy Club',
     category: 'Logo Redesign & Brand Expansion',
+    filterCategory: 'branding',
     description: 'A total reimagining of the Raisuri Junior Football Academy\'s brand. The new logo is a modern, flexible, and scalable design that ensures brand consistency across all touchpoints, giving the club a young and passionate feel.',
     images: [
       'src/assets/portfolio-raisuri-new.png',
@@ -820,6 +833,7 @@ const enhancedPortfolioData = [
     id: '3',
     title: 'SAG Logistics: Local Logistics Solution Provider',
     category: 'Corporate Brand Refresh & Web Development',
+    filterCategory: 'combo',
     description: 'A brand identity refresh for SA Global Logistics, starting with a new company profile design. This visual style was then expanded to a new website, ensuring a modern and cohesive brand presence across all digital platforms.',
     images: [
       'src/assets/portfolio-sag-new.png',
@@ -837,6 +851,7 @@ const enhancedPortfolioData = [
     id: '4',
     title: 'Youthopia: Junior Edu-tech Company',
     category: 'Logo Design & Brand Identity',
+    filterCategory: 'branding',
     description: 'Designed a comprehensive brand identity and logo for a new edu-tech platform for kids. The visual identity targets both young students and their parents, with a design that is both playful and trustworthy.',
     images: [
       'src/assets/portfolio-youthopia-new.png',
@@ -858,6 +873,165 @@ let storyCurrentImageIndex = 0;
 let storyInterval = null;
 let isStoryProgressing = false;
 
+// Portfolio filtering variables
+let currentFilter = 'all';
+
+// Portfolio filtering functions
+function filterPortfolio(category) {
+    currentFilter = category;
+    
+    // Update active button
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-filter="${category}"]`).classList.add('active');
+    
+    // Filter portfolio cards
+    const cards = document.querySelectorAll('.portfolio-card');
+    cards.forEach(card => {
+        const cardCategory = card.dataset.category;
+        if (category === 'all' || cardCategory === category) {
+            card.style.display = 'flex';
+            card.classList.remove('hidden');
+        } else {
+            card.style.display = 'none';
+            card.classList.add('hidden');
+        }
+    });
+}
+
+// Initialize category event listeners
+function initCategoryFilters() {
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+            
+            // Track category filter usage
+            trackPortfolioEvent('category_filter', {
+                category: filter,
+                previous_category: currentFilter
+            });
+            
+            filterPortfolio(filter);
+        });
+    });
+}
+
+// Portfolio Analytics Tracking
+function trackPortfolioEvent(action, properties = {}) {
+    const eventData = {
+        event: 'portfolio_interaction',
+        action: action,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        user_agent: navigator.userAgent,
+        ...properties
+    };
+    
+    console.log('📊 Portfolio Analytics:', eventData);
+    
+    // Send to Google Analytics if available
+    if (typeof gtag !== 'undefined') {
+        gtag('event', action, {
+            event_category: 'portfolio',
+            event_label: properties.project_title || properties.category || 'general',
+            custom_parameters: properties
+        });
+    }
+    
+    // Send to any other analytics services here
+    // Example: Facebook Pixel, Mixpanel, etc.
+}
+
+// Initialize portfolio card analytics
+function initPortfolioAnalytics() {
+    // Track card views using Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                const card = entry.target;
+                const projectId = card.dataset.projectId;
+                const projectTitle = card.dataset.projectTitle;
+                
+                if (!card.dataset.viewed) {
+                    card.dataset.viewed = 'true';
+                    trackPortfolioEvent('portfolio_card_view', {
+                        project_id: projectId,
+                        project_title: projectTitle,
+                        category: card.dataset.category,
+                        view_duration: 'initial'
+                    });
+                }
+            }
+        });
+    }, {
+        threshold: 0.5,
+        rootMargin: '0px 0px -10% 0px'
+    });
+    
+    // Observe all portfolio cards
+    document.querySelectorAll('.portfolio-card').forEach(card => {
+        observer.observe(card);
+        
+        // Track hover interactions
+        let hoverStartTime;
+        card.addEventListener('mouseenter', () => {
+            hoverStartTime = Date.now();
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            if (hoverStartTime) {
+                const hoverDuration = Date.now() - hoverStartTime;
+                if (hoverDuration > 1000) { // Only track if hovered for more than 1 second
+                    trackPortfolioEvent('portfolio_card_hover', {
+                        project_id: card.dataset.projectId,
+                        project_title: card.dataset.projectTitle,
+                        category: card.dataset.category,
+                        hover_duration: hoverDuration
+                    });
+                }
+            }
+        });
+        
+        // Track clicks
+        card.addEventListener('click', () => {
+            trackPortfolioEvent('portfolio_card_click', {
+                project_id: card.dataset.projectId,
+                project_title: card.dataset.projectTitle,
+                category: card.dataset.category,
+                action: 'open_fullscreen'
+            });
+        });
+    });
+}
+
+// Render portfolio cards
+function renderPortfolioCards() {
+    const portfolioList = document.getElementById('portfolioList');
+    if (!portfolioList) return;
+    
+    const cardsHTML = enhancedPortfolioData.map(project => `
+        <div class="portfolio-card" 
+             data-category="${project.filterCategory}" 
+             data-project-id="${project.id}"
+             data-project-title="${project.title}"
+             onclick="openFullscreenView('${project.id}')">
+            <div class="card-image">
+                <img src="${project.images[0]}" alt="${project.title}" loading="lazy">
+                <div class="image-overlay">
+                    <h3 class="card-title">${project.title}</h3>
+                    <p class="card-category">${project.category}</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    portfolioList.innerHTML = cardsHTML;
+    
+    // Add analytics tracking to cards
+    initPortfolioAnalytics();
+}
+
 // Portfolio fullscreen functions
 window.openFullscreenView = function(projectId) {
   console.log('🚀 Opening fullscreen view for project:', projectId);
@@ -876,7 +1050,20 @@ window.openFullscreenView = function(projectId) {
       return;
     }
     
+    // Track fullscreen view opening
+    trackPortfolioEvent('portfolio_fullscreen_open', {
+      project_id: projectId,
+      project_title: project.title,
+      category: project.filterCategory,
+      client: project.client,
+      services: project.services.join(', ')
+    });
+    
     console.log('✅ Project found:', project.title);
+    
+    // Store current portfolio and timing for analytics
+    currentPortfolio = project;
+    window.fullscreenOpenTime = Date.now();
     
     // Show fullscreen section
     fullscreenSection.style.display = 'block';
@@ -942,6 +1129,18 @@ window.openFullscreenView = function(projectId) {
 window.exitFullscreenView = function() {
   console.log('🚪 Closing fullscreen view');
   
+  // Track fullscreen view closing with engagement time
+  if (window.fullscreenOpenTime) {
+    const engagementTime = Date.now() - window.fullscreenOpenTime;
+    trackPortfolioEvent('portfolio_fullscreen_close', {
+      project_id: currentPortfolio?.id || 'unknown',
+      project_title: currentPortfolio?.title || 'unknown',
+      engagement_time: engagementTime,
+      engagement_duration: Math.round(engagementTime / 1000) + 's'
+    });
+    window.fullscreenOpenTime = null;
+  }
+  
   // Stop slideshow
   if (storyInterval) {
     clearInterval(storyInterval);
@@ -961,12 +1160,28 @@ window.toggleProjectDetails = function() {
   const expanded = document.getElementById('detailsExpanded');
   
   if (collapsed && expanded) {
-    if (collapsed.style.display === 'none') {
-      collapsed.style.display = 'flex';
-      expanded.style.display = 'none';
-    } else {
+    const isExpanding = collapsed.style.display !== 'none';
+    
+    if (isExpanding) {
       collapsed.style.display = 'none';
       expanded.style.display = 'block';
+      
+      // Track project details expansion
+      trackPortfolioEvent('portfolio_details_expand', {
+        project_id: currentPortfolio?.id || 'unknown',
+        project_title: currentPortfolio?.title || 'unknown',
+        action: 'expand_details'
+      });
+    } else {
+      collapsed.style.display = 'flex';
+      expanded.style.display = 'none';
+      
+      // Track project details collapse
+      trackPortfolioEvent('portfolio_details_collapse', {
+        project_id: currentPortfolio?.id || 'unknown',
+        project_title: currentPortfolio?.title || 'unknown',
+        action: 'collapse_details'
+      });
     }
   }
 };
@@ -975,6 +1190,13 @@ window.dismissCTAAndResume = function() {
   const overlay = document.getElementById('storyCTA');
   if (overlay) {
     overlay.style.display = 'none';
+    
+    // Track CTA dismissal
+    trackPortfolioEvent('portfolio_cta_dismiss', {
+      project_id: currentPortfolio?.id || 'unknown',
+      project_title: currentPortfolio?.title || 'unknown',
+      action: 'dismiss_cta'
+    });
   }
 };
 
@@ -999,6 +1221,15 @@ function startImageSlideshow() {
     // Move to next image
     storyCurrentImageIndex = (storyCurrentImageIndex + 1) % images.length;
     
+    // Track automatic slideshow progression
+    trackPortfolioEvent('portfolio_slideshow_auto', {
+      project_id: currentPortfolio?.id || 'unknown',
+      project_title: currentPortfolio?.title || 'unknown',
+      image_index: storyCurrentImageIndex,
+      total_images: images.length,
+      action: 'auto_slide'
+    });
+    
     // Fade in next image
     setTimeout(() => {
       images[storyCurrentImageIndex].style.opacity = '1';
@@ -1006,3 +1237,14 @@ function startImageSlideshow() {
     
   }, 3000); // Change image every 3 seconds
 }
+
+// Initialize portfolio functionality
+document.addEventListener('DOMContentLoaded', () => {
+    // Render portfolio cards
+    renderPortfolioCards();
+    
+    // Initialize category filters
+    initCategoryFilters();
+    
+    console.log('✅ Portfolio functionality initialized');
+});
