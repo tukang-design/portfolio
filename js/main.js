@@ -1430,5 +1430,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render portfolio cards
     renderPortfolioCards();
     
+    // Check for success parameter (fallback if thank-you page not available)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      // Show success modal if thank-you page redirect failed
+      const successModal = document.getElementById('successModal');
+      if (successModal) {
+        successModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Track the conversion for analytics
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_submit', {
+            event_category: 'Contact',
+            event_label: 'Contact Form Submission',
+            value: 1
+          });
+        }
+        
+        // Clear the URL parameter
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
+    
     console.log('✅ Portfolio functionality initialized');
 });
