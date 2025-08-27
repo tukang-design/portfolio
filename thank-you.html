@@ -10,6 +10,8 @@
     <!-- Force deployment update -->
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico">
+    <link rel="apple-touch-icon" href="logo.png">
     
     <!-- Jakarta Sans Font with optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,33 +22,65 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/responsive.css">
     
-    <!-- Google Analytics -->
+    <!-- Google Analytics with Enhanced Configuration -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4B77H7TRLM"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-4B77H7TRLM', {
-            page_title: 'Thank You Page',
-            page_location: window.location.href
+        
+        // Configure default consent state
+        gtag('consent', 'default', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'personalization_storage': 'granted',
+            'functionality_storage': 'granted',
+            'security_storage': 'granted'
         });
         
-        // Track conversion event
+        gtag('js', new Date());
+        
+        // Enhanced GA4 configuration
+        gtag('config', 'G-4B77H7TRLM', {
+            'anonymize_ip': false,
+            'allow_google_signals': true,
+            'allow_ad_personalization_signals': true,
+            'enhanced_conversions': true,
+            'link_attribution': true,
+            'page_title': 'Thank You - Form Submission Success',
+            'page_location': window.location.href,
+            'custom_map': {
+                'custom_parameter_1': 'thank_you_page'
+            }
+        });
+        
+        // Track conversion event with proper configuration
         gtag('event', 'conversion', {
             'send_to': 'G-4B77H7TRLM',
             'event_category': 'Contact',
-            'event_label': 'Form Submission Success',
-            'value': 1
+            'event_label': 'Contact Form Submission',
+            'value': 1,
+            'currency': 'USD'
         });
         
-        // Track page view as lead conversion
+        // Track lead generation
         gtag('event', 'generate_lead', {
             'event_category': 'Contact',
-            'event_label': 'Thank You Page View',
+            'event_label': 'Thank You Page Visit',
+            'method': 'contact_form',
             'value': 1
         });
         
-        console.log('📊 Thank you page analytics tracked - conversion & lead generation');
+        // Track custom form completion event
+        gtag('event', 'form_submit', {
+            'event_category': 'Contact',
+            'event_label': 'Contact Form Completed',
+            'form_name': 'contact_inquiry',
+            'value': 1
+        });
+        
+        console.log('📊 Thank you page analytics tracked - conversion, lead generation, and form completion');
     </script>
 </head>
 <body class="thank-you-page">
