@@ -352,8 +352,8 @@ function showSuccessModal() {
   console.log('✅ Form submitted successfully, redirecting to thank you page');
   
   // Redirect to thank you page for better analytics tracking
-  // Redirect to thank you page, with fallback to success parameter
-  window.location.href = 'thank-you.html';
+  // Use HTTPS to avoid caching issues
+  window.location.href = 'https://tukang.design/thank-you.html';
 }
 
 function showErrorMessage(message) {
