@@ -81,7 +81,7 @@ async function handleFormSubmit(e) {
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
-      service: formData.get('service'),
+      service: formData.get('service_selection'),
       message: formData.get('message')
     };
     
@@ -335,39 +335,25 @@ ${data.name}`;
 
 // UI Helper Functions
 function showSuccessModal() {
-  const successModal = document.getElementById('successModal');
-  if (successModal) {
-    successModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Track successful submission for analytics
-    if (typeof analytics !== 'undefined') {
-      analytics.trackContactFormEvent('form_submitted_success');
-    }
-    
-    // Track conversion event if available
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'conversion', {
-        'send_to': 'G-4B77H7TRLM',
-        'event_category': 'Contact',
-        'event_label': 'Form Submission Success'
-      });
-    }
-    
-    console.log('✅ Thank you page displayed successfully');
+  // Track successful submission for analytics before redirect
+  if (typeof analytics !== 'undefined') {
+    analytics.trackContactFormEvent('form_submitted_success');
   }
-}
-
-function closeSuccessModal() {
-  const successModal = document.getElementById('successModal');
-  if (successModal) {
-    successModal.classList.remove('active');
-    document.body.style.overflow = '';
+  
+  // Track conversion event if available
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'conversion', {
+      'send_to': 'G-4B77H7TRLM',
+      'event_category': 'Contact',
+      'event_label': 'Form Submission Success'
+    });
   }
+  
+  console.log('✅ Form submitted successfully, redirecting to thank you page');
+  
+  // Redirect to thank you page for better analytics tracking
+  window.location.href = 'thank-you.html';
 }
-
-// Make closeSuccessModal globally available
-window.closeSuccessModal = closeSuccessModal;
 
 function showErrorMessage(message) {
   // Create and show error toast
