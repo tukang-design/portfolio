@@ -339,8 +339,35 @@ function showSuccessModal() {
   if (successModal) {
     successModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Track successful submission for analytics
+    if (typeof analytics !== 'undefined') {
+      analytics.trackContactFormEvent('form_submitted_success');
+    }
+    
+    // Track conversion event if available
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'conversion', {
+        'send_to': 'G-4B77H7TRLM',
+        'event_category': 'Contact',
+        'event_label': 'Form Submission Success'
+      });
+    }
+    
+    console.log('✅ Thank you page displayed successfully');
   }
 }
+
+function closeSuccessModal() {
+  const successModal = document.getElementById('successModal');
+  if (successModal) {
+    successModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Make closeSuccessModal globally available
+window.closeSuccessModal = closeSuccessModal;
 
 function showErrorMessage(message) {
   // Create and show error toast
