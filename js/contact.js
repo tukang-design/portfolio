@@ -351,9 +351,13 @@ function showSuccessModal() {
   
   console.log('✅ Form submitted successfully, redirecting to thank you page');
   
-  // Redirect to thank you page for better analytics tracking
-  // Use HTTPS to avoid caching issues
-  window.location.href = 'https://tukang.design/thank-you.html';
+  // Redirect to thank you page with cache-busting and robust redirect method
+  const timestamp = new Date().getTime();
+  const cacheBust = Math.random().toString(36).substring(7);
+  const thankYouUrl = `https://tukang.design/thank-you.html?v=${timestamp}&cb=${cacheBust}`;
+  
+  // Use replace to avoid back button issues and force fresh load
+  window.location.replace(thankYouUrl);
 }
 
 function showErrorMessage(message) {
