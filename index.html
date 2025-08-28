@@ -69,17 +69,30 @@
       
       gtag('js', new Date());
       
-      // Enhanced GA4 configuration with behavioral and advertising signals
+      // Simplified GA4 configuration
       gtag('config', 'G-4B77H7TRLM', {
-        'anonymize_ip': false,
-        'allow_google_signals': true,
-        'allow_ad_personalization_signals': true,
-        'enhanced_conversions': true,
-        'link_attribution': true,
-        'custom_map': {
-          'custom_parameter_1': 'interaction_type'
-        }
+        'send_page_view': true,
+        'debug_mode': true
       });
+      
+      // Wait for GA to load then send test event
+      setTimeout(function() {
+        console.log('📊 Sending test page view event...');
+        gtag('event', 'page_view', {
+          'page_title': 'Home Page Test',
+          'page_location': window.location.href,
+          'debug_mode': true
+        });
+        
+        gtag('event', 'test_connection', {
+          'event_category': 'Debug',
+          'event_label': 'GA Connection Test',
+          'value': 1
+        });
+        
+        console.log('📊 GA4 test events sent with tracking ID: G-4B77H7TRLM');
+        console.log('📊 dataLayer contents:', window.dataLayer);
+      }, 2000);
     </script>
     
     <!-- CSS -->
@@ -699,7 +712,7 @@
                            target="_blank" 
                            rel="noopener noreferrer"
                            class="btn btn-whatsapp"
-                           onclick="gtag('event', 'click', { 'event_category': 'WhatsApp', 'event_label': 'Contact CTA', 'value': 1 });">
+                           onclick="return trackWhatsAppClick(this, 'Contact CTA');">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.488" fill="currentColor"/>
                             </svg>
@@ -750,7 +763,7 @@
                                        target="_blank" 
                                        rel="noopener noreferrer"
                                        class="whatsapp-footer"
-                                       onclick="gtag('event', 'click', { 'event_category': 'WhatsApp', 'event_label': 'Footer Link', 'value': 1 });">Chat on WhatsApp</a></li>
+                                       onclick="return trackWhatsAppClick(this, 'Footer Link');">Chat on WhatsApp</a></li>
                             </ul>
                         </div>
                     </div>
@@ -970,8 +983,13 @@
     <!-- WhatsApp Click Tracking Function -->
     <script>
         function trackWhatsAppClick(element, label) {
+            console.log('🎯 trackWhatsAppClick called with label:', label);
+            console.log('🎯 Element:', element);
+            console.log('🎯 Element href:', element.href);
+            
             // Send tracking event to Google Analytics
             if (typeof gtag !== 'undefined') {
+                console.log('📊 Sending GA event...');
                 gtag('event', 'click', {
                     'event_category': 'WhatsApp',
                     'event_label': label,
@@ -979,10 +997,13 @@
                     'transport_type': 'beacon' // Ensures event is sent even if user navigates away
                 });
                 console.log('📊 WhatsApp click tracked:', label);
+            } else {
+                console.error('❌ gtag function not available');
             }
             
             // Small delay to ensure tracking is sent before navigation
             setTimeout(function() {
+                console.log('⏰ Opening WhatsApp URL:', element.href);
                 // Get the href and open in new tab
                 const url = element.href;
                 window.open(url, '_blank');
@@ -994,18 +1015,79 @@
         
         // Debug function to test tracking
         function testWhatsAppTracking() {
+            console.log('🔍 Testing GA setup...');
+            console.log('dataLayer:', window.dataLayer);
+            console.log('gtag function:', typeof gtag);
+            
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'test_whatsapp_click', {
                     'event_category': 'WhatsApp',
                     'event_label': 'Debug Test',
-                    'value': 1
+                    'value': 1,
+                    'transport_type': 'beacon'
                 });
-                console.log('📊 Test WhatsApp tracking sent');
-                alert('Test tracking sent! Check GA Real-Time Events.');
+                console.log('📊 Test WhatsApp tracking sent to GA');
+                alert('Test tracking sent! Check GA Real-Time Events in 60 seconds.');
             } else {
                 console.error('❌ gtag not found');
                 alert('Error: Google Analytics not loaded');
             }
+        }
+        
+        // Enhanced debug function for GA status
+        function checkGAStatus() {
+            console.log('🔍 GA Status Check:');
+            console.log('- dataLayer exists:', !!window.dataLayer);
+            console.log('- dataLayer length:', window.dataLayer ? window.dataLayer.length : 0);
+            console.log('- gtag function:', typeof gtag);
+            console.log('- GA script loaded:', !!document.querySelector('script[src*="googletagmanager.com"]'));
+            
+            if (window.dataLayer && window.dataLayer.length > 0) {
+                console.log('- dataLayer contents:', window.dataLayer);
+            }
+            
+            // Check network requests
+            console.log('🌐 Checking GA network requests...');
+            if (window.performance && window.performance.getEntriesByType) {
+                const resourceEntries = window.performance.getEntriesByType('resource');
+                const gaRequests = resourceEntries.filter(entry => 
+                    entry.name.includes('google-analytics.com') || 
+                    entry.name.includes('googletagmanager.com') ||
+                    entry.name.includes('analytics.google.com')
+                );
+                console.log('- GA network requests found:', gaRequests.length);
+                gaRequests.forEach(req => console.log('  →', req.name));
+            }
+        }
+        
+        // Test if GA is working with a manual event
+        function forceGATest() {
+            console.log('🚀 Force sending GA test event...');
+            
+            if (typeof gtag === 'undefined') {
+                console.error('❌ gtag function not available');
+                return;
+            }
+            
+            // Send a simple test event
+            gtag('event', 'manual_test', {
+                'event_category': 'Test',
+                'event_label': 'Manual Debug Test ' + new Date().getTime(),
+                'value': 1,
+                'debug_mode': true
+            });
+            
+            console.log('✅ Manual test event sent');
+            
+            // Also try with beacon transport
+            gtag('event', 'manual_test_beacon', {
+                'event_category': 'Test',
+                'event_label': 'Manual Beacon Test ' + new Date().getTime(),
+                'transport_type': 'beacon',
+                'value': 1
+            });
+            
+            console.log('✅ Manual beacon test event sent');
         }
         
         // Add to global scope for testing
