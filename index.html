@@ -1090,8 +1090,18 @@
             console.log('✅ Manual beacon test event sent');
         }
         
-        // Add to global scope for testing
+        // Add all debug functions to global scope for testing
         window.testWhatsAppTracking = testWhatsAppTracking;
+        window.checkGAStatus = checkGAStatus;
+        window.forceGATest = forceGATest;
+        window.trackWhatsAppClick = trackWhatsAppClick;
+        
+        console.log('🔧 Debug functions loaded:', {
+            testWhatsAppTracking: typeof window.testWhatsAppTracking,
+            checkGAStatus: typeof window.checkGAStatus,
+            forceGATest: typeof window.forceGATest,
+            trackWhatsAppClick: typeof window.trackWhatsAppClick
+        });
     </script>
 </body>
 </html>
